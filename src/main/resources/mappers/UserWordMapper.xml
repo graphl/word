@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.word.dao.UserWordMapper" >
+  <resultMap id="BaseResultMap" type="com.word.pojo.UserWord" >
+    <constructor >
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="word_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.word.pojo.UserWord" >
+    insert into words_user_word (user_id, word_id)
+    values (#{userId,jdbcType=INTEGER}, #{wordId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.word.pojo.UserWord" >
+    insert into words_user_word
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="wordId != null" >
+        word_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="wordId != null" >
+        #{wordId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="deleteUserWord" parameterType="map" >
+  delete
+  from  words_user_word
+  where  user_id = #{userId}
+  and word_id = #{wordId}
+  </select>
+  <update id="updateBywordIdAnduserId">
+
+    update words_user_word
+    set
+  </update>
+</mapper>

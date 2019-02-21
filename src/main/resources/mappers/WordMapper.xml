@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.word.dao.WordMapper" >
+  <resultMap id="BaseResultMap" type="com.word.pojo.Word" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="word_name" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="word_sound" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="word_symbol" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="word_image" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, word_name, word_sound, word_symbol, word_image, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from words_word
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from words_word
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.word.pojo.Word" >
+    insert into words_word (id, word_name, word_sound, 
+      word_symbol, word_image, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{wordName,jdbcType=CHAR}, #{wordSound,jdbcType=CHAR}, 
+      #{wordSymbol,jdbcType=CHAR}, #{wordImage,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.word.pojo.Word" >
+    insert into words_word
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="wordName != null" >
+        word_name,
+      </if>
+      <if test="wordSound != null" >
+        word_sound,
+      </if>
+      <if test="wordSymbol != null" >
+        word_symbol,
+      </if>
+      <if test="wordImage != null" >
+        word_image,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="wordName != null" >
+        #{wordName,jdbcType=CHAR},
+      </if>
+      <if test="wordSound != null" >
+        #{wordSound,jdbcType=CHAR},
+      </if>
+      <if test="wordSymbol != null" >
+        #{wordSymbol,jdbcType=CHAR},
+      </if>
+      <if test="wordImage != null" >
+        #{wordImage,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        now(),
+      </if>
+      <if test="updateTime != null" >
+        now(),
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.word.pojo.Word" >
+    update words_word
+    <set >
+      <if test="wordName != null" >
+        word_name = #{wordName,jdbcType=CHAR},
+      </if>
+      <if test="wordSound != null" >
+        word_sound = #{wordSound,jdbcType=CHAR},
+      </if>
+      <if test="wordSymbol != null" >
+        word_symbol = #{wordSymbol,jdbcType=CHAR},
+      </if>
+      <if test="wordImage != null" >
+        word_image = #{wordImage,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = now(),
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.word.pojo.Word" >
+    update words_word
+    set word_name = #{wordName,jdbcType=CHAR},
+      word_sound = #{wordSound,jdbcType=CHAR},
+      word_symbol = #{wordSymbol,jdbcType=CHAR},
+      word_image = #{wordImage,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectList" resultMap="BaseResultMap">
+
+    select
+    <include refid="Base_Column_List" />
+    from mmall_product
+    order  BY id asc
+
+  </select>
+  <select id="selectByNameAndWordId" resultMap="BaseResultMap" parameterType="map">
+  select
+  <include refid="Base_Column_List"/>
+    from  words_word
+    <where>
+      <if test="wordName != null">
+        and word_name = #{wordName}
+      </if>
+      <if test="wordId != null">
+        and id = #{wordId}
+      </if>
+    </where>
+  </select>
+</mapper>
