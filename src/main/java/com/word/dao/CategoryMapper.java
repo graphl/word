@@ -1,6 +1,7 @@
 package com.word.dao;
 
 import com.word.pojo.Category;
+import com.word.vo.CategoryName;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface CategoryMapper {
 
     int updateByPrimaryKey(Category record);
 
-    List<Category> selectAllCategory();
+    List<String> selectAllCategory();
 
     Category selectByCategoryId(Integer categoryId);
 }

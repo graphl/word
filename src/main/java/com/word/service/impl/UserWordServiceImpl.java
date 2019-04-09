@@ -3,11 +3,14 @@ package com.word.service.impl;
 import com.word.common.ServerResponse;
 import com.word.dao.UserWordMapper;
 import com.word.dao.WordMapper;
+import com.word.pojo.User;
 import com.word.pojo.UserWord;
 import com.word.pojo.Word;
 import com.word.service.IUserWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service("iUserWordService")
@@ -44,5 +47,12 @@ public class UserWordServiceImpl implements IUserWordService {
             }
         }
         return ServerResponse.createByErrorMessage("没有该单词");
+    }
+
+    public ServerResponse<List<UserWord>> showUserWord(Integer user_id){
+
+        List<UserWord> wordList = userWordMapper.showUserWord(user_id);
+
+       return ServerResponse.createBySuccess(wordList);
     }
 }

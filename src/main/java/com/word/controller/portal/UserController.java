@@ -27,6 +27,7 @@ public class UserController {
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session){
         ServerResponse<User> response = iUserService.login(username,password);
+       // System.out.println(response.getStatus());
         if(response.isSuccess()){
             session.setAttribute(Const.CURRENT_USER,response.getData());
         }
@@ -44,6 +45,7 @@ public class UserController {
     public ServerResponse<String> register(User user){
         return iUserService.register(user);
     }
+
     @RequestMapping(value = "check_valid.do" ,method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> checkVaild(String str,String type){

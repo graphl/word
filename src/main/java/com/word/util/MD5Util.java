@@ -1,5 +1,7 @@
 package com.word.util;
 
+import org.springframework.util.DigestUtils;
+
 import java.security.MessageDigest;
 
 public class MD5Util {
@@ -7,7 +9,6 @@ public class MD5Util {
         StringBuffer resultSb = new StringBuffer();
         for (int i = 0; i < b.length; i++)
             resultSb.append(byteToHexString(b[i]));
-
         return resultSb.toString();
     }
 
@@ -19,14 +20,13 @@ public class MD5Util {
         int d2 = n % 16;
         return hexDigits[d1] + hexDigits[d2];
     }
-
-    /**
+ /*   *
      * 返回大写MD5
      *
      * @param origin
      * @param charsetname
-     * @return
-     */
+     * @return*/
+
     private static String MD5Encode(String origin, String charsetname) {
         String resultString = null;
         try {

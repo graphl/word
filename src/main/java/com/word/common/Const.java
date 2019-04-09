@@ -10,6 +10,11 @@ public class Const {
         int ROLE_ADMIN = 1; //管理员
     }
 
+    public interface category{
+        int CATEGORY_NULL= 0; //没有分类
+        int CATEGORY =1; //有分类
+    }
+
     public enum  ProductStatusEnum{
         ON_STATUS(1,"在线");
         private String value;

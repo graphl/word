@@ -7,6 +7,8 @@ public class Word {
 
     private String wordName;
 
+    private String word;
+
     private String wordSound;
 
     private String wordSymbol;
@@ -17,14 +19,24 @@ public class Word {
 
     private Date updateTime;
 
-    public Word(Integer id, String wordName, String wordSound, String wordSymbol, String wordImage, Date createTime, Date updateTime) {
+    public Word(Integer id, String wordName, String word, String wordSound, String wordSymbol, String wordImage, Date createTime, Date updateTime) {
         this.id = id;
         this.wordName = wordName;
+        this.word = word;
         this.wordSound = wordSound;
         this.wordSymbol = wordSymbol;
         this.wordImage = wordImage;
         this.createTime = createTime;
         this.updateTime = updateTime;
+    }
+
+
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
     }
 
     public Word() {
