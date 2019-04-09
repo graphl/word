@@ -70,7 +70,7 @@
       category_id = #{categoryId,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="checkCategoryAndWord" parameterType="map">
+  <select id="checkCategoryAndWord" parameterType="map" resultType="int">
   select
   <include refid="Base_Column_List" />
     from  words_word_category

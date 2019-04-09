@@ -81,15 +81,15 @@
       now()
     where id = #{id,jdbcType=INTEGER}
   </update>
-<select id="selectAllCategory" resultMap="BaseResultMap">
+<select id="selectAllCategory" resultType="string">
   select
-  <include refid="Base_Column_List" />
-  from  words_word
+  category_name
+  from  words_category
 </select>
-  <select id="selectByCategoryId">
+  <select id="selectByCategoryId" resultType="Category">
     select
     <include refid="Base_Column_List" />
-    from words_word
+    from words_category
     where  id = #{categoryId}
   </select>
 </mapper>

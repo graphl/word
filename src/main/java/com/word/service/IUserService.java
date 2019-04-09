@@ -5,6 +5,7 @@ import com.word.pojo.User;
 
 public interface IUserService {
     ServerResponse login(String username, String password);
+
     ServerResponse<String> register(User user);
 
     ServerResponse<String> checkVaild(String str,String type);

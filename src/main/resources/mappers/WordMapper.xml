@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.word.pojo.Word" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="word" jdbcType="VARCHAR" javaType="java.lang.String"/>
       <arg column="word_name" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="word_sound" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="word_symbol" jdbcType="CHAR" javaType="java.lang.String" />
@@ -13,7 +14,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, word_name, word_sound, word_symbol, word_image, create_time, update_time
+    id, word_name, word_sound, word_symbol, word_image, create_time, update_time ,word
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -121,7 +122,7 @@
 
     select
     <include refid="Base_Column_List" />
-    from mmall_product
+    from words_word
     order  BY id asc
 
   </select>

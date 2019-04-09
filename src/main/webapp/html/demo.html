@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Title</title>
+</head>
+
+<link rel="stylesheet" href="../layui-v2.4.5/layui/css/layui.css">
+<script src="https://cdn.staticfile.org/jquery/2.0.0/jquery.min.js">
+</script>
+<script type="text/javascript">
+    alert("请求");
+        $.ajax({
+            type:"get",
+            url: '/manage/category/get_all_categoryName.do',
+            dataType:"json",
+            success:function(data){
+                $.each(data.data,function (index,item) {
+                    alert(item.categoryName)
+                    var txt = $("<li class=\"layui-nav-item\"><a href=\"\">最新活动</a></li>>").text(item.categoryName);
+                    $("#list").append(txt);
+                    var txt1  = "<li class=\"layui-nav-item\"><a href=\"\">"+item.categoryName+"</a></li>"
+                    $("#list").append(txt1);
+                });
+
+            },
+            error:function(jqXHR){
+                console.log("Error: "+jqXHR.status);
+            }
+    });
+    $.ajax({
+        type:"get",
+        url: '/manage/word/list.do',
+        dataType:"json",
+        success:function (data) {
+            alert(data.status);
+            console.log(data.data)
+            console.log(data.data.list)
+            $.each(data.data.list,function (index,item) {
+               alert(item.id);
+                $(".ul").append("<li value="+item.id+" class='layui-btn layui-btn-add '>"
+                    +v.Name+
+                    "<span class='vid'>"+"myJson"+"</span>"+
+                    "</li>"
+                )
+
+            });
+        },
+        error:function(jqXHR){
+            console.log("Error: "+jqXHR.status);
+        }
+    });
+</script>
+<body>
+<ul class="layui-nav" id="list">
+    <li class="layui-nav-item"><a href="">最新活动</a></li>
+    <li class="layui-nav-item layui-this">
+        <a href="javascript:;">产品</a>
+        <dl class="layui-nav-child">
+            <dd><a href="">选项1</a></dd>
+            <dd><a href="">选项2</a></dd>
+            <dd><a href="">选项3</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item"><a href="">大数据</a></li>
+    <li class="layui-nav-item">
+        <a href="javascript:;">解决方案</a>
+        <dl class="layui-nav-child">
+            <dd><a href="">移动模块</a></dd>
+            <dd><a href="">后台模版</a></dd>
+            <dd class="layui-this"><a href="">选中项</a></dd>
+            <dd><a href="">电商平台</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item"><a href="">社区</a></li>
+</ul>
+
+<ul class="ul">
+
+</ul>
+<table id="demo" lay-filter="test"></table>
+
+<script src="../layui-v2.4.5/layui/layui.js"></script>
+<script type="text/javascript">
+    layui.use('table', function(){
+        var table = layui.table;
+
+        function queryTrainSchemeFY(){
+            $.ajax({
+                url:contextPath+"/manage/word/list.do",
+                data:$("#demo").serialize(),
+                dataType:'json',
+                type:'post',
+                async:true,
+                success:showTrainSchemeTable
+            });
+        }
+
+        /*  //第一个实例
+          table.render({
+              elem: '#demo'
+              ,count:${pager.totalRecord}//这个是你的总页面
+              ,curr:${pager.pageNum}//这个是你当前
+              ,height: 312
+              ,url: '/manage/word/list.do' //数据接口
+              ,parseData: function(res) { //res 即为原始返回的数据
+                  return {
+                      "code": res.status, //解析接口状态
+                      "count": res.total, //解析数据长度
+                      "pageSize":res.pages,//总页码
+                      "data": res.data.list //解析数据列表
+                  };
+              }
+              ,page: true //开启分页
+              ,cols: [[ //表头
+                  {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+                  ,{field: 'word', title: '单词', width:80}
+                  ,{field: 'wordImage', title: '单词图片', width:180, sort: true}
+                  ,{field: 'wordName', title: '单词中文', width:80}
+                  ,{field: 'wordSound', title: '单词发音', width: 177}
+                  ,{field: 'wordSymbol', title: '单词英标', width: 180, sort: true}
+                  ,{field: 'createTime', title: '单词创建时间', width: 180, sort: true}
+                  ,{field: 'updateTime', title: '单词更新时间', width: 180}
+              ]]
+          });
+
+      });*/
+    layui.use('element', function(){
+        var element = layui.element(); //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
+</body>
+</html>
+
+</body>
+</html>

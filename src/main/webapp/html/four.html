@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript">
+    alert("请求");
+    $(function () {
+        $.ajax({
+            type:"get",
+            url: '/manage/category/get_all_categoryName.do',
+            dataType:"json",
+            success:function(data){
+                 alert("111111")
+                $.each(data.data,function (index,item) {
+                    alert(item.categoryName)
+                    $("#one").val(item.categoryName);
+                });
+             },
+            error:function(jqXHR){
+            console.log("Error: "+jqXHR.status);
+        }
+        });
+
+    });
+
+</script>
+<body>
+<ul id="list">
+
+</ul>
+<input type="text" id="one">
+</body>
+</html>

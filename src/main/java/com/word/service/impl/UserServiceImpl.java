@@ -1,6 +1,7 @@
 package com.word.service.impl;
 
 import com.word.common.Const;
+import com.word.common.ResponseCode;
 import com.word.common.ServerResponse;
 import com.word.common.TokenCache;
 import com.word.dao.UserMapper;
@@ -28,14 +29,18 @@ public class UserServiceImpl  implements IUserService {
     public ServerResponse login(String username,String password){
         int resultCount = userMapper.checkUsername(username);
         if(resultCount == 0){
-            return ServerResponse.createByErrorMessage("用户名不存在");
+            int t = ServerResponse.createByErrorMessage("用户名不存在").getStatus();
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),"用户名不存在");
         }
 
         // todo MD5加密
+        //前端已经加过密了
         String MD5Password = MD5Util.MD5EncodeUtf8(password);
         User user = userMapper.selectLogin(username,MD5Password);
         if(user == null){
-            return ServerResponse.createByErrorMessage("密码错误");
+            //int t = ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),"密码错误").getStatus();
+           // System.out.println("密码错误"+t);
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),"密码错误");
         }
         user.setPassword(StringUtils.EMPTY);
         return  ServerResponse.createBySuccess("登陆成功",user);
@@ -65,7 +70,6 @@ public class UserServiceImpl  implements IUserService {
         }
         user.setRole(Const.Role.ROLE_CUSTOMER);
         //MD5加密
-
         user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
         resultCount = userMapper.insert(user);
         if(resultCount == 0){

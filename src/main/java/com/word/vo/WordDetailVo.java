@@ -6,6 +6,8 @@ public class WordDetailVo {
 
     private Integer id;
 
+    private String word;
+
     private String wordName;
 
     private String wordSound;
@@ -25,6 +27,14 @@ public class WordDetailVo {
     public WordDetailVo setId(Integer id) {
         this.id = id;
         return this;
+    }
+
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
     }
 
     public String getWordName() {

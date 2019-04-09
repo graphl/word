@@ -1,17 +1,23 @@
 package com.word.service.impl;
 
 import com.google.common.collect.Lists;
+import com.word.common.Const;
 import com.word.common.ServerResponse;
 import com.word.dao.CategoryMapper;
 import com.word.pojo.Category;
 import com.word.service.ICategoryService;
+import com.word.vo.CategoryName;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Service("iCategoryService")
 public class CategoryServiceImpl implements ICategoryService {
 
@@ -49,16 +55,18 @@ public class CategoryServiceImpl implements ICategoryService {
         }
         return ServerResponse.createByErrorMessage("更新分类失败");
     }
-    public ServerResponse<List<String>> getAllCagegoryName(){
-         List<Category> categoryList = categoryMapper.selectAllCategory();
+    public ServerResponse<List<CategoryName>> getAllCategoryName(){
+         List<String> categoryList = categoryMapper.selectAllCategory();
          if(categoryList == null){
-             return ServerResponse.createByErrorMessage("没有分类");
+             return ServerResponse.createByErrorCodeMessage(Const.category.CATEGORY_NULL,"没有分类");
          }
-         List<String> caStringList = Lists.newArrayList();
-         for(Category categoryItem : categoryList){
-             caStringList.add(categoryItem.getCategoryName());
+        List<CategoryName> categoryNames = Lists.newArrayList();
+         for (String item:categoryList){
+                CategoryName categoryName = new CategoryName();
+                categoryName.setCategoryName(item);
+                categoryNames.add(categoryName);
          }
-         return ServerResponse.createBySuccess(caStringList);
+         return ServerResponse.createBySuccess(categoryNames);
     }
     public ServerResponse<Category> getCagegoryNameByCategoryId(Integer categoryId){
        if(categoryId == null){

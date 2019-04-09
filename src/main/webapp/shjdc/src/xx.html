@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- Search -->
+<script id="search-result-title-tmpl" type="text/x-jquery-tmpl">
+        <div class="word-container">
+            <span class="word">${content}</span>
+            {{if learning_id}}
+                <a href="/review/learning/${learning_id}" style="float: right; margin-top: 12px;" target="_blank">
+            {{else}}
+                <a href="/bdc/vocabulary/${id}" style="float: right;" target="_blank">
+            {{/if}}
+                详细</a>
+            <div>
+                <span>us:</span>
+                {{if pronunciations.us}}<small>/${pronunciations.us}/</small>{{/if}}
+                {{if audio_addresses.us.length !== 0 && audio_addresses.us[0]}}
+                <span class="speaker" data-target="us"><i class="icon-volume-off"></i></span>
+                {{/if}}
+                {{if pronunciations.us.length+pronunciations.uk.length > 16 }}
+                </div>
+                <div>
+                {{/if}}
+                <span>uk:</span>
+                {{if pronunciations.uk}}<small>/${pronunciations.uk}/</small>{{/if}}
+                {{if audio_addresses.uk.length !== 0 && audio_addresses.uk[0]}}
+                <span class="speaker" data-target="uk"><i class="icon-volume-off"></i></span>
+                {{/if}}
+            </div>
+        </div>
+</script>
+<script id="search_tmpl" type="text/x-jquery-tmpl">
+        <div class="definition">
+            <div class="simple-definition" style="margin-bottom: 20px; font-size: 16px;">
+                {{each(i, v) definitions.cn}}
+                    {{if i>9}}
+                    <div class="hide">
+                    {{else}}
+                    <div>
+                    {{/if}}
+                        <span>{{html v.pos}}</span>
+                        <span>&nbsp;{{html v.defn}}</span>
+                    </div>
+                {{/each}}
+                {{if definitions.cn.length>10}}
+                    <div class="view-more"><a href="javascript:;">查看更多</a></div>
+                {{/if}}
+            </div>
+            <div class="add">
+                {{if learning_id}}
+                    <div class="progress pull-left" style="border-radius: 0; width: 80%; margin-top: 2px; margin-bottom: 20px;">
+                        {{each(i, v) li}}
+                            {{if v==1}}
+                            <div class="bar bar-success bar-reviewed" style="width: ${width}"></div>
+                            {{else}}
+                            <div class="bar bar-left" style="width: ${width}"></div>
+                            {{/if}}
+                        {{/each}}
+                    </div>
+                    <a class="forget pull-right" href="javascript:;" style="font-size: 12px;">我忘了</a>
+                    <p class="forget pull-left hide" style="font-size: 14px;">我们会安排重新复习这个单词</p>
+                {{else}}
+                    <p style="text-align: right;"><a id="add-word" class="btn btn-success" data-id="${object_id}" href="javascript:;">添加</a></p>
+                    <p style="text-align: right;"><span class="loading hide">&nbsp; &nbsp; 正在添加</span></p>
+                {{/if}}
+            </div>
+            <div class="word-added hide">
+                <p style="font-size: 14px; text-align: right">
+                    成功添加进你的词库 <a href="" target="_blank">查看</a>
+                </p>
+            </div>
+        </div>
+
+
+</script>
+
+
+<script id="no_search_tmpl" type="text/x-jquery-tmpl">
+        <p>目前只支持搜索英语单词</p>
+
+
+</script>
+<script id="search_fail_tmpl" type="text/x-jquery-tmpl">
+        <div>
+            <p class="title">
+                未找到单词
+            </p>
+            <!--
+                <div class="body"><a class="btn btn-success" href="/bdc/search/fail/${word}/" target="_blank">手动添加</a></div>
+            -->
+        </div>
+
+
+</script>
+
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script>
+    var TEXTS = {
+        'Cancel': "取消",
+        'Close': "关闭",
+        'revoke': "撤销",
+        'submitting': "正在提交中...",
+        'update_success': "更新成功",
+        'loading': "正在加载数据 ...",
+        'example_saved': "例句已经收藏",
+        'note_saved': "此条笔记已被收藏",
+        'no_flash': '你的浏览器没有安装Adobe Flash Player，无法播放声音 <a href="http://get.adobe.com/flashplayer/" target="_blank">Go to Download it</a>',
+        'review_error': "答案不正确，请再次尝试。"
+    };
+</script>
+
+<script>
+
+    var whiteList = ['www.shanbay.com', 'www.17bdc.com'];
+    var host = window.location.host;
+    var agent = window.navigator.userAgent.toLowerCase()
+    // redirect domains except www.shanbay.com or www.17bdc.com
+    if (whiteList.indexOf(host) == -1 && agent.search('micromessenger') == -1) {
+        var href = window.location.href;
+        var host = window.location.host;
+        window.location.href = href.replace(host, 'www.shanbay.com');
+    }
+    // redirect http to https
+    if (window.location.protocol !== "https:" && host == 'www.shanbay.com') {
+        window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
+    }
+
+</script>
+
+
+<!--[if (lt IE 8) & (!IEMobile)]>
+<script src="https://static.baydn.com/static/font/shanbay-fontawesome/shanbay-fontawesome-ie7-v3.js"></script>
+<![endif]-->
+<script src="https://static.baydn.com/static/scripts/jquery-1.7.2.min.js?_=1522116382"></script>
+<script src="https://static.baydn.com/static/scripts/jquery.tmpl.min.js"></script>
+<script src="https://static.baydn.com/static/scripts/jquery.cookie.js"></script>
+<script src="https://static.baydn.com/static/scripts/plugins/soundmanagerv297a_20150601/soundmanager2-jsmin.js"></script>
+<script src="https://static.baydn.com/static/scripts/plugins/raven/raven.min.js"></script>
+<script type="text/javascript">
+    function load_soundManager() {
+        var is_safari = false;
+        var chrome_version = undefined;
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.indexOf('safari') != -1) {
+            if (ua.indexOf('chrome') > -1) {
+                // Other browsers
+                is_safari = false;
+                var reg = /chrome\/(\d+)\./;
+                match = ua.match(reg);
+                if (match && match.length == 2) {
+                    chrome_version = parseInt(match[1]);
+                }
+            } else {
+                // Safari
+                is_safari = true;
+            }
+        }
+        soundManager.setup({
+            debugMode: false,
+            onready: function () {
+            }
+        });
+        soundManager.debugFlash = false;
+
+        if (is_safari || (chrome_version != undefined && chrome_version >= 48)) {
+            soundManager.preferFlash = false;
+        } else {
+            soundManager.preferFlash = true;
+            soundManager.flashVersion = 9;
+        }
+        soundManager.useHTML5Audio = true;
+        soundManager.url = 'https://static.baydn.com/static/scripts/plugins/soundmanagerv297a_20150601/';
+        soundManager.onready(function () {
+            soundManager.createSound({
+                id: "shanbay_audio",
+                url: "http://media.shanbay.com/sounds/huh.mp3"
+            });
+            soundManager.createSound({
+                id: "sentence_audio",
+                url: "http://media.shanbay.com/sounds/huh.mp3"
+            });
+            listen_audio = soundManager.createSound({
+                id: "listen_audio",
+                url: "http://media.shanbay.com/sounds/huh.mp3"
+            });
+        });
+    }
+
+    function sentry_config() {
+        Raven.config('http://d13462113cc14ccbae74e11225443fe3@sentry.17bdc.com/60', {}).install();
+        Raven.setUser({id: $.cookie('userid')})
+    }
+
+
+    load_soundManager();
+
+
+    //sentry_config();
+
+</script>
+<script src="https://static.baydn.com/static/scripts/jquery.noty.js"></script>
+
+<script src="https://static.baydn.com/static/scripts/jquery.color.js"></script>
+<script src="https://static.baydn.com/baydn/public/vendor/aliyun-oss-sdk-v4.4.1.min.js"></script>
+<script type="text/javascript"
+        src="https://static.baydn.com/static/scripts/shanbay-base.100b882f0c4b0fca6e45c3967c7aef4b.js"
+        charset="utf-8"></script>
+<script type="text/javascript"
+        src="https://static.baydn.com/static/scripts/shanbay-all.15b20f28c91a805dfd568055ca3c5c74.js"
+        charset="utf-8"></script>
+<!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
+
+
+<script src="https://static.baydn.com/static/scripts/json2.js"></script>
+<script src="https://static.baydn.com/static/scripts/underscore-min.js"></script>
+<script src="https://static.baydn.com/static/scripts/backbone.js"></script>
+<script src="https://static.baydn.com/static/scripts/jPages.min.js"></script>
+<script src="https://static.baydn.com/static/scripts/jquery.shortcuts-0.1.js"></script>
+<script src="https://static.baydn.com/static/scripts/spin.min.js"></script>
+<script src="https://static.baydn.com/static/scripts/jstorage.min.js"></script>
+<script type="text/javascript"
+        src="https://static.baydn.com/static/scripts/syncreview.f7b90e5c2bcc7e121218ce03000713f5.js"
+        charset="utf-8"></script>
+<script>
+    var IS_DEBUG = false;
+
+    var opts = {
+        lines: 10, // The number of lines to draw
+        length: 4, // The length of each line
+        width: 2, // The line thickness
+        radius: 5, // The radius of the inner circle
+        corners: 1, // Corner roundness (0..1)
+        rotate: 0, // The rotation offset
+        color: '#000', // #rgb or #rrggbb
+        speed: 1, // Rounds per second
+        trail: 60, // Afterglow percentage
+        shadow: false, // Whether to render a shadow
+        hwaccel: false, // Whether to use hardware acceleration
+        className: 'spinner', // The CSS class to assign to the spinner
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        top: 'auto', // Top position relative to parent in px
+        left: 'auto' // Left position relative to parent in px
+    };
+    //var target = document.getElementById('loading-spin');
+    var spinner = new Spinner(opts).spin();
+    if (location.pathname == '/bdc/review/') {
+        var router = new NewReviewRouter();
+        Backbone.history.start();
+    }
+    else if (location.pathname == '/bdc/review/old/') {
+        var router = new ReviewRouter();
+        Backbone.history.start();
+    }
+    else if (location.pathname.slice(0, 10) == "/learning/") {
+        var router = new LearningRouter();
+        Backbone.history.start();
+    }
+    else if (location.pathname.slice(0, 17) == "/review/learning/") {
+        var router = new LearningRouter();
+        Backbone.history.start();
+    }
+
+</script>
+<script src="https://static.baydn.com/static/scripts/plugins/google_org_chart/jsapi.js"></script>
+<script src="https://static.baydn.com/static/scripts/plugins/google_org_chart/orgchart.js"></script>
+
+
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-24491297-1']);
+    _gaq.push(['_setDomainName', '.shanbay.com']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        if (window.location.href.indexOf('shanbay.com') == -1)
+            return;
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = "https://static.baydn.com/static/" + "scripts/ga.js";
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
+</body>
+</html>

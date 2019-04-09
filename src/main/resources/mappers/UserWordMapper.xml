@@ -30,15 +30,15 @@
       </if>
     </trim>
   </insert>
-  <select id="deleteUserWord" parameterType="map" >
+  <select id="deleteUserWord" parameterType="map" resultType="int">
   delete
   from  words_user_word
   where  user_id = #{userId}
   and word_id = #{wordId}
   </select>
-  <update id="updateBywordIdAnduserId">
-
-    update words_user_word
-    set
-  </update>
+<select id="showUserWord" parameterType="integer" resultMap="BaseResultMap">
+  select word_id
+  from  words_user_word
+  where user_id = #{userid}
+</select>
 </mapper>
