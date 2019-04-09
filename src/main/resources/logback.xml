@@ -44,7 +44,7 @@
         </filter>
     </appender>
 
-    <logger name="com.demo" additivity="false" level="INFO" >
+    <logger name="com.word" additivity="false" level="DEBUG" >
         <appender-ref ref="demo" />
         <appender-ref ref="console"/>
     </logger>
@@ -53,7 +53,7 @@
 
     <!-- geelynote mybatis log 日志 -->
 
-    <logger name="com.demo.dao" level="DEBUG"/>
+    <logger name="com.word.dao" level="DEBUG"/>
 
     <!--<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG" >-->
         <!--<appender-ref ref="console"/>-->
