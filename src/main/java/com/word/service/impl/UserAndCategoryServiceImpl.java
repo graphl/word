@@ -23,6 +23,7 @@ public class UserAndCategoryServiceImpl implements IUserAndCategoryService {
     private WordAndCategoryMapper wordAndCategoryMapper;
     @Autowired
     private WordMapper wordMapper;
+
     public ServerResponse addCategoryService(WordAndCategory wordAndCategory){
         if(wordAndCategory.getWordId() == null || wordAndCategory.getCategoryId() ==null ){
             return  ServerResponse.createByErrorMessage("参数错误");

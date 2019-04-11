@@ -49,9 +49,9 @@ public class UserWordServiceImpl implements IUserWordService {
         return ServerResponse.createByErrorMessage("没有该单词");
     }
 
-    public ServerResponse<List<UserWord>> showUserWord(Integer user_id){
+    public ServerResponse<List<Word>> showUserWord(Integer user_id){
 
-        List<UserWord> wordList = userWordMapper.showUserWord(user_id);
+        List<Word> wordList = userWordMapper.showUserWord(user_id);
 
        return ServerResponse.createBySuccess(wordList);
     }

@@ -7,6 +7,10 @@
       <arg column="word_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, word_name, word_sound, word_symbol, word_image, create_time, update_time ,word
+  </sql>
   <insert id="insert" parameterType="com.word.pojo.UserWord" >
     insert into words_user_word (user_id, word_id)
     values (#{userId,jdbcType=INTEGER}, #{wordId,jdbcType=INTEGER})
@@ -36,9 +40,10 @@
   where  user_id = #{userId}
   and word_id = #{wordId}
   </select>
-<select id="showUserWord" parameterType="integer" resultMap="BaseResultMap">
-  select word_id
-  from  words_user_word
-  where user_id = #{userid}
+<select id="showUserWord" parameterType="integer" resultType="word">
+  select
+  <include refid="Base_Column_List"></include>
+  from  words_word ww,words_user_word wu
+  where ww.id = wu.word_id and wu.user_id = #{userid}
 </select>
 </mapper>
