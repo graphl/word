@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.word.common.ServerResponse;
 import com.word.dao.WordBookMapper;
 import com.word.pojo.WordBook;
-import com.word.service.IWordBookService;
+import com.word.service.IWordsBookService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+/**
+ * word_book book_name
+ *
+ */
 @Service("iWordBookService")
-public class WordBookServiceImpl  implements IWordBookService {
+public class WordBookServiceImpl  implements IWordsBookService {
 
     private Logger logger = LoggerFactory.getLogger(WordBookServiceImpl.class);
 
@@ -21,7 +26,7 @@ public class WordBookServiceImpl  implements IWordBookService {
    private WordBookMapper wordBookMapper;
 
 
-    @Override
+   /* @Override
     public ServerResponse addBook(String bookName) {
         if(StringUtils.isBlank(bookName)){
             return ServerResponse.createByErrorMessage("单词类别参数错误");
@@ -33,9 +38,9 @@ public class WordBookServiceImpl  implements IWordBookService {
             return  ServerResponse.createBySuccess("添加Book成功");
         }
         return ServerResponse.createByErrorMessage("添加book失败");
-    }
+    }*/
 
-    @Override
+
     public ServerResponse updateBookName(Integer bookId, String bookName) {
         if(bookId==null||StringUtils.isBlank(bookName)){
             return  ServerResponse.createByErrorMessage("参数错误");
@@ -70,5 +75,7 @@ public class WordBookServiceImpl  implements IWordBookService {
         }
         return ServerResponse.createBySuccess(wordBook);
     }
+    // 前端
+
 
 }

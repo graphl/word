@@ -5,7 +5,7 @@ import com.word.common.ResponseCode;
 import com.word.common.ServerResponse;
 import com.word.pojo.User;
 import com.word.service.IUserService;
-import com.word.service.IWordBookService;
+import com.word.service.IWordsBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,8 @@ public class WordBookController {
     @Autowired
     private IUserService iUserService;
     @Autowired
-    private IWordBookService iWordBookService;
+    private IWordsBookService iWordBookService;
+/*
     @RequestMapping(value = "add_book.do")
     @ResponseBody
     public ServerResponse addCategory(HttpSession session, String  bookName){
@@ -87,6 +88,7 @@ public class WordBookController {
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
         }
     }
+*/
 
 
 }

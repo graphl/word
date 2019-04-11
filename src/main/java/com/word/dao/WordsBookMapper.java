@@ -2,6 +2,8 @@ package com.word.dao;
 
 import com.word.pojo.WordsBook;
 
+import java.util.List;
+
 public interface WordsBookMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,11 @@ public interface WordsBookMapper {
     int updateByPrimaryKeySelective(WordsBook record);
 
     int updateByPrimaryKey(WordsBook record);
+
+
+    /**
+     * 前端
+     */
+
+
 }

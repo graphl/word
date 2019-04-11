@@ -8,25 +8,28 @@
       <arg column="word_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
+
   <sql id="Base_Column_List" >
     id, book_id, word_id
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from words_book
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from words_book
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.word.pojo.WordsBook" >
-    insert into words_book (id, book_id, word_id
-      )
-    values (#{id,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{wordId,jdbcType=INTEGER}
-      )
+    insert into words_book (id, book_id, word_id)
+    values (#{id,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{wordId,jdbcType=INTEGER})
   </insert>
+
   <insert id="insertSelective" parameterType="com.word.pojo.WordsBook" >
     insert into words_book
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -52,6 +55,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.word.pojo.WordsBook" >
     update words_book
     <set >
@@ -64,10 +68,12 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.word.pojo.WordsBook" >
     update words_book
     set book_id = #{bookId,jdbcType=INTEGER},
       word_id = #{wordId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
 </mapper>
