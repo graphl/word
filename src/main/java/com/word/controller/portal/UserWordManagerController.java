@@ -56,21 +56,35 @@ public class UserWordManagerController {
             return iUserWordService.showUserWord(user.getId());
         }
 
-        //
-        @RequestMapping("/get_MWord")
+        @RequestMapping("/get_MWord.do")
         @ResponseBody
         public ServerResponse getMWord(HttpSession session){
             List<MWordVo> mWordVos = new ArrayList<>();
             MWordVo mWordVo = new MWordVo(1,"assignment","ə'saɪnmənt","https://media-audio1.baydn.com/us%2Fa%2Fas%2Fassignment_v4.mp3","n. 分配,功课,任务,被指定的(课外)作业;(分派的)任务, 委派");
             mWordVos.add(mWordVo);
-            MWordVo mWordVo1 = new MWordVo(2,"A","ə'saɪnmənt","https://media-audio1.baydn.com/us%2Fa%2Fas%2Fassignment_v4.mp3","n. 分配,功课,任务,被指定的(课外)作业;(分派的)任务, 委派");
+            MWordVo mWordVo1 = new MWordVo(2,"A","A","https://media-audio1.baydn.com/us%2Fa%2Fas%2Fassignment_v4.mp3","n. 分配,功课,任务,被指定的(课外)作业;(分派的)任务, 委派");
             mWordVos.add(mWordVo1);
-            MWordVo mWordVo2 = new MWordVo(3,"B","ə'saɪnmənt","https://media-audio1.baydn.com/us%2Fa%2Fas%2Fassignment_v4.mp3","n. 分配,功课,任务,被指定的(课外)作业;(分派的)任务, 委派");
+            MWordVo mWordVo2 = new MWordVo(3,"B","B","https://media-audio1.baydn.com/us%2Fa%2Fas%2Fassignment_v4.mp3","n. 分配,功课,任务,被指定的(课外)作业;(分派的)任务, 委派");
             mWordVos.add(mWordVo2);
-            MWordVo mWordVo3 = new MWordVo(4,"C","ə'saɪnmənt","https://media-audio1.baydn.com/us%2Fa%2Fas%2Fassignment_v4.mp3","n. 分配,功课,任务,被指定的(课外)作业;(分派的)任务, 委派");
+            MWordVo mWordVo3 = new MWordVo(4,"C","C","https://media-audio1.baydn.com/us%2Fa%2Fas%2Fassignment_v4.mp3","n. 分配,功课,任务,被指定的(课外)作业;(分派的)任务, 委派");
             mWordVos.add(mWordVo3);
-            MWordVo mWordVo4 = new MWordVo(5,"D","ə'saɪnmənt","https://media-audio1.baydn.com/us%2Fa%2Fas%2Fassignment_v4.mp3","n. 分配,功课,任务,被指定的(课外)作业;(分派的)任务, 委派");
+            MWordVo mWordVo4 = new MWordVo(5,"chronic","krɑːnɪk","https://media-audio1.baydn.com/us%2Fa%2Fab%2Fabc_pub_audio%2Fc1c937","n. 分配,功课,任务,被指定的(课外)作业;(分派的)任务, 委派");
             mWordVos.add(mWordVo4);
             return ServerResponse.createBySuccess(mWordVo);
         }
+
+    @RequestMapping("/Know_Word.do")
+    @ResponseBody
+        public ServerResponse KnowWord(HttpSession session,Integer word_id){
+
+            return null;
+        }
+
+    @RequestMapping("/unKnow_Word.do")
+    @ResponseBody
+    public ServerResponse unKnowWord(HttpSession session,Integer word_id){
+
+        return null;
+    }
+
 }
