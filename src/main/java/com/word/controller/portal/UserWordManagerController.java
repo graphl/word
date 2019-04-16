@@ -70,7 +70,7 @@ public class UserWordManagerController {
             mWordVos.add(mWordVo3);
             MWordVo mWordVo4 = new MWordVo(5,"chronic","krɑːnɪk","https://media-audio1.baydn.com/us%2Fa%2Fab%2Fabc_pub_audio%2Fc1c93771003d8c472c61bde6ae240fb4.7132ed1951bb06c9e84f676fad6c325f.mp3.mp3","n. 分配,功课,任务,被指定的(课外)作业;(分派的)任务, 委派");
             mWordVos.add(mWordVo4);
-            return ServerResponse.createBySuccess(mWordVo);
+            return ServerResponse.createBySuccess(mWordVos);
         }
 
     @RequestMapping("/Know_Word.do")
