@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/userword")
+@RequestMapping("/userword")
 public class UserWordManagerController {
 
         @Autowired
@@ -94,7 +94,8 @@ public class UserWordManagerController {
 
     }
 
-    @RequestMapping("/search_word")
+    @RequestMapping("/searchwordDetail.do")
+    @ResponseBody
     public void searchWord(HttpSession session, String word, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         WordDetailOneVo wordDetailOneVo = new WordDetailOneVo();
         wordDetailOneVo.setId(1);

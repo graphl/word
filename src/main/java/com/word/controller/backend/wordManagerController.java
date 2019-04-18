@@ -56,7 +56,7 @@ public class wordManagerController {
 
     @RequestMapping("search.do")
     @ResponseBody
-    public ServerResponse ProductSearch(HttpSession session,String wordName,Integer wordId,
+    public ServerResponse Search(HttpSession session,String wordName,Integer wordId,
                                         @RequestParam(value = "pageNum" ,defaultValue = "1") Integer pageNum,
                                         @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize){
         User user =(User) session.getAttribute(Const.CURRENT_USER);
@@ -66,11 +66,11 @@ public class wordManagerController {
         if(iUserService.checkAdminRole(user).isSuccess()){
             //填充业务
             return  iWordService.searchWord(wordName,wordId,pageNum,pageSize);
-//            return iProductService.searchProduct(productName,productId,pageNum,pageSize);
         }else{
             return  ServerResponse.createByErrorMessage("无权限操作");
         }
     }
+
 
     @RequestMapping("wordList.do")
     @ResponseBody
