@@ -26,8 +26,8 @@
   </delete>
 
   <insert id="insert" parameterType="com.word.pojo.WordsBook" >
-    insert into words_book (id, book_id, word_id)
-    values (#{id,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{wordId,jdbcType=INTEGER})
+    insert into words_book ( book_id, word_id)
+    values (#{bookId,jdbcType=INTEGER}, #{wordId,jdbcType=INTEGER})
   </insert>
 
   <insert id="insertSelective" parameterType="com.word.pojo.WordsBook" >
@@ -75,5 +75,10 @@
       word_id = #{wordId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+<delete id="delTobookWord" parameterType="map">
+
+  delete from words_book
+  where book_id = #{bookId} and word_id = #{wordId}
+</delete>
 
 </mapper>

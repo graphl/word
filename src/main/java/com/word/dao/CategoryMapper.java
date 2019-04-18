@@ -21,4 +21,8 @@ public interface CategoryMapper {
     List<String> selectAllCategory();
 
     Category selectByCategoryId(Integer categoryId);
+
+    List<Category> getAllCategory();
+
+    int delCategoryById(Integer categoryId);
 }

@@ -7,40 +7,31 @@ public class Word {
 
     private String wordName;
 
-    private String word;
-
     private String wordSound;
 
     private String wordSymbol;
 
     private String wordImage;
 
+
     private Date createTime;
 
     private Date updateTime;
 
-    public Word(Integer id, String wordName, String word, String wordSound, String wordSymbol, String wordImage, Date createTime, Date updateTime) {
+    private String word;
+
+    public Word() {
+    }
+
+    public Word(Integer id, String wordName, String wordSound, String wordSymbol, String wordImage, Date createTime, Date updateTime, String word) {
         this.id = id;
         this.wordName = wordName;
-        this.word = word;
         this.wordSound = wordSound;
         this.wordSymbol = wordSymbol;
         this.wordImage = wordImage;
         this.createTime = createTime;
         this.updateTime = updateTime;
-    }
-
-
-    public String getWord() {
-        return word;
-    }
-
-    public void setWord(String word) {
         this.word = word;
-    }
-
-    public Word() {
-        super();
     }
 
     public Integer getId() {
@@ -56,7 +47,7 @@ public class Word {
     }
 
     public void setWordName(String wordName) {
-        this.wordName = wordName == null ? null : wordName.trim();
+        this.wordName = wordName;
     }
 
     public String getWordSound() {
@@ -64,7 +55,7 @@ public class Word {
     }
 
     public void setWordSound(String wordSound) {
-        this.wordSound = wordSound == null ? null : wordSound.trim();
+        this.wordSound = wordSound;
     }
 
     public String getWordSymbol() {
@@ -72,7 +63,7 @@ public class Word {
     }
 
     public void setWordSymbol(String wordSymbol) {
-        this.wordSymbol = wordSymbol == null ? null : wordSymbol.trim();
+        this.wordSymbol = wordSymbol;
     }
 
     public String getWordImage() {
@@ -80,7 +71,7 @@ public class Word {
     }
 
     public void setWordImage(String wordImage) {
-        this.wordImage = wordImage == null ? null : wordImage.trim();
+        this.wordImage = wordImage;
     }
 
     public Date getCreateTime() {
@@ -97,5 +88,27 @@ public class Word {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
+    }
+
+    @Override
+    public String toString() {
+        return "Word{" +
+                "id=" + id +
+                ", wordName='" + wordName + '\'' +
+                ", wordSound='" + wordSound + '\'' +
+                ", wordSymbol='" + wordSymbol + '\'' +
+                ", wordImage='" + wordImage + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", word='" + word + '\'' +
+                '}';
     }
 }

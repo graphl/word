@@ -5,7 +5,6 @@ import com.word.common.ServerResponse;
 import com.word.pojo.WordAndCategory;
 
 public interface IUserAndCategoryService {
-
     ServerResponse addCategoryService(WordAndCategory wordAndCategory);
 
     ServerResponse deleteCategoryWord(WordAndCategory wordAndCategory);

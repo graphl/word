@@ -1,6 +1,7 @@
 package com.word.dao;
 
 import com.word.pojo.WordsBook;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,7 +18,8 @@ public interface WordsBookMapper {
 
     int updateByPrimaryKey(WordsBook record);
 
-
+    int delTobookWord(@Param("bookId")Integer bookId,
+                      @Param("wordId") Integer wordId);
     /**
      * 前端
      */

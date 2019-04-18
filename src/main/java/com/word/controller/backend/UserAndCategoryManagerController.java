@@ -19,11 +19,11 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("manage/userAndCategory")
 public class UserAndCategoryManagerController {
 
-
     @Autowired
     private IUserAndCategoryService iUserAndCategoryService;
     @Autowired
     private IUserService iUserService;
+
     @RequestMapping("add_word")
     @ResponseBody
     public ServerResponse addCategoryService(HttpSession session, WordAndCategory wordAndCategory){

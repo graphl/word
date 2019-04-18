@@ -3,13 +3,13 @@ package com.word.pojo;
 public class WordAndCategory {
     private Integer id;
 
-    private Integer wordId;
+    private Integer book_id;
 
     private Integer categoryId;
 
-    public WordAndCategory(Integer id, Integer wordId, Integer categoryId) {
+    public WordAndCategory(Integer id, Integer book_id, Integer categoryId) {
         this.id = id;
-        this.wordId = wordId;
+        this.book_id = book_id;
         this.categoryId = categoryId;
     }
 
@@ -17,26 +17,23 @@ public class WordAndCategory {
         return id;
     }
 
-    public WordAndCategory setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 
-    public Integer getWordId() {
-        return wordId;
+    public Integer getbook_id() {
+        return book_id;
     }
 
-    public WordAndCategory setWordId(Integer wordId) {
-        this.wordId = wordId;
-        return this;
+    public void setbook_id(Integer book_id) {
+        this.book_id = book_id;
     }
 
     public Integer getCategoryId() {
         return categoryId;
     }
 
-    public WordAndCategory setCategoryId(Integer categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
-        return this;
     }
 }

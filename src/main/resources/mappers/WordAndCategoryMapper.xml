@@ -4,12 +4,12 @@
   <resultMap id="BaseResultMap" type="com.word.pojo.WordAndCategory" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="word_id" jdbcType="CHAR" javaType="java.lang.String" />
-      <arg column="category_id" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="book_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="category_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, word_id, category_id
+    id, book_id, category_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -22,7 +22,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.word.pojo.WordAndCategory" >
-    insert into words_word_category (id, word_id, category_id
+    insert into words_word_category (id, book_id, category_id
       )
     values (#{id,jdbcType=INTEGER}, #{wordId,jdbcType=CHAR}, #{categoryId,jdbcType=CHAR}
       )
@@ -34,7 +34,7 @@
         id,
       </if>
       <if test="wordId != null" >
-        word_id,
+        book_id,
       </if>
       <if test="categoryId != null" >
         category_id,
@@ -56,7 +56,7 @@
     update words_word_category
     <set >
       <if test="wordId != null" >
-        word_id = #{wordId,jdbcType=CHAR},
+        book_id = #{wordId,jdbcType=CHAR},
       </if>
       <if test="categoryId != null" >
         category_id = #{categoryId,jdbcType=CHAR},
@@ -66,7 +66,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.word.pojo.WordAndCategory" >
     update words_word_category
-    set word_id = #{wordId,jdbcType=CHAR},
+    set book_id = #{wordId,jdbcType=CHAR},
       category_id = #{categoryId,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -76,7 +76,7 @@
     from  words_word_category
     <where>
       <if test="wordId != null">
-        and word_id = #{wordId}
+        and book_id = #{wordId}
       </if>
       <if test="categoryId != null">
         and category_id = #{categoryId}
@@ -87,7 +87,7 @@
     delete  from words_word_category
     <where>
       <if test="wordId != null">
-        and word_id = #{wordId}
+        and book_id = #{wordId}
       </if>
       <if test="categoryId != null">
         and category_id = #{categoryId}

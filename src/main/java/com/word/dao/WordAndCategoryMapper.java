@@ -18,9 +18,9 @@ public interface WordAndCategoryMapper {
 
     int updateByPrimaryKey(WordAndCategory record);
 
-    int checkCategoryAndWord(@Param("categoryId") Integer categoryId,@Param("wordId") Integer wordId);
+    int checkCategoryAndWord(@Param("categoryId") Integer categoryId, @Param("wordId") Integer wordId);
 
-    int deleteBywordIdAndCategoryId(@Param("categoryId") Integer categoryId,@Param("wordId") Integer wordId);
+    int deleteBywordIdAndCategoryId(@Param("categoryId") Integer categoryId, @Param("wordId") Integer wordId);
 
     List<WordAndCategory> selectByCategoryId(Integer categoryId);
 }

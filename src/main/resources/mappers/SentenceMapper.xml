@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.word.dao.SentenceMapper" >
+  <resultMap id="BaseResultMap" type="com.word.pojo.Sentence" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="sentence" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sentence_Chinese" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="updata_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sentence, sentence_Chinese, create_time, updata_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sentence
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sentence
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.word.pojo.Sentence" >
+    insert into sentence (id, sentence, sentence_Chinese, 
+      create_time, updata_time)
+    values (#{id,jdbcType=INTEGER}, #{sentence,jdbcType=VARCHAR}, #{sentenceChinese,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updataTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.word.pojo.Sentence" >
+    insert into sentence
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sentence != null" >
+        sentence,
+      </if>
+      <if test="sentenceChinese != null" >
+        sentence_Chinese,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updataTime != null" >
+        updata_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sentence != null" >
+        #{sentence,jdbcType=VARCHAR},
+      </if>
+      <if test="sentenceChinese != null" >
+        #{sentenceChinese,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updataTime != null" >
+        #{updataTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.word.pojo.Sentence" >
+    update sentence
+    <set >
+      <if test="sentence != null" >
+        sentence = #{sentence,jdbcType=VARCHAR},
+      </if>
+      <if test="sentenceChinese != null" >
+        sentence_Chinese = #{sentenceChinese,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updataTime != null" >
+        updata_time = #{updataTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.word.pojo.Sentence" >
+    update sentence
+    set sentence = #{sentence,jdbcType=VARCHAR},
+      sentence_Chinese = #{sentenceChinese,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updata_time = #{updataTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getAllS" resultType="Sentence">
+    select <include refid="Base_Column_List"/>
+    from  sentence
+  </select>
+<delete id="deleteBySentenceId" parameterType="integer">
+  delete from sentence
+  where id = #{sentence_id}
+</delete>
+
+</mapper>

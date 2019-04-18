@@ -98,7 +98,7 @@
         #{role,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
-        now(),
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null" >
        now(),
@@ -207,4 +207,22 @@
     set password = #{passwordNew},update_time = now()
     where username = #{username}
   </update>
+
+
+  <select id="getAllUser" resultType="User">
+    select <include refid="Base_Column_List"/>
+    from words_user where role = 0
+  </select>
+  
+  <select id="getAllAdmin" resultType="User">
+    select <include refid="Base_Column_List"/>
+    from  words_user where role = 1
+  </select>
+
+  <delete id="deleteUserById" parameterType="map">
+  delete from  words_user
+  where id = #{id} and role = #{role}
+  </delete>
+
+
 </mapper>

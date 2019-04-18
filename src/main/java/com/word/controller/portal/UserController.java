@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user/")
@@ -115,5 +116,40 @@ public class UserController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"未登陆需要强制登陆");
         }
         return iUserService.getInformation(currentUser.getId());
+    }
+
+
+    // 后端
+
+    @RequestMapping(value = "getAllUser.do")
+    @ResponseBody
+    public ServerResponse<List<User>> getAllUsser(){
+
+       return iUserService.getAllUser();
+    }
+
+    @RequestMapping(value = "getAdmins.do")
+    @ResponseBody
+    public ServerResponse<List<User>> getAdmins(){
+        return iUserService.getAdmins();
+    }
+
+    @RequestMapping(value = "deleteUserById.do")
+    @ResponseBody
+    public ServerResponse deleteUserById(Integer user_id){
+        //System.out.println(user_id+"...............................");
+        return  iUserService.deleteUserById(user_id,0);
+    }
+
+    @RequestMapping(value = "deleteAdminUserById.do")
+    @ResponseBody
+    public  ServerResponse deleteAdminUserById(Integer user_id){
+        return  iUserService.deleteUserById(user_id,1);
+    }
+
+    @RequestMapping(value = "updateUser.do")
+    @ResponseBody
+    public ServerResponse updateUser(User user){
+        return iUserService.updateUser(user);
     }
 }

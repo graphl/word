@@ -5,16 +5,15 @@ public class WordBook {
 
     private String bookName;
 
-    private Integer wordId;
-
-    public WordBook(Integer id, String bookName, Integer wordId) {
-        this.id = id;
-        this.bookName = bookName;
-        this.wordId = wordId;
-    }
+    private String book_js;
 
     public WordBook() {
-        super();
+    }
+
+    public WordBook(Integer id, String bookName, String book_js) {
+        this.id = id;
+        this.bookName = bookName;
+        this.book_js = book_js;
     }
 
     public Integer getId() {
@@ -30,14 +29,14 @@ public class WordBook {
     }
 
     public void setBookName(String bookName) {
-        this.bookName = bookName == null ? null : bookName.trim();
+        this.bookName = bookName;
     }
 
-    public Integer getWordId() {
-        return wordId;
+    public String getBook_js() {
+        return book_js;
     }
 
-    public void setWordId(Integer wordId) {
-        this.wordId = wordId;
+    public void setBook_js(String book_js) {
+        this.book_js = book_js;
     }
 }

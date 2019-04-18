@@ -24,4 +24,11 @@ public interface IUserService {
 
     ServerResponse checkAdminRole(User user);
 
+    ServerResponse getAllUser();
+
+    ServerResponse getAdmins();
+
+    ServerResponse deleteUserById(Integer user_id,Integer role);
+
+    ServerResponse updateUser(User user);
 }

@@ -86,10 +86,20 @@
   category_name
   from  words_category
 </select>
+
   <select id="selectByCategoryId" resultType="Category">
     select
     <include refid="Base_Column_List" />
     from words_category
     where  id = #{categoryId}
   </select>
+  <select id="getAllCategory" resultType="Category">
+    select <include refid="Base_Column_List"/>
+    from  words_category
+  </select>
+  
+  <delete id="delCategoryById">
+    delete from words_category
+    where id = #{categoryId}
+  </delete>
 </mapper>

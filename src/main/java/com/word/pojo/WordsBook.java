@@ -10,11 +10,7 @@ public class WordsBook {
     public WordsBook(Integer id, Integer bookId, Integer wordId) {
         this.id = id;
         this.bookId = bookId;
-        this.wordId = wordId;
-    }
-
-    public WordsBook() {
-        super();
+        this. wordId= wordId;
     }
 
     public Integer getId() {

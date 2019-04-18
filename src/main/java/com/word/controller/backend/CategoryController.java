@@ -3,6 +3,7 @@ package com.word.controller.backend;
 import com.word.common.Const;
 import com.word.common.ResponseCode;
 import com.word.common.ServerResponse;
+import com.word.pojo.Category;
 import com.word.pojo.User;
 import com.word.service.ICategoryService;
 import com.word.service.IUserService;
@@ -40,6 +41,7 @@ public class CategoryController {
         }
     }
 
+
     @RequestMapping("set_Category_Name.do")
     @ResponseBody
     public ServerResponse setCategoryName(HttpSession session,Integer categoryId,String categoryName){
@@ -63,6 +65,7 @@ public class CategoryController {
             return iCategoryService.getAllCategoryName();
 
     }
+
     @RequestMapping("get_categoryNameBycategoryId")
     @ResponseBody
     public ServerResponse getCategoryNameByCategoryId(HttpSession session,String categoryId){
@@ -79,4 +82,23 @@ public class CategoryController {
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
         }
     }
+
+    @RequestMapping("updateCategory.do")
+    @ResponseBody
+    public ServerResponse updateCategory(Category category){
+
+        return iCategoryService.updateCategory(category);
+    }
+
+    @RequestMapping("getCategoryList.do")
+    @ResponseBody
+    public ServerResponse getCategoryList(){
+        return iCategoryService.categoryList();
+    }
+
+    @RequestMapping("delCategory.do")
+    public ServerResponse delCategoryById(Integer categoryId){
+        return iCategoryService.delCategoryId(categoryId);
+    }
+
 }

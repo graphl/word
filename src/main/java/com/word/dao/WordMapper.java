@@ -20,5 +20,12 @@ public interface WordMapper {
 
     List<Word> selectList();
 
-    List<Word> selectByNameAndWordId(@Param("wordName") String wordName,@Param("wordId") Integer wordId);
+    List<Word> selectByNameAndWordId(@Param("wordName") String wordName, @Param("wordId") Integer wordId);
+
+    int getWordIdByWordName(String wordName);
+
+    Word selectByWord_name(String word_name);
+
+
+    int deleteByWordId(Integer wordId);
 }

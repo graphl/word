@@ -12,13 +12,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service("iUserService")
 public class UserServiceImpl  implements IUserService {
 
     @Autowired
-    private  UserMapper userMapper;
+    private UserMapper userMapper;
 
     /**
      * 登陆
@@ -51,6 +52,7 @@ public class UserServiceImpl  implements IUserService {
      * @param user
      * @return
      */
+
     public ServerResponse<String> register(User user){
         ServerResponse vaildResponse = this.checkVaild(user.getUsername(),Const.USERNAME);
         if(!vaildResponse.isSuccess()){
@@ -248,5 +250,25 @@ public class UserServiceImpl  implements IUserService {
         return ServerResponse.createByError();
     }
 
+
+
+    public ServerResponse getAllUser(){
+        List<User> users = userMapper.getAllUser();
+        return  ServerResponse.createBySuccess(users);
+    }
+    public ServerResponse getAdmins(){
+        List<User> users = userMapper.getAllAdmin();
+        return ServerResponse.createBySuccess(users);
+    }
+
+    public ServerResponse deleteUserById(Integer user_id,Integer role){
+        int result = userMapper.deleteUserById(user_id,role);
+        return ServerResponse.createBySuccess(result);
+    }
+
+    public ServerResponse updateUser(User user){
+        int result  = userMapper.updateByPrimaryKeySelective(user);
+        return ServerResponse.createBySuccess(result);
+    }
 
 }

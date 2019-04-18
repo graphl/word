@@ -12,9 +12,9 @@ public interface UserWordMapper {
 
     int insertSelective(UserWord record);
 
-    int deleteUserWord(@Param("wordId") Integer wordId,@Param("userId") Integer userId);
+    int deleteUserWord(@Param("wordId") Integer wordId, @Param("userId") Integer userId);
 
     List<Word> showUserWord(int userid);
 
-
+    int updateUserWord(Word word);
 }

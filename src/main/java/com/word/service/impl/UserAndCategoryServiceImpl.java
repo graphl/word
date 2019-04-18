@@ -25,11 +25,11 @@ public class UserAndCategoryServiceImpl implements IUserAndCategoryService {
     private WordMapper wordMapper;
 
     public ServerResponse addCategoryService(WordAndCategory wordAndCategory){
-        if(wordAndCategory.getWordId() == null || wordAndCategory.getCategoryId() ==null ){
+        if(wordAndCategory.getbook_id() == null || wordAndCategory.getCategoryId() ==null ){
             return  ServerResponse.createByErrorMessage("参数错误");
         }
-        Word word = wordMapper.selectByPrimaryKey(wordAndCategory.getWordId());
-        int resultCount = wordAndCategoryMapper.checkCategoryAndWord(wordAndCategory.getWordId(),wordAndCategory.getCategoryId());
+        Word word = wordMapper.selectByPrimaryKey(wordAndCategory.getbook_id());
+        int resultCount = wordAndCategoryMapper.checkCategoryAndWord(wordAndCategory.getbook_id(),wordAndCategory.getCategoryId());
         if(word !=null && resultCount > 0){
             int rowCount =  wordAndCategoryMapper.insert(wordAndCategory);
             if(rowCount > 0){
@@ -40,10 +40,10 @@ public class UserAndCategoryServiceImpl implements IUserAndCategoryService {
         return  ServerResponse.createByErrorMessage("单词归类失败，没有该单词获单词重复");
     }
     public ServerResponse deleteCategoryWord(WordAndCategory wordAndCategory){
-        if(wordAndCategory.getWordId() == null || wordAndCategory.getCategoryId() ==null ){
+        if(wordAndCategory.getbook_id() == null || wordAndCategory.getCategoryId() ==null ){
             return  ServerResponse.createByErrorMessage("参数错误");
         }
-        int resultCount = wordAndCategoryMapper.deleteBywordIdAndCategoryId(wordAndCategory.getCategoryId(),wordAndCategory.getWordId());
+        int resultCount = wordAndCategoryMapper.deleteBywordIdAndCategoryId(wordAndCategory.getCategoryId(),wordAndCategory.getbook_id());
         if(resultCount > 0){
             return ServerResponse.createBySuccess("删除成功");
         }
@@ -57,7 +57,7 @@ public class UserAndCategoryServiceImpl implements IUserAndCategoryService {
         List<Word> wordIdList = Lists.newArrayList();
         if(CollectionUtils.isNotEmpty(wordAndCategoryList)) {
             for (WordAndCategory wordAndCategoryItem : wordAndCategoryList) {
-                Word wordBywordId = wordMapper.selectByPrimaryKey(wordAndCategoryItem.getWordId());
+                Word wordBywordId = wordMapper.selectByPrimaryKey(wordAndCategoryItem.getbook_id());
                 wordIdList.add(wordBywordId);
             }
         }

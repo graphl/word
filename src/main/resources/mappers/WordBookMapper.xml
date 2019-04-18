@@ -5,11 +5,11 @@
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="book_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="word_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="book_js" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, book_name, word_id
+    id, book_name, book_js
   </sql>
 
   <sql id="Base_Column_List_word" >
@@ -29,8 +29,8 @@
   </delete>
 
   <insert id="insert" parameterType="com.word.pojo.WordBook" >
-    insert into words_word_book (id, book_name, word_id)
-    values (#{id,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{wordId,jdbcType=INTEGER} )
+    insert into words_word_book (id, book_name, book_js)
+    values (#{id,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{bookJs,jdbcType=VARCHAR} )
   </insert>
 
   <insert id="insertSelective" parameterType="com.word.pojo.WordBook" >
@@ -42,8 +42,8 @@
       <if test="bookName != null" >
         book_name,
       </if>
-      <if test="wordId != null" >
-        word_id,
+      <if test="bookJs != null" >
+        book_js,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -53,8 +53,8 @@
       <if test="bookName != null" >
         #{bookName,jdbcType=VARCHAR},
       </if>
-      <if test="wordId != null" >
-        #{wordId,jdbcType=INTEGER},
+      <if test="bookJs != null" >
+        #{bookJs,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -65,8 +65,8 @@
       <if test="bookName != null" >
         book_name = #{bookName,jdbcType=VARCHAR},
       </if>
-      <if test="wordId != null" >
-        word_id = #{wordId,jdbcType=INTEGER},
+      <if test="bookJs != null" >
+        book_js = #{bookJs,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -75,7 +75,7 @@
   <update id="updateByPrimaryKey" parameterType="com.word.pojo.WordBook" >
     update words_word_book
     set book_name = #{bookName,jdbcType=VARCHAR},
-      word_id = #{wordId,jdbcType=INTEGER}
+      book_js = #{bookJs,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -91,7 +91,7 @@
     from words_word_book
   </select>
 
-<select id="selectByBookId_List" parameterType="integer" resultType="word">
+<select id="selectByBookId_List" parameterType="integer" resultType="com.word.pojo.Word">
 
   select <include refid="Base_Column_List_word"/>
   from words_book wb,words_word ww
@@ -102,4 +102,20 @@
     select <include refid="Base_Column_List"/>
     from words_word_book
   </select>
+
+  <delete id="deleteByBookId">
+delete from words_word_book
+where id = #{bookId}
+
+  </delete>
+  <insert id="insertWordToBook" parameterType="list">
+    insert into words_book(book_id,word_id)
+    values
+    <foreach collection="wordlist" item="item" index="index" separator=",">
+      (
+      #{item},
+      #{wordId}
+      )
+    </foreach>
+  </insert>
 </mapper>

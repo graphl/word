@@ -74,6 +74,23 @@ public class CategoryServiceImpl implements ICategoryService {
            return ServerResponse.createByErrorMessage("无此分类");
        }
         return ServerResponse.createBySuccess(category);
+    }
 
+    public  ServerResponse updateCategory(Category category){
+        int result  = categoryMapper.updateByPrimaryKeySelective(category);
+
+        return ServerResponse.createBySuccess(result);
+    }
+
+
+    public ServerResponse categoryList(){
+        List<Category> categoryList = categoryMapper.getAllCategory();
+
+        return ServerResponse.createBySuccess(categoryList);
+    }
+
+    public ServerResponse delCategoryId(Integer categoryId){
+        int result = categoryMapper.delCategoryById(categoryId);
+        return ServerResponse.createBySuccess(result);
     }
 }

@@ -3,15 +3,12 @@ package com.word.service.impl;
 import com.word.common.ServerResponse;
 import com.word.dao.UserWordMapper;
 import com.word.dao.WordMapper;
-import com.word.pojo.User;
 import com.word.pojo.UserWord;
 import com.word.pojo.Word;
 import com.word.service.IUserWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
 
 @Service("iUserWordService")
 public class UserWordServiceImpl implements IUserWordService {
@@ -20,6 +17,8 @@ public class UserWordServiceImpl implements IUserWordService {
     private WordMapper wordMapper;
     @Autowired
     private UserWordMapper userWordMapper;
+
+   // 前端
     public ServerResponse addUserWord(Integer wordId,Integer userId){
         if(wordId == null||userId == null){
             return ServerResponse.createByErrorMessage("添加用户单词参数错误");
@@ -55,4 +54,6 @@ public class UserWordServiceImpl implements IUserWordService {
 
        return ServerResponse.createBySuccess(wordList);
     }
+
+
 }

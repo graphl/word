@@ -3,6 +3,8 @@ package com.word.dao;
 import com.word.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -16,19 +18,25 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    User selectLogin(@Param("username") String username,@Param("password") String password);
+    User selectLogin(@Param("username") String username, @Param("password") String password);
 
     String selectQuestionByUsername(String username);
 
-    int checkAnswer(@Param("username") String username,@Param("question") String question,@Param("answer") String answer);
+    int checkAnswer(@Param("username") String username, @Param("question") String question, @Param("answer") String answer);
 
-    int updatePasswordByUsername(@Param("username") String username,@Param("passwordNew") String passwordNew);
+    int updatePasswordByUsername(@Param("username") String username, @Param("passwordNew") String passwordNew);
 
-    int checkPassword(@Param("password") String password,@Param("userId") Integer userId);
+    int checkPassword(@Param("password") String password, @Param("userId") Integer userId);
 
-    int checkEmailByUserId(@Param("email") String email,@Param("userId") Integer userId);
+    int checkEmailByUserId(@Param("email") String email, @Param("userId") Integer userId);
 
     int checkUsername(String username);
 
     int checkEmail(String email);
+
+    List<User> getAllUser();
+
+    List<User> getAllAdmin();
+
+    int deleteUserById(@Param("id") Integer id,@Param("role") Integer role);
 }

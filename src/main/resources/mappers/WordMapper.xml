@@ -4,13 +4,13 @@
   <resultMap id="BaseResultMap" type="com.word.pojo.Word" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="word" jdbcType="VARCHAR" javaType="java.lang.String"/>
       <arg column="word_name" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="word_sound" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="word_symbol" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="word_image" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="word" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
@@ -139,4 +139,20 @@
       </if>
     </where>
   </select>
+  <select id="getWordIdByWordName" resultType="int" parameterType="string">
+    select word_id
+    from words_word
+  </select>
+  <select id="selectByWord_name" parameterType="string" resultType="Word">
+    select <include refid="Base_Column_List"/>
+    from words_word
+    where word_name = #{word_name}
+  </select>
+  
+  <delete id="deleteByWordId" parameterType="integer">
+    delete from words_word
+    where  id = #{wordId}
+  </delete>
+
+
 </mapper>

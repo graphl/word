@@ -46,4 +46,15 @@
   from  words_word ww,words_user_word wu
   where ww.id = wu.word_id and wu.user_id = #{userid}
 </select>
+  <update id="updateUserWord">
+    update words_word
+    <set>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="wordId != null" >
+        word_id,
+      </if>
+    </set>
+  </update>
 </mapper>
