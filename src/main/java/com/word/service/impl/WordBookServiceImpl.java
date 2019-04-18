@@ -66,6 +66,14 @@ public class WordBookServiceImpl  implements IWordBookService {
         }*/
         return ServerResponse.createBySuccess(wordBookList);
     }
+    public List<WordBook> getAllBookName_list(){
+        List<WordBook> wordBookList = wordBookMapper.selectAllBook();
+      /*  List<String> wordBookStringList = Lists.newArrayList();
+        for(WordBook wordBook : wordBookList){
+            wordBookStringList.add(wordBook.getBookName());
+        }*/
+        return wordBookList;
+    }
     public ServerResponse<WordBook> getWordBookByBookId(Integer wordId){
         if(wordId == null){
             return ServerResponse.createByErrorMessage("书籍查询参数错误");

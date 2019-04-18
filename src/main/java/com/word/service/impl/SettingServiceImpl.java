@@ -23,4 +23,8 @@ public class SettingServiceImpl implements ISettingService {
         Integer result = user_settingWordMapper.updateByUserId(user_settingWord,user_id);
          return    ServerResponse.createBySuccess("改变完成");
     }
+
+    public User_SettingWord selectSetting(Integer userId){
+        return user_settingWordMapper.selectSetting(userId);
+    }
 }

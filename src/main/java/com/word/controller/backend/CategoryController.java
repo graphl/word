@@ -12,12 +12,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/manage/category/")
 public class CategoryController {
+
 
     @Autowired
     private ICategoryService iCategoryService;
@@ -96,9 +99,21 @@ public class CategoryController {
         return iCategoryService.categoryList();
     }
 
+
+
     @RequestMapping("delCategory.do")
     public ServerResponse delCategoryById(Integer categoryId){
         return iCategoryService.delCategoryId(categoryId);
+    }
+
+
+
+    @RequestMapping("/addbookTocategory")
+    @ResponseBody
+    public ServerResponse addwordTobook(String bookList,Integer categoryId){
+        List<Integer> ids = Arrays.asList(bookList.split(",")).stream().map(s->Integer.parseInt(s)).collect(Collectors.toList());
+        return null;
+        //return iCategoryService.addwordTobook(ids,wordId);
     }
 
 }

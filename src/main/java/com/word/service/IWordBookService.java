@@ -13,6 +13,8 @@ public interface IWordBookService {
 
     ServerResponse<List<WordBook>> getAllBookName();
 
+    List<WordBook> getAllBookName_list();
+
     ServerResponse<WordBook> getWordBookByBookId(Integer wordId);
 
     ServerResponse<List<WordBook>> showAllBook();

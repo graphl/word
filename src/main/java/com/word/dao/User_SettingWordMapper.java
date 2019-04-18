@@ -21,4 +21,7 @@ public interface User_SettingWordMapper {
     int updateByUserId(@Param("user_setting") User_SettingWord user_settingWord,
                        @Param("user_id") Integer user_id);
 
+
+    User_SettingWord selectSetting(Integer userId);
+
 }
