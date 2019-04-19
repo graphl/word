@@ -88,7 +88,7 @@
                     <li class="nav-help-btn"><a href="#">帮助</a></li>
                 </ul>
                 <div class="nav-user"><a class="login-btn"
-                                         href="#">登录</a><span>·</span><a
+                                         href="/login.jsp">登录</a><span>·</span><a
                         class="register-btn" href="/register.jsp">注册</a></div>
             </div>
         </div>
@@ -153,7 +153,7 @@
                     $('#stantard-dialogBox').dialogBox({
                         title: 'English',
                         hasClose: true,
-                        content: '登陆成功'
+                        content: '注册成功'
                     });
                     setTimeout(function () {
                         window.location.href="/login.jsp";
@@ -168,6 +168,10 @@
             },
         });
     });
+
+    $('.search-submited').click(function () {
+        window.location.href = '/userword/searchwordDetail.do?word=' + $('.search-input').val()
+    })
 </script>
 </body>
 </html>

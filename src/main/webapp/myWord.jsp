@@ -1,4 +1,6 @@
-<%@ page import="com.word.pojo.User" %><%--
+<%@ page import="com.word.pojo.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.word.vo.UserWordVo" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2019/4/9 0009
@@ -17,9 +19,17 @@
     <title>记单词</title>
 
 
-    <link href="css/shanbay-fontawesome-v3.css" rel="stylesheet" type="text/css">
+    <link href="/css/shanbay-fontawesome-v3.css" rel="stylesheet" type="text/css">
 
-    <link href="css/shanbay.1e7fb99f94a25299c81b5410a4ee007a.css" rel="stylesheet" type="text/css">
+    <link href="/css/shanbay.1e7fb99f94a25299c81b5410a4ee007a.css" rel="stylesheet" type="text/css">
+
+    <link href="/css/library.33c719b0fc9b076506fc01b97073fb97.css" rel="stylesheet" type="text/css">
+
+    <style>
+        .span8 {
+            width: 920px;
+        }
+    </style>
 </head>
 
 <body data-spy="scroll" data-target=".subnav" data-offset="50" class="">
@@ -68,8 +78,10 @@
                     <li><a href="#" class="shortcuts-button">快捷键</a></li>
 
                     <li class="dropdown main-nav nav-avatar  ">
-                        <a href="#" class="main-menu user-avatar" data-toggle="dropdown"> <i> <img src="https://media-image1.baydn.com/avatar_img%2Fcizbtc%2Fb5c11e19486a6c1def47c9345fb425a8.c7a2d9f8de1d9979a1ff579a396b3ea9.jpg@20w_20h" width="20" height="20" class=""> </i>
-                            <%=((User)session.getAttribute("currentUser")).getUsername()%>
+                        <a href="#" class="main-menu user-avatar" data-toggle="dropdown"> <i> <img
+                                src="https://media-image1.baydn.com/avatar_img%2Fcizbtc%2Fb5c11e19486a6c1def47c9345fb425a8.c7a2d9f8de1d9979a1ff579a396b3ea9.jpg@20w_20h"
+                                width="20" height="20" class=""> </i>
+                            <%=((User) session.getAttribute("currentUser")).getUsername()%>
                             <img class="dropdown-arraw" src="https://static.baydn.com/static//img/icon-arraw.png">
                         </a>
                         <ul class="dropdown-menu">
@@ -97,8 +109,8 @@
     <div class="sub-menu
     active">
         <ul class="container" style="height: 47px;">
-            <li class="active"><a id="bdc-new-review-link" href="#">单词学习</a></li>
-            <li class=""><a href="/userword/show_UserWord.do">我的词库</a></li>
+            <li class=""><a id="bdc-new-review-link" href="/study.jsp">单词学习</a></li>
+            <li class="active"><a href="#">我的词库</a></li>
             <li class=""><a href="/setting.jsp">单词设置</a></li>
         </ul>
     </div>
@@ -179,105 +191,48 @@
 <div class="container main-body  new-main-body" style="min-height: 754px;">
 
     <div id="review-setting"></div>
-    <div id="loading-spin" style="display: none;">
+    <div style="display: none;">
         <p style="text-align: center;margin-top: 5px;">正在加载数据 ...</p>
     </div>
-    <div class="row divide-against-progress">
-        <div id="review1" class="span12 review">
-            <div class="row bdc-learning-header">
-                <div class="span12"><p><span class="span-left">⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅</span> 我的单词 <span class="span-right">⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅</span>
-                </p></div>
-            </div>
-            <div class="hero-unit start-review new-start-review">
-                <div class="row new-review-summary">
-                    <div class="pull-left span7">
-                        <h1 class="span2 today">150
-                            <small>我的单词</small>
-                        </h1>
+    <div class="row">
+        <div id="learnings-library" class="span8">
+
+            <div id="learnings-container">
+                <div class="hide" id="today" style="display: block;">
+                    <%
+                        List<UserWordVo> userWordVoList = (List<UserWordVo>)request.getAttribute("userWords");
+                        for (UserWordVo item : userWordVoList) {
+                    %>
+                    <div class="learning">
+                        <div class="wordinfo" style="margin-top: 20px;"><span class="word"
+                                                                                                     style="width: 30%; display: block; float:left;"><%=item.getWord_name()%></span>
+                            <span style="width: 20%;display: block; float: left;">                 <span
+                                    class="pronunciation" style="display:block; float: left;"><%=item.getWord_symbol()%></span>                 <span
+                                    class="speaker" style="display: block; float: left; cursor: pointer;">                      <i
+                                    class="icon-volume-off" style="font-size:20px; color:#d3d3d3"></i>                 </span>                 </span>
+                            <span class="definition" style="width: 30%; display: block; float: left;"><%=item.getWord()%></span> <span class="operations" style="width:10%; display: block; float:left;">             <p
+                                    class="msg success hide">操作成功</p>             <p class="delete-confirm well hide">                 <span
+                                    class="confirm">确认删除</span>             </p>             <span class="view"
+                                                                                                   title="查看"><a
+                                    href="/review/learning/63335072296/">                 <span class="icon icon-small"
+                                                                                                style="margin-right: -15px;"><img
+                                    src="https://static.baydn.com/static/img/package/eye.png"></span>             </a></span>                                                                                                     <span
+                                    class="setmaster master" title="太简单">                           <span
+                                    class="icon icon-small"><img
+                                    src="https://static.baydn.com/static/img/package/rubish.png"></span>                         </span>                                                                                         </span>
+                            <br style="clear:both;height:0;"></div>
                     </div>
-                    <div class="span3">
-                        <div class="row-fluid">
-                            <button class="span12 btn-large btn-success start-review-button">开始学习</button>
-                        </div>
-                        <div class="row-fluid">
-                            <div id="start-review-button-loading" class="hide"
-                                 style="text-align: center; padding-top: 30px;"><img
-                                    src="https://static.baydn.com/static/img/loading.gif" width="20"></div>
-                        </div>
-                    </div>
+                    <%
+                        }
+                    %>
                 </div>
             </div>
+            <div id="loading-spin" style="padding-top: 20px;"></div>
+            <span class="hide" id="library-type" user_id="108966250"></span>
+
+
         </div>
 
-        <div id="review2" class="span12 review" style="display: none;">
-            <div class="row">
-                <div class="span12 test-box review-id" data-id="61906001704">
-                    <div id="preview" class="row">
-                        <div class="span10">
-                            <div class="row word-row new-word-row">
-                                <div class="span10 offset1"><h1 id="word_name">carbon</h1>
-                                    <div class="learning-speaker">
-                                        <h1>
-                                            <small id="word_symbol"> /'kɑːrbən/</small>
-                                        </h1>
-                                        <span class="audio us active">US<span class="speaker-icon"></span>
-                                            <audio id="music"
-                                                   src="https://media-audio1.baydn.com/us/a/as/assignment_v4.mp3"></audio></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="example-hint" class="row learning-hint learning-hint-active" style="display: none;">
-                                <div class="span10 offset1">
-                                    <div class="hint-content sentence annotation"> ocean-going</div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div id="answer" class="span10 offset1 operation" style="opacity: 1;">
-                                    <div class="row test-answers first"><a class="known span10"
-                                                                           href="javascript:void(0)" onclick="onKnow()"><span>1. </span>认识</a>
-                                    </div>
-                                    <div class="row test-answers"><a class="unknown span10"
-                                                                     href="javascript:void(0)" onclick="unKnow()"><span>2. </span>不认识</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-    <div class="row hide bottom-progress progress-box">
-        <div class="span12 progress-box-wrap">
-            <div class="row">
-                <div class="span1">
-                    <h6 class="pull-right">进度</h6>
-                </div>
-                <div class="span10">
-                    <div class="well review-progress">
-                        <div class="progress pull-right progress-danger" style="width:0%;">
-                            <div class="bar" style="width: 100%"><span class="num"></span>
-                            </div>
-                        </div>
-                        <div class="progress pull-left progress-success" style="width:0%;">
-                            <div class="bar" style="width: 100%"><span class="num"></span></div>
-                        </div>
-                        <div class="progress pull-left progress-reviewed " style="width: 0%;">
-                            <div class="bar reviewed pull-left" style="width: 100%;"><span class="num"></span>
-                            </div>
-                        </div>
-                        <div class="progress pull-left progress-unreviewed" style="width: 99.9%;">
-                            <div class="bar" style="width: 100%"><span class="num">150</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <div id="affix-prompt">
     </div>
@@ -321,14 +276,10 @@
                 $('#review2').show();
             }
         })
-
-        $('.search-submited').click(function () {
-            window.location.href = '/userword/searchwordDetail.do?word=' + $('.search-input').val()
-        })
     })
 
     function onKnow() {
-        if (flg){
+        if (flg) {
             $.ajax({
                 url: '/userword/Know_Word.do',
                 type: 'get',
@@ -347,7 +298,7 @@
     }
 
     function unKnow() {
-        if (flg){
+        if (flg) {
             flg = false;
             $('#example-hint').show();
             $.ajax({
@@ -359,6 +310,10 @@
             });
         }
     }
+
+    $('.search-submited').click(function () {
+        window.location.href = '/userword/searchwordDetail.do?word=' + $('.search-input').val()
+    })
 </script>
 </body>
 </html>

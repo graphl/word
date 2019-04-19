@@ -57,4 +57,7 @@
       </if>
     </set>
   </update>
+  <select id="checkWordIsInUserWord" parameterType="integer" resultType="integer">
+  select  conut(*) from words_user_word where word_id = #{wordId}
+  </select>
 </mapper>

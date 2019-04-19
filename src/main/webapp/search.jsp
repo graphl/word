@@ -1,4 +1,8 @@
-<%--
+<%@ page import="com.word.pojo.User" %>
+<%@ page import="com.word.vo.WordDetailOneVo" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.word.pojo.Phrase" %>
+<%@ page import="com.word.pojo.Sentence" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2019/4/9 0009
@@ -17,9 +21,9 @@
     <title>记单词</title>
 
 
-    <link href="css/shanbay-fontawesome-v3.css" rel="stylesheet" type="text/css">
+    <link href="/css/shanbay-fontawesome-v3.css" rel="stylesheet" type="text/css">
 
-    <link href="css/shanbay.1e7fb99f94a25299c81b5410a4ee007a.css" rel="stylesheet" type="text/css">
+    <link href="/css/shanbay.1e7fb99f94a25299c81b5410a4ee007a.css" rel="stylesheet" type="text/css">
 </head>
 
 <body data-spy="scroll" data-target=".subnav" data-offset="50" class="">
@@ -47,10 +51,8 @@
                         <a class="main-menu" href="#">首页</a>
                     </li>
 
-                    <li class="dropdown main-nav
-    active
-">
-                        <a href="/bdc/client/guide" class="main-menu">
+                    <li class="dropdown main-nav active">
+                        <a href="#" class="main-menu">
                             单词
                         </a>
                     </li>
@@ -71,7 +73,7 @@
                         <a href="#" class="main-menu user-avatar" data-toggle="dropdown"> <i> <img
                                 src="https://media-image1.baydn.com/avatar_img%2Fcizbtc%2Fb5c11e19486a6c1def47c9345fb425a8.c7a2d9f8de1d9979a1ff579a396b3ea9.jpg@20w_20h"
                                 width="20" height="20" class=""> </i>
-                            admin
+                            <%=((User)session.getAttribute("currentUser")).getUsername()%>
                             <img class="dropdown-arraw" src="https://static.baydn.com/static//img/icon-arraw.png">
                         </a>
                         <ul class="dropdown-menu">
@@ -99,11 +101,9 @@
     <div class="sub-menu
     active">
         <ul class="container" style="height: 47px;">
-            <li class="
-    active
-"><a id="bdc-new-review-link" href="#">单词学习</a></li>
-            <li class=""><a href="#">我的词库</a></li>
-            <li class=""><a href="#">单词设置</a></li>
+            <li class="active"><a id="bdc-new-review-link" href="/study.jsp">单词学习</a></li>
+            <li class=""><a href="/userword/show_UserWord.do">我的词库</a></li>
+            <li class=""><a href="/setting.jsp">单词设置</a></li>
         </ul>
     </div>
 
@@ -204,14 +204,11 @@
                             <div class="row">
                                 <div class="span1"><h6 class="pull-right">&nbsp;</h6></div>
                                 <div class="span9">
-                                    <h1 class="content pull-left" style="">English
-                                        <small>/'ɪŋɡlɪʃ/</small>
+                                    <h1 class="content pull-left" style=""><%=((WordDetailOneVo)request.getAttribute("wordDetail")).getWord_name()%>
+                                        <small><%=((WordDetailOneVo)request.getAttribute("wordDetail")).getWord_symbol()%></small>
                                     </h1>
 
                                     <div class="pull-left learning-speaker">
-                                        <span class="audio uk"
-                                              data="https://media-audio1.baydn.com/uk%2Fe%2Fen%2Fenglish_v3.mp3">UK<span
-                                                class="speaker-icon"></span></span>
                                         <span class="audio us"
                                               data="https://media-audio1.baydn.com/us%2Fe%2Fen%2Fenglish_v3.mp3">US<span
                                                 class="speaker-icon"></span></span>
@@ -229,31 +226,11 @@
                                     <div class="well">
                                         <div class="row">
 
-                                            <div class="cndf span7"><span class="text">n. 英语</span><span class="text">adj. 英格兰的； 英国的； 英语的； 英格兰人的</span>
+                                            <div class="cndf span7"><span class="text"><%=((WordDetailOneVo)request.getAttribute("wordDetail")).getWord()%></span>
                                             </div>
 
                                         </div>
-                                        <div class="row">
 
-                                            <div class="span1"><span class="part-of-speech label">n.</span></div>
-                                            <ol class="span7">
-
-                                                <li class="definition">
-                                                    <span class="content">an Indo-European language belonging to the West Germanic branch; the official language of Britain and the United States and most of the commonwealth countries</span>
-                                                </li>
-
-                                            </ol>
-
-                                            <div class="span1"><span class="part-of-speech label">adj.</span></div>
-                                            <ol class="span7">
-
-                                                <li class="definition">
-                                                    <span class="content">of or relating to or characteristic of England or its culture or people</span>
-                                                </li>
-
-                                            </ol>
-
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -270,156 +247,75 @@
                                 <li class="active"><a class="ex-sys-box-tab" data-toggle="tab"
                                                       href="#ex-sys-box">词典例句</a></li>
                             </ul>
-                            <div class="tab-content">
+                            <div>
                                 <div class="tab-pane row active" id="ex-sys-box">
                                     <ol class="span9">
-
-
+                                        <%
+                                            List<Phrase> phraseList = ((WordDetailOneVo)request.getAttribute("wordDetail")).getPhrase();
+                                            for (int i=0; i<phraseList.size(); i++) {
+                                        %>
                                         <li class="row">
                                             <div class="span9">
-                                                <div class="index pull-left">1</div>
+                                                <%--<div class="index pull-left"><%=i+1%></div>--%>
                                                 <div class="pull-left body">
                                                     <div class="annotation enex">
-
-                                                        She speaks good English.
-
+                                                        <%=phraseList.get(i).getPhrase()%>
                                                     </div>
-                                                    <div class="cnex">她英语说得很好。</div>
+                                                    <div class="cnex"> <%=phraseList.get(i).getPhraseChinese()%></div>
                                                     <div class="edit-example-box">
                                                     </div>
                                                 </div>
                                             </div>
                                         </li>
-
-                                        <li class="row">
-                                            <div class="span9">
-                                                <div class="index pull-left">2</div>
-                                                <div class="pull-left body">
-                                                    <div class="annotation enex">
-
-                                                        I need to improve my English.
-
-                                                    </div>
-                                                    <div class="cnex">我需要提高我的英语水平。</div>
-                                                    <div class="edit-example-box">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-
-                                    </ol>
-                                </div>
-                                <div class="tab-pane row" id="ex-user-box">
-                                    <ol class="span9">
-
-
-                                        <li class="row">
-                                            <div class="span9">
-                                                <div class="index pull-left">1</div>
-                                                <div class="pull-left body">
-                                                    <div class="annotation enex">
-
-                                                        i love english very much,hope i can speak an good english very
-                                                        soon.
-
-                                                    </div>
-                                                    <div class="cnex">我非常喜欢英语，希望很快能说流利的英语。</div>
-                                                    <div class="edit-example-box">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="row">
-                                            <div class="span9">
-                                                <div class="index pull-left">2</div>
-                                                <div class="pull-left body">
-                                                    <div class="annotation enex">
-
-                                                        What is English for "卷发"?
-
-                                                    </div>
-                                                    <div class="cnex">“卷发”用英文怎么说？</div>
-                                                    <div class="edit-example-box">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="row">
-                                            <div class="span9">
-                                                <div class="index pull-left">3</div>
-                                                <div class="pull-left body">
-                                                    <div class="annotation enex">
-
-                                                        English is so good
-
-                                                    </div>
-                                                    <div class="cnex">英文很好</div>
-                                                    <div class="edit-example-box">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-
+                                    <%
+                                        }
+                                    %>
                                     </ol>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="notes-box" class="row">
-                        <div class="span1"><h6 class="pull-right">笔记</h6></div>
+
+                    <div  class="row" style="margin-top: 40px;">
+                        <div class="span1">
+                            <h6 class="pull-right">
+                                短语
+                            </h6>
+                        </div>
                         <div class="span9">
-                            <ul id="note-tab" class="nav nav-tabs">
-                                <li class="active"><a class="note-user-box-tab" href="#note-user-box">共享笔记</a></li>
+                            <ul  class="nav nav-tabs">
+                                <li class="active"><a class="ex-sys-box-tab" data-toggle="tab"
+                                                      href="#ex-sys-box">词典短语</a></li>
                             </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane row active" id="note-user-box">
+                            <div>
+                                <div class="tab-pane row active">
                                     <ol class="span9">
-
-
+                                        <%
+                                            List<Sentence> sentenceList = ((WordDetailOneVo)request.getAttribute("wordDetail")).getSentence();
+                                            for (int i=0; i<sentenceList.size(); i++) {
+                                        %>
                                         <li class="row">
                                             <div class="span9">
-                                                <div class="index pull-left">1</div>
-                                                <div class="pull-left content">
-                                                    <span>The English countryside looks at it's best in spring.</span>
-                                                    <div class="author">作者 <a href="/user/list/wechat_mbysitjz/"
-                                                                              target="_blank">wechat_mbysitjz</a></div>
+                                                <%--<div class="index pull-left"><%=i+1%></div>--%>
+                                                <div class="pull-left body">
+                                                    <div class="annotation enex">
+                                                        <%=sentenceList.get(i).getSentence()%>
+                                                    </div>
+                                                    <div class="cnex"> <%=sentenceList.get(i).getSentenceChinese()%></div>
+                                                    <div class="edit-example-box">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </li>
-
-                                        <li class="row">
-                                            <div class="span9">
-                                                <div class="index pull-left">2</div>
-                                                <div class="pull-left content">
-                                                    <span>German French Italian American;
-English 英语；</span>
-                                                    <div class="author">作者 <a href="/user/list/Phenix9899/"
-                                                                              target="_blank">Phenix9899</a></div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="row">
-                                            <div class="span9">
-                                                <div class="index pull-left">3</div>
-                                                <div class="pull-left content">
-                                                    <span>The English countryside looks at its best in spring. 英国的乡村在春天景色最美</span>
-                                                    <div class="author">作者 <a href="/user/list/ziyuanqingdi/"
-                                                                              target="_blank">ziyuanqingdi</a></div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-
+                                        <%
+                                            }
+                                        %>
                                     </ol>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div id="spell-modal-box">
                     </div>
                 </div>
@@ -462,7 +358,11 @@ English 英语；</span>
 </div>
 <script src="js/jquery-1.12.4.min.js"></script>
 <script>
-
+    $(function () {
+        $('.search-submited').click(function () {
+            window.location.href = '/userword/searchwordDetail.do?word=' + $('.search-input').val()
+        })
+    })
 </script>
 </body>
 </html>

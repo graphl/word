@@ -14,6 +14,7 @@ public class SettingServiceImpl implements ISettingService {
     @Autowired
     User_SettingWordMapper user_settingWordMapper;
     // 前端
+
     public ServerResponse get_setting_message(Integer user_id){
         User_SettingWord user_settingWord = user_settingWordMapper.selectByUserId(user_id);
         return  ServerResponse.createBySuccess(user_settingWord);

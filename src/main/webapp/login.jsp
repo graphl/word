@@ -147,7 +147,7 @@
                         content: '登陆成功'
                     });
                     setTimeout(function () {
-                        window.location.href="/";
+                        window.location.href="/study.jsp";
                     }, 2000);
                 }else{
                     $('#stantard-dialogBox').dialogBox({

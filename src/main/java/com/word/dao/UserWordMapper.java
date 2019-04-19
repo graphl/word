@@ -17,4 +17,6 @@ public interface UserWordMapper {
     List<Word> showUserWord(int userid);
 
     int updateUserWord(Word word);
+
+    int checkWordIsInUserWord(Integer wordId);
 }

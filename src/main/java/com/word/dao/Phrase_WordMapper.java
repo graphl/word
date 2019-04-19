@@ -13,4 +13,5 @@ public interface Phrase_WordMapper {
 
     List<Phrase> selectBywordId(Integer word_id);
 
+
 }

@@ -47,9 +47,7 @@
                         <a class="main-menu" href="#">首页</a>
                     </li>
 
-                    <li class="dropdown main-nav
-    active
-">
+                    <li class="dropdown main-nav active">
                         <a href="#" class="main-menu">
                             单词
                         </a>
@@ -68,7 +66,9 @@
                     <li><a href="#" class="shortcuts-button">快捷键</a></li>
 
                     <li class="dropdown main-nav nav-avatar  ">
-                        <a href="#" class="main-menu user-avatar" data-toggle="dropdown"> <i> <img src="https://media-image1.baydn.com/avatar_img%2Fcizbtc%2Fb5c11e19486a6c1def47c9345fb425a8.c7a2d9f8de1d9979a1ff579a396b3ea9.jpg@20w_20h" width="20" height="20" class=""> </i>
+                        <a href="#" class="main-menu user-avatar" data-toggle="dropdown"> <i> <img
+                                src="https://media-image1.baydn.com/avatar_img%2Fcizbtc%2Fb5c11e19486a6c1def47c9345fb425a8.c7a2d9f8de1d9979a1ff579a396b3ea9.jpg@20w_20h"
+                                width="20" height="20" class=""> </i>
                             <%=((User)session.getAttribute("currentUser")).getUsername()%>
                             <img class="dropdown-arraw" src="https://static.baydn.com/static//img/icon-arraw.png">
                         </a>
@@ -97,9 +97,9 @@
     <div class="sub-menu
     active">
         <ul class="container" style="height: 47px;">
-            <li class="active"><a id="bdc-new-review-link" href="#">单词学习</a></li>
+            <li class=""><a id="bdc-new-review-link" href="/study.jsp">单词学习</a></li>
             <li class=""><a href="/userword/show_UserWord.do">我的词库</a></li>
-            <li class=""><a href="/setting.jsp">单词设置</a></li>
+            <li class="active"><a href="#">单词设置</a></li>
         </ul>
     </div>
 
@@ -182,102 +182,87 @@
     <div id="loading-spin" style="display: none;">
         <p style="text-align: center;margin-top: 5px;">正在加载数据 ...</p>
     </div>
-    <div class="row divide-against-progress">
-        <div id="review1" class="span12 review">
-            <div class="row bdc-learning-header">
-                <div class="span12"><p><span class="span-left">⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅</span> 我的单词 <span class="span-right">⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅</span>
-                </p></div>
-            </div>
-            <div class="hero-unit start-review new-start-review">
-                <div class="row new-review-summary">
-                    <div class="pull-left span7">
-                        <h1 class="span2 today">150
-                            <small>我的单词</small>
-                        </h1>
-                    </div>
-                    <div class="span3">
-                        <div class="row-fluid">
-                            <button class="span12 btn-large btn-success start-review-button">开始学习</button>
-                        </div>
-                        <div class="row-fluid">
-                            <div id="start-review-button-loading" class="hide"
-                                 style="text-align: center; padding-top: 30px;"><img
-                                    src="https://static.baydn.com/static/img/loading.gif" width="20"></div>
-                        </div>
-                    </div>
+    <div class="row">
+        <div id="setting" class="span8">
+
+            <div id="setting-bdc" class="setting">
+
+                <div class="page-header">
+                    <h3>背单词设置</h3>
                 </div>
+
+
+                <form action="/bdc/setting/" method="post">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="Mcqgva6946fzwOgCovf5ByiyYWgQ0c7G">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>
+                                <label>
+                                    正在学习：
+                                </label>
+                            </th>
+                            <td>
+                                <select  name="learn">
+                                    <option value="1" selected="selected">考研单词书</option>
+                                    <option value="2">四级单词</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label for="id_target_level">单词的目标掌握程度：</label></th>
+                            <td><select id="id_target_level" name="target_level">
+                                <option value="1" selected="selected">再认</option>
+                                <option value="2">拼写</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <th><label for="id_target_retention">学习次数：</label></th>
+                            <td>
+                                <select  name="learn" id="id_target_retention">
+                                    <option value="1" selected="selected">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label for="id_quota">每日学习量：</label></th>
+                            <td><select id="id_quota" name="quota">
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="150" selected="selected">150</option>
+                                <option value="200">200</option>
+                                <option value="250">250</option>
+                                <option value="300">300</option>
+                                <option value="400">400</option>
+                                <option value="500">500</option>
+                                <option value="600">600</option>
+                                <option value="700">700</option>
+                            </select></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <button class="btn btn-success" type="submit">确定</button>
+                    &nbsp;&nbsp;<a href="/" class="cancel">取消</a>
+
+                </form>
             </div>
+
+            <script id="cost_tip_tmpl" type="text/x-jquery-tmpl">
+    <p>只要坚持登录，您每天都会收到 <span class="green">5</span> 个彩贝的奖励</p>
+    <p>如果坚持完成学习后打卡，您每天还会再被额外奖励 <span class="green">${checkin_prize}</span> 个彩贝</p>
+    <p>总之，只要你坚持学习，就能够积攒到足够的贝壳支付将来的学费，还有机会向更高的单词量迈进。</p>
+    <p> <a href="/help/support_function/how_to_earn_coins/#invite-user" target="_blank">了解什么是贝壳，彩贝</a> </p>
+
+            </script>
+
         </div>
 
-        <div id="review2" class="span12 review" style="display: none;">
-            <div class="row">
-                <div class="span12 test-box review-id" data-id="61906001704">
-                    <div id="preview" class="row">
-                        <div class="span10">
-                            <div class="row word-row new-word-row">
-                                <div class="span10 offset1"><h1 id="word_name">carbon</h1>
-                                    <div class="learning-speaker">
-                                        <h1>
-                                            <small id="word_symbol"> /'kɑːrbən/</small>
-                                        </h1>
-                                        <span class="audio us active">US<span class="speaker-icon"></span>
-                                            <audio id="music"
-                                                   src="https://media-audio1.baydn.com/us/a/as/assignment_v4.mp3"></audio></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="example-hint" class="row learning-hint learning-hint-active" style="display: none;">
-                                <div class="span10 offset1">
-                                    <div class="hint-content sentence annotation"> ocean-going</div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div id="answer" class="span10 offset1 operation" style="opacity: 1;">
-                                    <div class="row test-answers first"><a class="known span10"
-                                                                           href="javascript:void(0)" onclick="onKnow()"><span>1. </span>认识</a>
-                                    </div>
-                                    <div class="row test-answers"><a class="unknown span10"
-                                                                     href="javascript:void(0)" onclick="unKnow()"><span>2. </span>不认识</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-    <div class="row hide bottom-progress progress-box">
-        <div class="span12 progress-box-wrap">
-            <div class="row">
-                <div class="span1">
-                    <h6 class="pull-right">进度</h6>
-                </div>
-                <div class="span10">
-                    <div class="well review-progress">
-                        <div class="progress pull-right progress-danger" style="width:0%;">
-                            <div class="bar" style="width: 100%"><span class="num"></span>
-                            </div>
-                        </div>
-                        <div class="progress pull-left progress-success" style="width:0%;">
-                            <div class="bar" style="width: 100%"><span class="num"></span></div>
-                        </div>
-                        <div class="progress pull-left progress-reviewed " style="width: 0%;">
-                            <div class="bar reviewed pull-left" style="width: 100%;"><span class="num"></span>
-                            </div>
-                        </div>
-                        <div class="progress pull-left progress-unreviewed" style="width: 99.9%;">
-                            <div class="bar" style="width: 100%"><span class="num">150</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <div id="affix-prompt">
     </div>
@@ -321,14 +306,13 @@
                 $('#review2').show();
             }
         })
-
         $('.search-submited').click(function () {
             window.location.href = '/userword/searchwordDetail.do?word=' + $('.search-input').val()
         })
     })
 
     function onKnow() {
-        if (flg){
+        if (flg) {
             $.ajax({
                 url: '/userword/Know_Word.do',
                 type: 'get',
@@ -347,7 +331,7 @@
     }
 
     function unKnow() {
-        if (flg){
+        if (flg) {
             flg = false;
             $('#example-hint').show();
             $.ajax({

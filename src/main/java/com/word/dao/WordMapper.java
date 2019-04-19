@@ -26,6 +26,5 @@ public interface WordMapper {
 
     Word selectByWord_name(String word_name);
 
-
     int deleteByWordId(Integer wordId);
 }

@@ -1,11 +1,16 @@
 package com.word.service.impl;
 
 import com.word.common.ServerResponse;
+import com.word.dao.Phrase_WordMapper;
+import com.word.dao.Sentence_WordMapper;
 import com.word.dao.UserWordMapper;
 import com.word.dao.WordMapper;
+import com.word.pojo.Phrase;
+import com.word.pojo.Sentence;
 import com.word.pojo.UserWord;
 import com.word.pojo.Word;
 import com.word.service.IUserWordService;
+import com.word.vo.WordDetailOneVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -17,6 +22,13 @@ public class UserWordServiceImpl implements IUserWordService {
     private WordMapper wordMapper;
     @Autowired
     private UserWordMapper userWordMapper;
+
+    @Autowired
+    private Phrase_WordMapper phrase_wordMapper;
+
+    @Autowired
+    private Sentence_WordMapper sentence_wordMapper;
+
 
    // 前端
     public ServerResponse addUserWord(Integer wordId,Integer userId){
@@ -54,6 +66,28 @@ public class UserWordServiceImpl implements IUserWordService {
 
        return ServerResponse.createBySuccess(wordList);
     }
+
+
+    public WordDetailOneVo searchWordDetail(String wordName){
+        WordDetailOneVo wordDetailOneVo = new WordDetailOneVo();
+        Word word = wordMapper.selectByWord_name(wordName);
+        List<Phrase> phraseList = phrase_wordMapper.selectBywordId(word.getId());
+        List<Sentence> sentenceList = sentence_wordMapper.selectByWordId(word.getId());
+        int check = userWordMapper.checkWordIsInUserWord(word.getId());
+        if(check > 0 ){
+            check = 1;
+        }
+        wordDetailOneVo.setId(word.getId());
+        wordDetailOneVo.setWord(word.getWord());
+        wordDetailOneVo.setWord_name(word.getWordName());
+        wordDetailOneVo.setWord_sound(word.getWordSound());
+        wordDetailOneVo.setPhrase(phraseList);
+        wordDetailOneVo.setSentence(sentenceList);
+        wordDetailOneVo.setCheck(check);
+        return wordDetailOneVo;
+    }
+
+    
 
 
 }

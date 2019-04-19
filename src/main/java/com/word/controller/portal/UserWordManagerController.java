@@ -61,7 +61,7 @@ public class UserWordManagerController {
                 userWords.add(userWord);
             }
             request.setAttribute("userWords",userWords);
-            request.getServletContext().getRequestDispatcher("/search.jsp").forward(request,response);
+            request.getServletContext().getRequestDispatcher("/myWord.jsp").forward(request,response);
         }
 
         @RequestMapping("/get_MWord.do")
@@ -95,7 +95,6 @@ public class UserWordManagerController {
     }
 
     @RequestMapping("/searchwordDetail.do")
-    @ResponseBody
     public void searchWord(HttpSession session, String word, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         WordDetailOneVo wordDetailOneVo = new WordDetailOneVo();
         wordDetailOneVo.setId(1);
