@@ -128,4 +128,9 @@
   </set>
   where user_id = #{user_id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectSetting" parameterType="integer" resultType="User_SettingWord">
+    select <include refid="Base_Column_List" />
+    from user_setting_word where user_id = #{userId}
+  </select>
 </mapper>

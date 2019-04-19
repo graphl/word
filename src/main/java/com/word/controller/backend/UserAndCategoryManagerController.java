@@ -66,9 +66,7 @@ public class UserAndCategoryManagerController {
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
             //更新categoryName
-
             return iUserAndCategoryService.listBycategoryId(categoryId,pageNum,pageSize);
-
         }else{
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
         }

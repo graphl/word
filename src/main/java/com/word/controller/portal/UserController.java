@@ -17,7 +17,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/user/")
 public class UserController {
-
     /**
      * 用户模块
      */
@@ -28,7 +27,6 @@ public class UserController {
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session){
         ServerResponse<User> response = iUserService.login(username,password);
-       // System.out.println(response.getStatus());
         if(response.isSuccess()){
             session.setAttribute(Const.CURRENT_USER,response.getData());
         }
