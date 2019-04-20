@@ -41,7 +41,7 @@ public interface ICategoryService {
     /**
      *获取所有分类
      */
-    ServerResponse categoryList();
+    ServerResponse categoryList(int pageNum, int pageSize);
 
     /**
      * 删除分类

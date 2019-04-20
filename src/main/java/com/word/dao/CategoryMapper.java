@@ -2,6 +2,7 @@ package com.word.dao;
 
 import com.word.pojo.Category;
 import com.word.vo.CategoryName;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,7 +23,8 @@ public interface CategoryMapper {
 
     Category selectByCategoryId(Integer categoryId);
 
-    List<Category> getAllCategory();
+    List<Category> getAllCategory(@Param("pageNumKey") int pageNum,
+                                  @Param("pageSizeKey") int pageSize);
 
     int delCategoryById(Integer categoryId);
 }

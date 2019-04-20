@@ -95,8 +95,8 @@ public class CategoryController {
 
     @RequestMapping("getCategoryList.do")
     @ResponseBody
-    public ServerResponse getCategoryList(){
-        return iCategoryService.categoryList();
+    public ServerResponse getCategoryList(int pageNum, int pageSize){
+        return iCategoryService.categoryList(pageNum, pageSize);
     }
 
 
