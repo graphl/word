@@ -95,11 +95,9 @@ public class CategoryController {
 
     @RequestMapping("getCategoryList.do")
     @ResponseBody
-    public ServerResponse getCategoryList(int pageNum, int pageSize){
-        return iCategoryService.categoryList(pageNum, pageSize);
+    public ServerResponse getCategoryList(@RequestParam(value = "page",defaultValue = "0") int page,@RequestParam(value = "limit",defaultValue = "10") int limit){
+        return iCategoryService.categoryList(page, limit);
     }
-
-
 
     @RequestMapping("delCategory.do")
     public ServerResponse delCategoryById(Integer categoryId){

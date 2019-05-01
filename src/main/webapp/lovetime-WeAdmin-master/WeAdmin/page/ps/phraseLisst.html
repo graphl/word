@@ -70,7 +70,10 @@
                 ,{field:'createTime',title: '创建时间'}
                 ,{field:'updataTime',title:'修改时间'}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
-            ]]
+            ]],
+            page:{
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+            }
         })});
 
     //头工具栏事件

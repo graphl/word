@@ -11,12 +11,12 @@
     <link rel="stylesheet" href="./static/css/font.css">
     <link rel="stylesheet" href="./static/css/weadmin.css">
     <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
-
 </head>
 
 <body>
 <!-- 顶部开始 -->
 <div class="container">
+
     <div class="logo">
         <a href="./index.html">English 后台管理</a>
     </div>
@@ -84,45 +84,20 @@
                         </a>
                     </li>
                     <li>
-                        <a _href="./pages/article/list.html">
+                    <li>
+                        <a _href="./page/word/wordBookList.html">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>单词书管理</cite>
+                            <cite>单词书列表</cite>
                         </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a _href="./page/word/wordBookList.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>单词书列表</cite>
-                                </a>
-                            </li>
-                            <li>
-                                <a _href="./page/category/categoryList.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>单词书分类列表</cite>
-                                </a>
-                            </li>
-                        </ul>
+                    </li>
                     </li>
                     <li>
-                        <a _href="./pages/article/list.html">
+                    <li>
+                        <a _href="./page/ps/sentencelist.html">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>短语和句子管理</cite>
+                            <cite>句子列表</cite>
                         </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a _href="./page/ps/phraseLisst.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>短语列表</cite>
-                                </a>
-                            </li>
-                            <li>
-                                <a _href="./page/ps/sentencelist.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>句子列表</cite>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+
                 </ul>
             </li>
             <li>
@@ -148,6 +123,7 @@
 <!-- <div class="x-slide_left"></div> -->
 <!-- 左侧菜单结束 -->
 <!-- 右侧主体开始 -->
+
 <div class="page-content">
     <div class="layui-tab tab" lay-filter="wenav_tab" id="WeTabTip" lay-allowclose="true">
         <ul class="layui-tab-title" id="tabName">
@@ -155,7 +131,7 @@
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='./pages/welcome.html' frameborder="0" scrolling="yes" class="weIframe"></iframe>
+                <iframe src='' frameborder="0" scrolling="yes" class="weIframe"></iframe>
             </div>
         </div>
     </div>
@@ -178,17 +154,6 @@
         var $ = layui.jquery;
         $(function(){
             var login = JSON.parse(localStorage.getItem("login"));
-            /*	if(login){
-                    if(login=0){
-                        window.location.href='./login.html';
-                        return false;
-                    }else{
-                        return false;
-                    }
-                }else{
-                    window.location.href='./login.html';
-                    return false;
-                }*/
         });
     });
 

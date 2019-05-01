@@ -35,7 +35,7 @@
 				<button class="layui-btn" onclick="WeAdminShow('添加用户','./add.html',600,400)">
 					<i class="layui-icon layui-icon-add-circle-fine"></i>添加
 				</button>
-				<span class="fr" style="line-height:40px">共有数据：88 条</span>
+
 			</div>
 			<table class="layui-table" id="word" lay-filter="word"></table>
 		</div>
@@ -51,8 +51,8 @@
 
 			<div class="layui-btn-container">
 				<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-				<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-				<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+				<!--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+				<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>-->
 			</div>
 		</script>
 
@@ -94,7 +94,10 @@
                                 return '<em>'+ res.answer + '</em>'
                             }} //单元格内容水平居中
                         ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
-                    ]]
+                    ]],
+                    page:{
+                        layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                    }
                 });
 
             //头工具栏事件
@@ -105,13 +108,13 @@
                         var data = checkStatus.data;
                         layer.alert(JSON.stringify(data));
                         break;
-                    case 'getCheckLength':
+                 /*   case 'getCheckLength':
                         var data = checkStatus.data;
                         layer.msg('选中了：'+ data.length + ' 个');
                         break;
                     case 'isAll':
                         layer.msg(checkStatus.isAll ? '全选': '未全选');
-                        break;
+                        break;*/
                 };
             });
 

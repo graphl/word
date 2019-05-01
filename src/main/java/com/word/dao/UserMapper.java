@@ -34,9 +34,15 @@ public interface UserMapper {
 
     int checkEmail(String email);
 
-    List<User> getAllUser();
+    List<User> getAllUser(@Param("pageNumKey") int pageNum,
+                          @Param("pageSizeKey") int pageSize);
 
-    List<User> getAllAdmin();
+    List<User> getAllAdmin(@Param("pageNumKey") int pageNum,
+                           @Param("pageSizeKey") int pageSize);
+
+    int getCountUser();
+
+    int getCountAdmin();
 
     int deleteUserById(@Param("id") Integer id,@Param("role") Integer role);
 }

@@ -1,7 +1,8 @@
 package com.word.service;
 
 import com.word.common.ServerResponse;
-import com.word.pojo.Word;
+import com.word.vo.UserWordVo;
+import com.word.vo.WordDetailOneVo;
 
 import java.util.List;
 
@@ -11,5 +12,9 @@ public interface IUserWordService {
 
     ServerResponse deleteUserWord(Integer wordId,Integer userId);
 
-    ServerResponse<List<Word>> showUserWord(Integer user_id);
+    List<UserWordVo> showUserWord(Integer user_id);
+
+    WordDetailOneVo searchWordDetail(String wordName);
+
+
 }

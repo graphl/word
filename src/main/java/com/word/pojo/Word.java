@@ -13,7 +13,6 @@ public class Word {
 
     private String wordImage;
 
-
     private Date createTime;
 
     private Date updateTime;

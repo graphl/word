@@ -10,6 +10,7 @@ import com.word.service.IWordBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -29,16 +30,13 @@ public class WordBookManagerController {
 
     @RequestMapping(value = "add_book.do")
     @ResponseBody
-    public ServerResponse addCategory(HttpSession session, String  bookName){
+    public ServerResponse addCategory(HttpSession session,WordBook wordBook){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登陆");
         }
-        //是否为管理员
         if(iUserService.checkAdminRole(user).isSuccess()){
-            //时管理员
-            //增加处理分类的逻辑
-            return iWordBookService.addBook(bookName);
+            return iWordBookService.addBook(wordBook);
 
         }else{
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
@@ -53,10 +51,7 @@ public class WordBookManagerController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登陆");
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
-            //更新categoryName
-
             return iWordBookService.updateBookName(bookId,bookName);
-
         }else{
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
         }
@@ -65,18 +60,9 @@ public class WordBookManagerController {
     @RequestMapping("get_all_bookName")
     @ResponseBody
     public ServerResponse getAllCategoryName(HttpSession session){
+
         User user = (User) session.getAttribute(Const.CURRENT_USER);
-       /* if(user == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登陆");
-        }*/
-     /*   if(iUserService.checkAdminRole(user).isSuccess()){*/
-            //更新categoryName
-
-            return iWordBookService.getAllBookName();
-
-       /* }else{
-            return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
-        }*/
+        return iWordBookService.getAllBookName();
     }
 
     @RequestMapping("get_bookNameBybookId")
@@ -95,6 +81,8 @@ public class WordBookManagerController {
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
         }
     }
+
+
     @RequestMapping("/addwordTobook")
     @ResponseBody
     public ServerResponse addwordTobook(String WordIdList,Integer wordId){
@@ -104,8 +92,9 @@ public class WordBookManagerController {
 
     @RequestMapping("/showAllbook")
     @ResponseBody
-    public ServerResponse showAllBook(){
-        return iWordBookService.showAllBook();
+    public ServerResponse showAllBook(@RequestParam(value = "page",defaultValue = "1")Integer pageNum,
+                                      @RequestParam(value = "limit",defaultValue = "10") Integer pageSize){
+        return iWordBookService.showAllBook(pageNum,pageSize);
     }
 
 

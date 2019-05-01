@@ -18,8 +18,11 @@ public interface WordMapper {
 
     int updateByPrimaryKey(Word record);
 
-    List<Word> selectList();
+    List<Word> selectList(@Param("pageNumKey") int pageNum,
+                          @Param("pageSizeKey") int pageSize);
 
+    List<Word> wordList();
+    int getCountWord();
     List<Word> selectByNameAndWordId(@Param("wordName") String wordName, @Param("wordId") Integer wordId);
 
     int getWordIdByWordName(String wordName);

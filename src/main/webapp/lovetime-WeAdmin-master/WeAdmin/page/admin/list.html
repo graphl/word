@@ -30,20 +30,10 @@
 		<div class="weadmin-body">
 			<div class="weadmin-block">
 				<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-				<button class="layui-btn" onclick="WeAdminShow('添加用户','./add.html')"><i class="layui-icon"></i>添加</button>
-				<span class="fr" style="line-height:40px">共有数据：88 条</span>
 			</div>
 			<table class="layui-table" id="word" lay-filter="word"></table>
 		</div>
 		<script src="../../lib/layui/layui.js" charset="utf-8"></script>
-		<script type="text/html" id="toolbarDemo">
-
-			<div class="layui-btn-container">
-				<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-				<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-				<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
-			</div>
-		</script>
 
 		<script type="text/html" id="barDemo">
 			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
@@ -69,26 +59,11 @@
                         ,{field:'email', title: '邮箱'}
                         ,{field:'phone', title: '电话'}
                         ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
-                    ]]
+                    ]],
+                    page:{
+                        layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                    }
                 });
-
-            //头工具栏事件
-            table.on('toolbar(word)', function(obj){
-                var checkStatus = table.checkStatus(obj.config.id);
-                switch(obj.event){
-                    case 'getCheckData':
-                        var data = checkStatus.data;
-                        layer.alert(JSON.stringify(data));
-                        break;
-                    case 'getCheckLength':
-                        var data = checkStatus.data;
-                        layer.msg('选中了：'+ data.length + ' 个');
-                        break;
-                    case 'isAll':
-                        layer.msg(checkStatus.isAll ? '全选': '未全选');
-                        break;
-                };
-            });
 
             //监听行工具事件
                 table.on('tool(word)', function(obj){

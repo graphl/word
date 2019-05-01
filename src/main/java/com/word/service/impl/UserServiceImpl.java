@@ -252,13 +252,16 @@ public class UserServiceImpl  implements IUserService {
 
 
 
-    public ServerResponse getAllUser(){
-        List<User> users = userMapper.getAllUser();
-        return  ServerResponse.createBySuccess(users);
+    public ServerResponse getAllUser(Integer pageNum,Integer pageSize){
+        List<User> users = userMapper.getAllUser(pageNum,pageSize);
+        int count = userMapper.getCountUser();
+        return  ServerResponse.createBySuccess(users,count);
     }
-    public ServerResponse getAdmins(){
-        List<User> users = userMapper.getAllAdmin();
-        return ServerResponse.createBySuccess(users);
+
+    public ServerResponse getAdmins(Integer pageNum,Integer pageSize){
+        List<User> users = userMapper.getAllAdmin(pageNum,pageSize);
+        int count = userMapper.getCountAdmin();
+        return ServerResponse.createBySuccess(users,count);
     }
 
     public ServerResponse deleteUserById(Integer user_id,Integer role){

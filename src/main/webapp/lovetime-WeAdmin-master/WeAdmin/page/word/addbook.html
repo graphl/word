@@ -24,19 +24,16 @@
                 <span class="we-red">*</span>书名
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="bookName" name="bookName" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
+                <input type="text" id="bookName" name="bookName" required=""                        autocomplete="off" class="layui-input">
             </div>
-            <!--<div class="layui-form-mid layui-word-aux">
-                <span class="we-red">*</span>将会成为您唯一的登入名
-            </div>-->
+
         </div>
         <div class="layui-form-item">
             <label for="book_js" class="layui-form-label">
                 <span class="we-red">*</span>书名注释
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="book_js" name="book_js" required="" lay-verify="phone"
+                <input type="text" id="book_js" name="book_js" required=""
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -57,32 +54,21 @@
             admin = layui.admin,
             layer = layui.layer;
         form.render();
-        //自定义验证规则
-        form.verify({
-            nikename: function(value){
-                if(value.length < 5){
-                    return '昵称至少得5个字符啊';
-                }
-            }
-            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-            ,repass: function(value){
-                if($('#L_pass').val()!=$('#L_repass').val()){
-                    return '两次密码不一致';
-                }
-            }
-        });
-
-        //监听提交
         form.on('submit(add)', function(data){
-            console.log(data);
-            //发异步，把数据提交给php
-            layer.alert("增加成功", {icon: 6},function () {
-                // 获得frame索引
-                var index = parent.layer.getFrameIndex(window.name);
-                //关闭当前frame
-                parent.layer.close(index);
-            });
-            return false;
+            $.ajax({
+                type:'post'
+                ,url:'/manage/book/add_book.do'
+                ,data:{'bookName':data.bookName,
+                        'book_js':data.book_js
+                }
+                ,success:function () {
+                    console.log('成功');
+                }
+                ,error:function () {
+                    console.log('失败');
+                }
+
+            })
         });
     });
 </script>

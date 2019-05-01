@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import com.word.common.ResponseCode;
 import com.word.common.ServerResponse;
 import com.word.dao.Phrase_WordMapper;
+import com.word.dao.SentenceMapper;
 import com.word.dao.Sentence_WordMapper;
 import com.word.dao.WordMapper;
 import com.word.pojo.Phrase;
@@ -33,7 +34,7 @@ public class WordServiceImpl implements IWordService {
     private Phrase_WordMapper phrase_wordMapper;
 
     @Autowired
-    private Sentence_WordMapper sentence_wordMapper;
+    private SentenceMapper sentenceMapper;
 
     public ServerResponse saveOrUpdateProduct(Word word) {
       /*  if (word != null) {
@@ -88,19 +89,18 @@ public class WordServiceImpl implements IWordService {
         return wordDetailVo;
     }
 
+    public ServerResponse WordList(){
+
+        List<Word> wordList = wordMapper.wordList();
+        return ServerResponse.createBySuccess(wordList);
+    }
     public  ServerResponse getWordList(int pageNum,int pageSize){
 
-        PageHelper.startPage(pageNum,pageSize);
-        List<Word> wordList = wordMapper.selectList();
-        List<WordListVo> wordListVoList = Lists.newArrayList();
-        for(Word wordItem:wordList){
-            WordListVo productListVo = assembleProductListVo(wordItem);
-            wordListVoList.add(productListVo);
-        }
-        PageInfo pageResult = new PageInfo(wordList);
-        pageResult.setList(wordList);
+        List<Word> wordList = wordMapper.selectList(pageNum,pageSize);
 
-        return ServerResponse.createBySuccess(wordList);
+
+        int count  = wordMapper.getCountWord();
+        return ServerResponse.createBySuccess(wordList,count);
     }
     private WordListVo assembleProductListVo(Word word){
         WordListVo wordListVo = new WordListVo();
@@ -141,7 +141,7 @@ public class WordServiceImpl implements IWordService {
 
         Integer word_id = wordMapper.getWordIdByWordName(word_name);
         List<Phrase> phrases = phrase_wordMapper.selectBywordId(word_id);
-        List<Sentence> sentences =  sentence_wordMapper.selectByWordId(word_id);
+        List<Sentence> sentences =  sentenceMapper.selectByWordId(word_id);
         Word word = wordMapper.selectByWord_name(word_name);
         WordDetail_SVo wordDetail_sVo = new WordDetail_SVo(word,phrases,sentences);
         return wordDetail_sVo;

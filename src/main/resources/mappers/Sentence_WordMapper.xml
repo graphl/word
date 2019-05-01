@@ -96,9 +96,5 @@
       updata_time = #{updataTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByWordId" parameterType="string" resultType="Sentence">
-  select <include refid="sentence"/>
-    from sentence s,sentence_word sw
-    where  s.id = sw.sentence_id and sw.word_id = #{word_id}
-  </select>
+
 </mapper>

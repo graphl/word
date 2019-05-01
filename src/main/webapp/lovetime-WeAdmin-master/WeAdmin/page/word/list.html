@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>单词列表</title>
@@ -9,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="../../static/css/font.css">
     <link rel="stylesheet" href="../../static/css/weadmin.css">
+
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -31,22 +31,16 @@
    <div class="weadmin-block">
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="WeAdminShow('添加用户','./add.html')"><i class="layui-icon"></i>添加</button>
-        <!--<span class="fr" style="line-height:40px">共有数据：88 条</span>-->
     </div>
     <table class="layui-table" id="word" lay-filter="word"></table>
 
-    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-        <legend>总页数大于页码总数</legend>
-    </fieldset>
-    <div id="demo1"></div>
 </div>
 <script src="../../lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/html" id="toolbarDemo">
 
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">添加单词到单词书中</button>
+
     </div>
 </script>
 
@@ -56,19 +50,13 @@
 </script>
 <script>
     var WordID = new Array();
+    var Pdata ;
     layui.use('table', function() {
         var table = layui.table;
         $ = layui.jquery;
         laypage = layui.laypage;
         //第一个实例
-        //总页数大于页码总数
-       /* laypage.render({
-            elem: 'demo1'
-            ,count: 70 //数据总数
-            ,jump: function(obj){
-                console.log(obj)
-            }
-        });*/
+
 
         table.render({
             elem: '#word'
@@ -87,10 +75,14 @@
                 ,{field:'wordSymbol', title: '单词音标'}
                 ,{field:'wordImage', title: '单词图片地址'}
                 ,{field:'word', title: '单词中文意思', align: 'center'} //单元格内容水平居中
-                ,{field:'createTime',title: '创建时间'}
-                ,{field:'updateTime',title: '更新时间'}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
             ]]
+            ,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                limits: [5, 10, 15], //显示
+                limit: 10, //每页默认显示的数量
+                size:80,
+                count:80
+        }
         })
 
     //头工具栏事件
@@ -102,7 +94,6 @@
                console.log(data)
                 var i;
                 var wordsId =  new Array();
-
                 for(i=0;i<data.length;i++){
                     wordsId.push(data[i].id);
                     console.log(data[i].id)
@@ -148,28 +139,15 @@
                 layer.close(index);
             });
         } else if(obj.event === 'edit'){
-            layer.confirm('真的要更新吗？', function(index){
-                //console.log(data)
-                $.ajax({
-                    type:'post'
-                    ,url:'/manage/word/update.do'
-                    ,data:{
-                        'id':data.id
-                        ,'wordName':data.wordName
-                        ,'wordSound':data.wordSound
-                        ,'wordSymbol':data.wordSymbol
-                        ,'wordImage':data.wordImage
-                        ,'word':data.word
-                    }
-                    ,success:function () {
-                        console.log('成功');
-                    }
-                    ,error:function () {
-                        console.log('失败');
-                    }
-                })
-                layer.close(index);
-            });
+
+            Pdata = data;
+            layer.open({
+                    type:2,
+                    offset: '100px',
+                    area : [ '600px', '500px' ],
+                    content : './edit.html',
+                }
+            )
         }
     });
 

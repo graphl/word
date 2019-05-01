@@ -6,10 +6,9 @@ import com.word.pojo.Sentence;
 
 public interface IPhraseAndSentenceService {
 
+    ServerResponse getAllPhrase(Integer pageNum,Integer pageSize);
 
-    ServerResponse getAllPhrase();
-
-    ServerResponse getAllSentence();
+    ServerResponse getAllSentence(Integer pageNum,Integer pageSize);
 
     ServerResponse deletePhraseById(Integer phrase_id);
 
