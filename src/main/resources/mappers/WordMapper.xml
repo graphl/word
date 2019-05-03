@@ -124,7 +124,7 @@
     from words_word
     order  BY id asc
   </select>
-  <select id="wordList">
+  <select id="wordList" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from words_word

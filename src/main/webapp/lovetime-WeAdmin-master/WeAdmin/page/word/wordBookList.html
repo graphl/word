@@ -31,7 +31,7 @@
 
     <div class="weadmin-block">
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="WeAdminShow('添加用户','./add.html')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="WeAdminShow('添加','./addbook.html')"><i class="layui-icon"></i>添加</button>
     </div>
     <table class="layui-table" id="word" lay-filter="word"></table>
 </div>
@@ -50,8 +50,11 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script>
+
     layui.use('table', function() {
+        $ = layui.jquery;
         var table = layui.table;
+
         //第一个实例
 
         table.render({
@@ -65,14 +68,22 @@
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 ,{field:'id', title: 'ID', sort: true}
-                ,{field:'bookName', title: '单词书名'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
-                ,{field:'book_js', title: '单词书注释'}
+                ,{field:'bookName', title: '单词书名',edit:'text',
+                        templet:function (res) {
+                            return '<em>'+ res.bookName + '</em>'
+                        }
+                }
+                ,{field:'book_js', title: '单词书注释',edit:'text',
+                    templet:function (res) {
+                        return '<em>'+ res.book_js + '</em>'
+                    }
+                }
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
             ]],
             page:{
-                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip']
             }
-        })});
+        })
 
     //头工具栏事件
     table.on('toolbar(word)', function(obj){
@@ -94,8 +105,8 @@
 
     //监听行工具事件
     table.on('tool(word)', function(obj){
+
         var data = obj.data;
-        //console.log(obj)
         if(obj.event === 'del'){
             layer.confirm('真的删除行么', function(index){
                 obj.del();
@@ -114,8 +125,9 @@
                 layer.close(index);
             });
         } else if(obj.event === 'edit'){
+
             layer.confirm('真的要更新吗？', function(index){
-                //console.log(data)
+                console.log(data)
                 $.ajax({
                     type:'post'
                     ,url:'/manage/book/updateBook.do'
@@ -136,9 +148,10 @@
         }
     });
 
-</script>
+    });
 
-<!--<script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script>-->
+</script>
+<script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script>
 </body>
 
 </html>

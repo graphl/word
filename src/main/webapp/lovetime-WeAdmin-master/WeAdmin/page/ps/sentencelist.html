@@ -31,7 +31,7 @@
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="WeAdminShow('添加短语','./addSentence.html')"><i class="layui-icon"></i>添加</button>
     </div>
-    <table class="layui-table" id="word" lay-filter="word"></table>
+    <table class="layui-table" id="wordbook" lay-filter="wordbook"></table>
 </div>
 <script src="../../lib/layui/layui.js" charset="utf-8"></script>
 
@@ -42,11 +42,12 @@
 </script>
 <script>
     layui.use('table', function() {
+
         var table = layui.table;
         //第一个实例
 
         table.render({
-            elem: '#word'
+            elem: '#wordbook'
             ,url:'/manage/ps/showAllS.do'
             ,response:{
                 statusName: 'status',
@@ -58,18 +59,17 @@
                 ,{field:'id', title: 'ID', sort: true}
                 ,{field:'sentence', title: '例句'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
                 ,{field:'sentenceChinese', title: '例句中文意思'}
-                ,{field:'createTime',title: '创建时间'}
-                ,{field:'updataTime',title:'修改时间'}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
             ]],
             page:{
                 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
             }
-        })});
+        })
 
-    //头工具栏事件
+        //头工具栏事件
     table.on('toolbar(word)', function(obj){
         var checkStatus = table.checkStatus(obj.config.id);
+
         switch(obj.event){
             case 'getCheckData':
                 var data = checkStatus.data;
@@ -127,6 +127,8 @@
                 layer.close(index);
             });
         }
+    });
+
     });
 
 </script>

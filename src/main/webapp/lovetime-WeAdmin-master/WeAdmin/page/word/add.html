@@ -14,7 +14,7 @@
 
 <body>
 <div class="weadmin-body">
-    <form class="layui-form">
+    <form class="layui-form" id="myForm" enctype="multipart/form-data" >
         <div class="layui-form-item">
             <label for="wordName" class="layui-form-label">
                 <span class="we-red">*</span>单词
@@ -87,7 +87,7 @@
         alert("kaishile")
 
         $.ajax({
-            url:'/upload.do'
+            url:'/manage/word/addWord.do'
             ,type:'post'
             ,data:formdata
             ,processData:false
