@@ -18,5 +18,5 @@ public interface Sentence_WordMapper {
 
     int updateByPrimaryKey(Sentence_Word record);
 
-    List<Sentence> selectByWordId(Integer word_id);
+
 }

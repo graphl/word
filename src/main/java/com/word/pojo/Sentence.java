@@ -9,9 +9,13 @@ public class Sentence {
 
     private String sentenceChinese;
 
+    private Integer wordId;
+
     private Date createTime;
 
     private Date updataTime;
+
+
 
     public Sentence(String sentence, String sentenceChinese) {
         this.sentence = sentence;
@@ -25,6 +29,26 @@ public class Sentence {
         this.createTime = createTime;
         this.updataTime = updataTime;
     }
+
+    public Sentence(Integer id, String sentence, String sentenceChinese, Integer wordId, Date createTime, Date updataTime) {
+        this.id = id;
+        this.sentence = sentence;
+        this.sentenceChinese = sentenceChinese;
+        this.wordId = wordId;
+        this.createTime = createTime;
+        this.updataTime = updataTime;
+    }
+
+    public Integer getWordId() {
+        return wordId;
+    }
+
+    public void setWordId(Integer wordId) {
+        this.wordId = wordId;
+    }
+
+
+
 
     public Sentence() {
         super();

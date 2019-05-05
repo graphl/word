@@ -43,7 +43,6 @@ public class SettingController {
         return iSettingService.updata_setting_message(user_settingWord,user.getId());
     }
 
-
     @RequestMapping("/UserSetting")
     public void UserSetting(HttpSession session, HttpServletRequest request, HttpServletResponse response){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -58,6 +57,5 @@ public class SettingController {
         request.setAttribute("booknames",booknames);
         request.setAttribute("bookIds",bookIds);
         request.setAttribute("settingWords",session);
-
     }
 }

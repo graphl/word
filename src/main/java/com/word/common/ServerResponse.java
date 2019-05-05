@@ -10,7 +10,7 @@ public class ServerResponse<T> implements Serializable {
     private  int status;
     private  String msg;
     private  T data;
-
+    private int count;
 
     private ServerResponse(int status) {this.status = status;}
     private  ServerResponse(int status,T data){
@@ -30,6 +30,11 @@ public class ServerResponse<T> implements Serializable {
         this.msg = msg;
         this.data = data;
     }
+    private ServerResponse(int status,T data,int count){
+        this.status = status;
+        this.data = data;
+        this.count = count;
+    }
     @JsonIgnore
     public Boolean isSuccess(){return this.status==ResponseCode.SUCCESS.getCode();}
 
@@ -40,6 +45,8 @@ public class ServerResponse<T> implements Serializable {
     public String getMsg() {
         return msg;
     }
+
+    public int getCount(){return count;}
 
     public T getData() {
         return data;
@@ -52,6 +59,9 @@ public class ServerResponse<T> implements Serializable {
     }
     public  static <T> ServerResponse<T> createBySuccess(T data){
         return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(),data);
+    }
+    public  static <T> ServerResponse<T> createBySuccess(T data,int count){
+        return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(),data,count);
     }
     public  static <T> ServerResponse<T> createBySuccess(String msg,T data){
         return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(),msg,data);

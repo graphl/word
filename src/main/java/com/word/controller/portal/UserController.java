@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -26,6 +27,7 @@ public class UserController {
     @RequestMapping(value = "login.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session){
+      //  System.out.println(username);
         ServerResponse<User> response = iUserService.login(username,password);
         if(response.isSuccess()){
             session.setAttribute(Const.CURRENT_USER,response.getData());
@@ -39,17 +41,21 @@ public class UserController {
         session.removeAttribute(Const.CURRENT_USER);
         return ServerResponse.createBySuccess();
     }
+
     @RequestMapping(value = "register.do")
     @ResponseBody
     public ServerResponse<String> register(User user){
         return iUserService.register(user);
     }
 
+
+
     @RequestMapping(value = "check_valid.do" ,method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> checkVaild(String str,String type){
         return iUserService.checkVaild(str,type);
     }
+
 
 
     @RequestMapping(value = "get_user_info.do" ,method = RequestMethod.POST)
@@ -116,26 +122,26 @@ public class UserController {
         return iUserService.getInformation(currentUser.getId());
     }
 
-
     // 后端
-
     @RequestMapping(value = "getAllUser.do")
     @ResponseBody
-    public ServerResponse<List<User>> getAllUsser(){
+    public ServerResponse<List<User>> getAllUsser(@RequestParam(value = "page",defaultValue = "1")Integer pageNum,
+                                                  @RequestParam(value = "limit",defaultValue = "10") Integer pageSize){
 
-       return iUserService.getAllUser();
+       return iUserService.getAllUser(pageNum,pageSize);
     }
 
     @RequestMapping(value = "getAdmins.do")
     @ResponseBody
-    public ServerResponse<List<User>> getAdmins(){
-        return iUserService.getAdmins();
+    public ServerResponse<List<User>> getAdmins(@RequestParam(value = "page",defaultValue = "1")Integer pageNum,
+                                                @RequestParam(value = "limit",defaultValue = "10") Integer pageSize){
+        return iUserService.getAdmins(pageNum,pageSize);
     }
 
     @RequestMapping(value = "deleteUserById.do")
     @ResponseBody
     public ServerResponse deleteUserById(Integer user_id){
-        //System.out.println(user_id+"...............................");
+
         return  iUserService.deleteUserById(user_id,0);
     }
 

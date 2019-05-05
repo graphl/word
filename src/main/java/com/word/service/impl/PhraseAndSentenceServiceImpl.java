@@ -24,22 +24,20 @@ public class PhraseAndSentenceServiceImpl implements IPhraseAndSentenceService {
      * 获得全部phrase
      */
 
-        public ServerResponse getAllPhrase(){
-            List<Phrase> phrases = phraseMapper.getAllphrase();
-           /* if(phrases.size() == 0){
-                return ServerResponse.createByErrorMessage("没有数据");
-            }*/
-            return ServerResponse.createBySuccess(phrases);
+        public ServerResponse getAllPhrase(Integer pageNum,Integer pageSize){
+            List<Phrase> phrases = phraseMapper.getAllphrase(pageNum,pageSize);
+            int count = phraseMapper.getCountPhrase();
+            return ServerResponse.createBySuccess(phrases,count);
         }
 
-        public ServerResponse getAllSentence(){
+        public ServerResponse getAllSentence(Integer pageNum,Integer pageSize){
 
-            List<Sentence> sentences = sentenceMapper.getAllS();
-
+            List<Sentence> sentences = sentenceMapper.getAllS(pageNum,pageSize);
+            int count = sentenceMapper.getCountAlls();
            /* if (sentences.size() == 0){
                 return ServerResponse.createByErrorMessage("没有数据");
             }*/
-            return  ServerResponse.createBySuccess(sentences);
+            return  ServerResponse.createBySuccess(sentences,count);
         }
 
     /**

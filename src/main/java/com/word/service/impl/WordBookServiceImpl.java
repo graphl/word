@@ -28,12 +28,8 @@ public class WordBookServiceImpl  implements IWordBookService {
    private WordBookMapper wordBookMapper;
 
 
-    public ServerResponse addBook(String bookName) {
-        if(StringUtils.isBlank(bookName)){
-            return ServerResponse.createByErrorMessage("单词类别参数错误");
-        }
-        WordBook wordBook = new WordBook();
-        wordBook.setBookName(bookName);
+    public ServerResponse addBook(WordBook wordBook) {
+
         int rowCount = wordBookMapper.insert(wordBook);
         if(rowCount>0){
             return  ServerResponse.createBySuccess("添加Book成功");
@@ -97,9 +93,10 @@ public class WordBookServiceImpl  implements IWordBookService {
     }
     // 前端
 
-    public ServerResponse<List<WordBook>> showAllBook(){
-        List<WordBook> wordBooks = wordBookMapper.showAllBook();
-        return ServerResponse.createBySuccess(wordBooks);
+    public ServerResponse<List<WordBook>> showAllBook(int pageNum,int pageSize){
+        List<WordBook> wordBooks = wordBookMapper.showAllBook(pageNum,pageSize);
+        int count = wordBookMapper.getCountWordBook();
+        return ServerResponse.createBySuccess(wordBooks,count);
     }
 
     public ServerResponse addwordTobook(List<Integer> WordIdList,Integer word_id){

@@ -103,4 +103,19 @@ public class WordDetailOneVo {
         this.phrase = phrase;
         this.sentence = sentence;
     }
+
+
+    @Override
+    public String toString() {
+        return "WordDetailOneVo{" +
+                "id=" + id +
+                ", word='" + word + '\'' +
+                ", word_name='" + word_name + '\'' +
+                ", word_symbol='" + word_symbol + '\'' +
+                ", check=" + check +
+                ", word_sound='" + word_sound + '\'' +
+                ", phrase=" + phrase +
+                ", sentence=" + sentence +
+                '}';
+    }
 }

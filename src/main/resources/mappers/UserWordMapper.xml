@@ -40,9 +40,9 @@
   where  user_id = #{userId}
   and word_id = #{wordId}
   </select>
-<select id="showUserWord" parameterType="integer" resultType="word">
+<select id="showUserWord" parameterType="integer" resultType="Word">
   select
-  <include refid="Base_Column_List"></include>
+  ww.word_name,ww.word,ww.word_symbol
   from  words_word ww,words_user_word wu
   where ww.id = wu.word_id and wu.user_id = #{userid}
 </select>
@@ -58,6 +58,6 @@
     </set>
   </update>
   <select id="checkWordIsInUserWord" parameterType="integer" resultType="integer">
-  select  conut(*) from words_user_word where word_id = #{wordId}
+  select  count(*) from words_user_word where word_id = #{wordId}
   </select>
 </mapper>

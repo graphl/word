@@ -6,12 +6,13 @@
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="sentence" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="sentence_Chinese" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="word_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="updata_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, sentence, sentence_Chinese, create_time, updata_time
+    id, sentence, sentence_Chinese,word_id, create_time, updata_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -101,5 +102,13 @@
   delete from sentence
   where id = #{sentence_id}
 </delete>
+<select id="getCountAlls" resultType="integer">
+  select count(*) from  sentence
+</select>
 
+  <select id="selectByWordId" parameterType="integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from sentence
+    where  word_id = #{word_id}
+  </select>
 </mapper>

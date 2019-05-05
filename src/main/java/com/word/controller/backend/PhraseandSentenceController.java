@@ -7,6 +7,7 @@ import com.word.service.IPhraseAndSentenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -18,13 +19,17 @@ public class PhraseandSentenceController {
 
     @RequestMapping("/showAllPhrase")
     @ResponseBody
-    public ServerResponse showAllPhrase(){
-        return iPhraseAndSentenceService.getAllPhrase();
+    public ServerResponse showAllPhrase(
+            @RequestParam(value = "page",defaultValue = "1")Integer pageNum,
+            @RequestParam(value = "limit",defaultValue = "10") Integer pageSize){
+        return iPhraseAndSentenceService.getAllPhrase(pageNum,pageSize);
     }
+
     @RequestMapping("/showAllS")
     @ResponseBody
-    public ServerResponse showAllS(){
-        return iPhraseAndSentenceService.getAllSentence();
+    public ServerResponse showAllS(@RequestParam(value = "page",defaultValue = "1")Integer pageNum,
+                                   @RequestParam(value = "limit",defaultValue = "10") Integer pageSize){
+        return iPhraseAndSentenceService.getAllSentence(pageNum,pageSize);
     }
 
     @RequestMapping("/deletePhraseById")
@@ -51,4 +56,5 @@ public class PhraseandSentenceController {
     public ServerResponse updateSentence(Sentence sentence){
         return iPhraseAndSentenceService.updateSentence(sentence);
     }
+
 }

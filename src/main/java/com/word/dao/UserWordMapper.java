@@ -2,6 +2,7 @@ package com.word.dao;
 
 import com.word.pojo.UserWord;
 import com.word.pojo.Word;
+import com.word.vo.UserWordVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface UserWordMapper {
 
     int deleteUserWord(@Param("wordId") Integer wordId, @Param("userId") Integer userId);
 
-    List<Word> showUserWord(int userid);
+    List<UserWordVo> showUserWord(int userid);
 
     int updateUserWord(Word word);
 

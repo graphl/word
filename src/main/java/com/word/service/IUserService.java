@@ -24,9 +24,9 @@ public interface IUserService {
 
     ServerResponse checkAdminRole(User user);
 
-    ServerResponse getAllUser();
+    ServerResponse getAllUser(Integer pageNum,Integer pageSize);
 
-    ServerResponse getAdmins();
+    ServerResponse getAdmins(Integer pageNum,Integer pageSize);
 
     ServerResponse deleteUserById(Integer user_id,Integer role);
 

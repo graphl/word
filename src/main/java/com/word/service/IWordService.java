@@ -13,6 +13,8 @@ public interface IWordService {
 
     ServerResponse getWordList(int pageNum,int pageSize);
 
+    ServerResponse WordList();
+
     ServerResponse<PageInfo> searchWord(String wordName, Integer wordId, int pageNum, int pageSize);
 
     ServerResponse deleteByWordId(Integer wordId);

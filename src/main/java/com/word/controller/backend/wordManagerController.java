@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -27,11 +30,19 @@ public class wordManagerController {
     private IUserService iUserService;
 
 
+    @RequestMapping("/upload.do")
+    @ResponseBody
+    public ServerResponse uploadfile(HttpServletRequest request, MultipartFile file,Word word){
+        String rootPath = request.getSession().getServletContext().getRealPath("resource/uploads/");
+
+        return  null;
+    }
     @RequestMapping("add.do")
     @ResponseBody
     public ServerResponse addWord(Word word){
         return iWordService.addword(word);
     }
+
 
     @RequestMapping("update.do")
     @ResponseBody
@@ -57,8 +68,8 @@ public class wordManagerController {
     @RequestMapping("search.do")
     @ResponseBody
     public ServerResponse Search(HttpSession session,String wordName,Integer wordId,
-                                        @RequestParam(value = "pageNum" ,defaultValue = "1") Integer pageNum,
-                                        @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize){
+                                        @RequestParam(value = "page" ,defaultValue = "1") Integer pageNum,
+                                        @RequestParam(value = "limit",defaultValue = "10") Integer pageSize){
         User user =(User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return  ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登陆");
@@ -71,11 +82,15 @@ public class wordManagerController {
         }
     }
 
-
+   @RequestMapping("word.do")
+   @ResponseBody
+   public ServerResponse getword(){
+        return iWordService.WordList();
+   }
     @RequestMapping("wordList.do")
     @ResponseBody
-    public ServerResponse getAllWord(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
-                                     @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize){
+    public ServerResponse getAllWord(@RequestParam(value = "page",defaultValue = "1")Integer pageNum,
+                                     @RequestParam(value = "limit",defaultValue = "10") Integer pageSize){
         return iWordService.getWordList(pageNum,pageSize);
     }
 

@@ -1,12 +1,10 @@
 package com.word.service.impl;
 
-import com.github.pagehelper.Page;
 import com.google.common.collect.Lists;
 import com.word.common.Const;
 import com.word.common.ServerResponse;
 import com.word.dao.CategoryMapper;
 import com.word.pojo.Category;
-import com.word.pojo.LayuiPage;
 import com.word.service.ICategoryService;
 import com.word.vo.CategoryName;
 import org.apache.commons.lang3.StringUtils;
@@ -84,13 +82,11 @@ public class CategoryServiceImpl implements ICategoryService {
         return ServerResponse.createBySuccess(result);
     }
 
-
     public ServerResponse categoryList(int pageNum, int pageSize){
         List<Category> categoryList = categoryMapper.getAllCategory(pageNum, pageSize);
-        LayuiPage<Category> layuiPage = new LayuiPage<>();
-        layuiPage.setTotal(((Page) categoryList).getTotal());
-        layuiPage.setData(categoryList);
-        return ServerResponse.createBySuccess(layuiPage);
+        System.out.println(categoryList.size());
+        int count = categoryMapper.getCountCategory();
+        return ServerResponse.createBySuccess(categoryList,count);
     }
 
     public ServerResponse delCategoryId(Integer categoryId){

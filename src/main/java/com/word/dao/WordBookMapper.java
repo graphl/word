@@ -26,8 +26,11 @@ public interface WordBookMapper {
 
     List<Word> selectByBookId_List(Integer bookId);
 
-    List<WordBook> showAllBook();
+    List<WordBook> showAllBook(@Param("pageNumKey") int pageNum,
+                               @Param("pageSizeKey") int pageSize);
 
+    List<WordBook> showAllWordBook();
+    int getCountWordBook();
     int deleteByBookId(Integer bookId);
 
 

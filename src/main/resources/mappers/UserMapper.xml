@@ -224,5 +224,10 @@
   where id = #{id} and role = #{role}
   </delete>
 
-
+  <select id="getCountUser" resultType="integer">
+    select count(*) from words_user where  role=0
+  </select>
+<select id="getCountAdmin" resultType="integer">
+  select count(*) from words_user where role=1
+</select>
 </mapper>

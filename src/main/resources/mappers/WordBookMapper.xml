@@ -102,7 +102,13 @@
     select <include refid="Base_Column_List"/>
     from words_word_book
   </select>
-
+  <select id="showAllWordBook" resultType="WordBook">
+    select <include refid="Base_Column_List"/>
+    from words_word_book
+  </select>
+<select id="getCountWordBook" resultType="integer">
+  select count(*) from words_word_book
+</select>
   <delete id="deleteByBookId">
 delete from words_word_book
 where id = #{bookId}

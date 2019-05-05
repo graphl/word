@@ -1,6 +1,7 @@
 package com.word.dao;
 
 import com.word.pojo.Phrase;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,7 +18,10 @@ public interface PhraseMapper {
 
     int updateByPrimaryKey(Phrase record);
 
-    List<Phrase> getAllphrase();
+    List<Phrase> getAllphrase(@Param("pageNumKey") int pageNum,
+                              @Param("pageSizeKey") int pageSize);
+
+    int getCountPhrase();
 
     int deleteByPhraseId(Integer phrase_id);
 

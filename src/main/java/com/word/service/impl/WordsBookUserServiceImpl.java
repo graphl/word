@@ -27,7 +27,7 @@ public class WordsBookUserServiceImpl implements IWordsBookUserService {
      */
     public List<WordBook> showAllBook(){
 
-        List<WordBook> wordsBookList = wordBookMapper.showAllBook();
+        List<WordBook> wordsBookList = wordBookMapper.showAllWordBook();
 
         return wordsBookList;
     }

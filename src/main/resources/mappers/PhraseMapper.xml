@@ -97,7 +97,9 @@
     select <include refid="Base_Column_List"/>
     from phrase
   </select>
-
+<select id="getCountPhrase" resultType="integer">
+  select count(*) from phrase
+</select>
   <delete id="deleteByPhraseId" parameterType="integer">
     delete phrase
     where  id = #{phrase_id}

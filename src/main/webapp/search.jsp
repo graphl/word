@@ -2,6 +2,7 @@
 <%@ page import="com.word.vo.WordDetailOneVo" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.word.pojo.Phrase" %>
+<%@taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%@ page import="com.word.pojo.Sentence" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -171,15 +172,6 @@
 
 
 </div>
-
-
-<!--
-<div class="gradient-bar">
-    &nbsp;
-</div>
--->
-
-
 <div class="container main-body  new-main-body" style="min-height: 754px;">
 
     <div id="review-setting"></div>
@@ -191,12 +183,12 @@
             <div id="learning-box" class="review-id row">
                 <div class="test-box span12 learning-detail-container">
                     <div class="alert alert-container">
-
-                        <p class="add-word-hint"><a href="javascript:;" class="add-word-to-review"
-                                                    vocab-id="2376">点击这里</a> 将这个单词添加到你的词库</p>
+                        <p class="add-word-hint">
+                            <a href="javascript:;" id="add_to_userWord" vocab-id="<%=((WordDetailOneVo)request.getAttribute("wordDetail")).getId()%>">点击这里</a>
+                            将这个单词添加到你的词库
+                        </p>
                         <p class="word-added-hint hide">该单词已被成功添加进你的词库，页面将在2秒钟之后刷新</p>
                         <p class="add-word-failed-hint hide">添加单词失败，请稍后再试</p>
-
                     </div>
 
                     <div id="learning_word" class="row">

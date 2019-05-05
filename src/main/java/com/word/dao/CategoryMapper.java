@@ -26,5 +26,6 @@ public interface CategoryMapper {
     List<Category> getAllCategory(@Param("pageNumKey") int pageNum,
                                   @Param("pageSizeKey") int pageSize);
 
+    int getCountCategory();
     int delCategoryById(Integer categoryId);
 }

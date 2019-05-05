@@ -102,4 +102,7 @@
     delete from words_category
     where id = #{categoryId}
   </delete>
+  <select id="getCountCategory" resultType="integer">
+    select count(*) from words_category
+  </select>
 </mapper>

@@ -3,7 +3,7 @@ package com.word.common;
 public enum  ResponseCode {
 
     SUCCESS(0,"SUCCESS"),
-    ERROR(10,"ERROR"),
+    ERROR(404,"ERROR"),
     NEED_LOGIN(100,"NEED_LOGIN"),
     ILLEGAL_ARGUMENT(2,"ILLEGAL_ARGUMENT");
 

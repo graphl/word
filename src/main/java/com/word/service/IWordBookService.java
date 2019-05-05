@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IWordBookService {
 
-    ServerResponse addBook(String bookName);
+    ServerResponse addBook(WordBook wordBook);
 
     ServerResponse updateBookName(Integer bookId, String bookName);
 
@@ -17,7 +17,7 @@ public interface IWordBookService {
 
     ServerResponse<WordBook> getWordBookByBookId(Integer wordId);
 
-    ServerResponse<List<WordBook>> showAllBook();
+    ServerResponse<List<WordBook>> showAllBook(int pageNum,int pageSize);
 
     ServerResponse updateWordBook(WordBook wordBook);
 
