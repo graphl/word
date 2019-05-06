@@ -67,11 +67,13 @@
 
                     <li><a href="#" class="shortcuts-button">快捷键</a></li>
 
-                    <li class="dropdown main-nav nav-avatar  ">
-                        <a href="#" class="main-menu user-avatar" data-toggle="dropdown"> <i> <img src="https://media-image1.baydn.com/avatar_img%2Fcizbtc%2Fb5c11e19486a6c1def47c9345fb425a8.c7a2d9f8de1d9979a1ff579a396b3ea9.jpg@20w_20h" width="20" height="20" class=""> </i>
+                    <li class="dropdown main-nav nav-avatar">
+
+                        <a href="#" class="main-menu user-avatar" data-toggle="dropdown"> <i><%-- <img src="https://media-image1.baydn.com/avatar_img%2Fcizbtc%2Fb5c11e19486a6c1def47c9345fb425a8.c7a2d9f8de1d9979a1ff579a396b3ea9.jpg@20w_20h" width="20" height="20" class="">--%> </i>
                             <%=((User)session.getAttribute("currentUser")).getUsername()%>
                             <img class="dropdown-arraw" src="https://static.baydn.com/static//img/icon-arraw.png">
                         </a>
+
                         <ul class="dropdown-menu">
                             <li><a class="sb-nav-menu-a" href="#">设置</a></li>
 
@@ -102,69 +104,6 @@
             <li class=""><a href="/setting.jsp">单词设置</a></li>
         </ul>
     </div>
-
-    <div class="sub-menu ">
-        <ul class="container">
-            <li class=""><a href="#">炼句学习</a></li>
-            <li class=""><a href="#">课程</a></li>
-            <li class=""><a href="#">炼句设置</a></li>
-        </ul>
-    </div>
-
-    <div id="menu-news" class="sub-menu ">
-        <ul class="container">
-            <li class="">
-                <a href="#">短文首页</a>
-            </li>
-            <li class="">
-                <a href="#">收藏的短文</a>
-            </li>
-            <li class="">
-                <a href="#">短文计划</a>
-            </li>
-
-            <li class="">
-                <a href="#">短文进度</a>
-            </li>
-
-        </ul>
-    </div>
-
-    <div id="menu-books" class="sub-menu ">
-        <ul class="container">
-            <li class="">
-                <a href="#">读书首页</a>
-            </li>
-            <li class="">
-                <a href="#">短文计划</a>
-            </li>
-
-            <li class="">
-                <a href="#">短文进度</a>
-            </li>
-
-        </ul>
-    </div>
-
-
-    <div class="sub-menu ">
-        <ul class="container">
-            <li class=""><a href="#">听力学习</a></li>
-            <li class=""><a href="#">听力课程</a></li>
-            <li class=""><a href="#">听力计划</a></li>
-            <li class=""><a class="#" href="/listen/#buy-hints">购买提示</a></li>
-            <li class=""><a href="#">听力设置</a></li>
-        </ul>
-    </div>
-
-    <div class="sub-menu ">
-        <ul class="container">
-            <li class=""><a href="#">论坛</a></li>
-            <li class=""><a href="#">小组</a></li>
-            <li class=""><a href="#">精选</a></li>
-        </ul>
-    </div>
-
 
 </div>
 
@@ -242,36 +181,12 @@
                                                                      href="javascript:void(0)" onclick="unKnow()"><span>2. </span>不认识</a>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-
-    </div>
-    <div class="row hide bottom-progress progress-box">
-        <div class="span12 progress-box-wrap">
-            <div class="row">
-                <div class="span1">
-                    <h6 class="pull-right">进度</h6>
-                </div>
-                <div class="span10">
-                    <div class="well review-progress">
-                        <div class="progress pull-right progress-danger" style="width:0%;">
-                            <div class="bar" style="width: 100%"><span class="num"></span>
-                            </div>
-                        </div>
-                        <div class="progress pull-left progress-success" style="width:0%;">
-                            <div class="bar" style="width: 100%"><span class="num"></span></div>
-                        </div>
-                        <div class="progress pull-left progress-reviewed " style="width: 0%;">
-                            <div class="bar reviewed pull-left" style="width: 100%;"><span class="num"></span>
-                            </div>
-                        </div>
-                        <div class="progress pull-left progress-unreviewed" style="width: 99.9%;">
-                            <div class="bar" style="width: 100%"><span class="num">150</span>
+                                <div id="next" class="span10 offset1 operation" style="opacity: 1;">
+                                    <div class="row test-answers"><a class="unknown span10"
+                                                                     href="javascript:void(0)" onclick="NextW()"><span>2. </span>下一个</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -281,8 +196,6 @@
     </div>
     <div id="affix-prompt">
     </div>
-
-
 </div>
 <script src="js/jquery-1.12.4.min.js"></script>
 <script>
@@ -292,22 +205,25 @@
     let m = document.getElementById('music');
     var flg = true;
 
-    $(function () {
 
+    $(function () {
         $.ajax({
             url: '/userword/get_MWord.do',
             type: 'get',
             data: {},
             success: function (data) {
+
                 words = data.data;
-                $('.today').text(words.length);
-                if (words.length > 0) {
+                console.log(data)
+                alert(words.word_name)
+                $('#word_name').html(words.word_name);
+                $('#word_symbol').html(words.word_symbol);
+                $('#music').attr('src', words.word_sound);
+                $('.hint-content').text(words.word);
+               // $('.today').text(words.length);
+               /* if (words.length > 0) {
                     cur = 0;
-                    $('#word_name').html(words[cur].word_name);
-                    $('#word_symbol').html(words[cur].word_symbol);
-                    $('#music').attr('src', words[cur].word_sound);
-                    $('.hint-content').text(words[cur].word);
-                }
+                }*/
             },
         });
 
@@ -315,10 +231,13 @@
             m.load();//加载
             m.play();//播放
         })
+
         $('.start-review-button').click(function () {
-            if (words.length > 0) {
+
+            if (words != null) {
                 $('#review1').hide();
                 $('#review2').show();
+                $('#next').hide();
             }
         })
 
@@ -332,29 +251,76 @@
             $.ajax({
                 url: '/userword/Know_Word.do',
                 type: 'get',
-                data: {word_id: words[cur].id},
+                data: {word_id: words.id},
                 success: function (data) {
+                    words = data.data;
+                    alert(words.word_name)
+                    $('#word_name').html(words.word_name);
+                    $('#word_symbol').html(words.word_symbol);
+                    $('#music').attr('src', words.word_sound);
+                    $('.hint-content').text(words.word);
+                 /*   words = data.data;
+                    $('.today').text(words.length);
+                    if (words.length > 0) {
+                        cur = 0;
+                        $('#word_name').html(words[cur].word_name);
+                        $('#word_symbol').html(words[cur].word_symbol);
+                        $('#music').attr('src', words[cur].word_sound);
+                        $('.hint-content').text(words[cur].word);
+                    }*/
                 },
             });
         }
         flg = true;
         cur++;
-        $('#word_name').html(words[cur].word_name);
+    /*    $('#word_name').html(words[cur].word_name);
         $('#word_symbol').html(words[cur].word_symbol);
         $('#music').attr('src', words[cur].word_sound);
         $('.hint-content').text(words[cur].word);
-        $('#example-hint').hide();
+        $('#example-hint').hide();*/
     }
+    
+    function NextW() {
+        if(!flg){
+            flg = true;
+            $('#example-hint').hide();
+            $('#next').hide();
+            $('#answer').show();
 
+
+            $.ajax({
+                url: '/userword/next.do',
+                type: 'get',
+                data: {word_id: words.id},
+                success: function (data) {
+                       words = data.data;
+                       alert(words.word_name)
+                       $('#word_name').html(words.word_name);
+                       $('#word_symbol').html(words.word_symbol);
+                       $('#music').attr('src', words.word_sound);
+                       $('.hint-content').text(words.word);
+                },
+            });
+        }
+
+    }
     function unKnow() {
         if (flg){
             flg = false;
-            $('#example-hint').show();
+             $('#example-hint').show();
+            $('#next').show();
+            $('#answer').hide();
             $.ajax({
                 url: '/userword/unKnow_Word.do',
                 type: 'get',
-                data: {word_id: words[cur].id},
+                data: {word_id: words.id},
                 success: function (data) {
+                 /*   words = data.data;
+                    alert(words.word_name)
+                    $('#word_name').html(words.word_name);
+                    $('#word_symbol').html(words.word_symbol);
+                    $('#music').attr('src', words.word_sound);
+                    $('.hint-content').text(words.word);*/
                 },
             });
         }

@@ -7,14 +7,13 @@
       <arg column="word_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="word_sound" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="word_symbol" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="word_image" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="word" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, word_name, word_sound, word_symbol, word_image, create_time, update_time ,word
+    id, word_name, word_sound, word_symbol, create_time, update_time ,word
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

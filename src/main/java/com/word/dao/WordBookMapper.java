@@ -30,12 +30,11 @@ public interface WordBookMapper {
                                @Param("pageSizeKey") int pageSize);
 
     List<WordBook> showAllWordBook();
-    int getCountWordBook();
-    int deleteByBookId(Integer bookId);
 
+    int getCountWordBook();
+
+    int deleteByBookId(Integer bookId);
 
     int insertWordToBook(@Param("wordlist") List<Integer> wordlist,
                          @Param("wordId") Integer word_id);
-
-
 }

@@ -119,6 +119,8 @@ public class wordManagerController {
    public ServerResponse getword(){
         return iWordService.WordList();
    }
+
+
     @RequestMapping("wordList.do")
     @ResponseBody
     public ServerResponse getAllWord(@RequestParam(value = "page",defaultValue = "1")Integer pageNum,
@@ -138,7 +140,5 @@ public class wordManagerController {
     public ServerResponse deleteByWordIdList(List<String> listwordId){
         return null;
     }
-
-
 
 }

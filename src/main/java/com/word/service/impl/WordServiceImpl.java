@@ -18,6 +18,7 @@ import com.word.vo.WordDetailVo;
 import com.word.vo.WordDetail_SVo;
 import com.word.vo.WordListVo;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,7 +80,6 @@ public class WordServiceImpl implements IWordService {
     private  WordDetailVo assembleWordDetailVo(Word word){
         WordDetailVo wordDetailVo =new WordDetailVo();
         wordDetailVo.setId(word.getId());
-        wordDetailVo.setWordImage(word.getWordImage());
         wordDetailVo.setWordName(word.getWordName());
 
         wordDetailVo.setWordSound(word.getWordSound());
@@ -89,6 +89,11 @@ public class WordServiceImpl implements IWordService {
         return wordDetailVo;
     }
 
+
+    @Test
+    public void test(){
+        wordMapper.wordList();
+    }
     public ServerResponse WordList(){
 
         List<Word> wordList = wordMapper.wordList();
@@ -97,8 +102,6 @@ public class WordServiceImpl implements IWordService {
     public  ServerResponse getWordList(int pageNum,int pageSize){
 
         List<Word> wordList = wordMapper.selectList(pageNum,pageSize);
-
-
         int count  = wordMapper.getCountWord();
         return ServerResponse.createBySuccess(wordList,count);
     }
@@ -106,9 +109,7 @@ public class WordServiceImpl implements IWordService {
         WordListVo wordListVo = new WordListVo();
         wordListVo.setId(word.getId());
         wordListVo.setId(word.getId());
-        wordListVo.setWordImage(word.getWordImage());
         wordListVo.setWordName(word.getWordName());
-
         wordListVo.setWordSound(word.getWordSound());
         word.setWordSymbol(word.getWordSymbol());
         return wordListVo;

@@ -2,6 +2,7 @@ package com.word.dao;
 
 import com.word.pojo.UserWord;
 import com.word.pojo.Word;
+import com.word.vo.MWordVo;
 import com.word.vo.UserWordVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,4 +21,6 @@ public interface UserWordMapper {
     int updateUserWord(Word word);
 
     int checkWordIsInUserWord(Integer wordId);
+
+    List<MWordVo> selectUserWord(Integer userId);
 }

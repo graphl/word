@@ -5,8 +5,11 @@ import com.word.dao.WordsBookMapper;
 import com.word.pojo.WordBook;
 import com.word.pojo.WordsBook;
 import com.word.service.IWordsBookService;
+import com.word.vo.BookWord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service("iWordsBookService")
 public class word_bookServiceImpl implements IWordsBookService {
@@ -36,6 +39,17 @@ public class word_bookServiceImpl implements IWordsBookService {
         return ServerResponse.createBySuccess(result);
     }
 
+    public ServerResponse showBookWord(Integer bookId,Integer pageNum,Integer pageSize){
+
+        List<BookWord> bookWords = wordsBookMapper.selectBookWord(bookId,pageNum,pageSize);
+
+        return ServerResponse.createBySuccess(bookWords);
+    }
+
+    public ServerResponse deleteByWbId(Integer wbId){
+        Integer result = wordsBookMapper.deleteByWbId(wbId);
+        return ServerResponse.createBySuccess(result);
+    }
    /* public ServerResponse updateBookWord(WordBook wordBook){
         int result = wordsBookMapper.updateToWordBook(wordBook);
         if(result == 0){

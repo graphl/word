@@ -12,7 +12,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, check_book_id, word_size, user_id, create_time, updata_time
+    id, check_book_id as checkBookId, word_size as wordSize, user_id as  userId, create_time, updata_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -110,27 +110,34 @@
     from user_setting_word
   </select>
 
-  <update id="updateByUserId" parameterType="map">
-  update user_setting_word
-  <set>
-    <if test="checkBookId != null" >
-      check_book_id = #{user_setting.checkBookId,jdbcType=INTEGER},
-    </if>
-    <if test="wordSize != null" >
-      word_size = #{user_setting.wordSize,jdbcType=INTEGER},
-    </if>
-    <if test="createTime != null" >
-      create_time = #{user_setting.createTime,jdbcType=TIMESTAMP},
-    </if>
-    <if test="updataTime != null" >
-      updata_time = #{user_setting.updataTime,jdbcType=TIMESTAMP},
-    </if>
-  </set>
-  where user_id = #{user_id,jdbcType=INTEGER}
+  <update id="updateByUserId" parameterType="User_SettingWord">
+    update user_setting_word
+    <set >
+      <if test="checkBookId != null" >
+        check_book_id = #{checkBookId,jdbcType=INTEGER},
+      </if>
+      <if test="wordSize != null" >
+        word_size = #{wordSize,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updataTime != null" >
+        updata_time = #{updataTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where  user_id = #{userId,jdbcType=INTEGER}
   </update>
 
   <select id="selectSetting" parameterType="integer" resultType="User_SettingWord">
     select <include refid="Base_Column_List" />
-    from user_setting_word where user_id = #{userId}
+    from user_setting_word
+    where user_id = #{userId}
+  </select>
+  
+  <select id="checkUser" parameterType="integer" resultType="integer">
+    select count(*)
+    from  user_setting_word
+    where  user_id = #{userId}
   </select>
 </mapper>

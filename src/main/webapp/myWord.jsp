@@ -1,12 +1,7 @@
 <%@ page import="com.word.pojo.User" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.word.vo.UserWordVo" %><%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2019/4/9 0009
-  Time: 22:04
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.word.vo.UserWordVo" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="zh-CN">
 <head>
@@ -17,7 +12,6 @@
     <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
 
     <title>记单词</title>
-
 
     <link href="/css/shanbay-fontawesome-v3.css" rel="stylesheet" type="text/css">
 
@@ -35,9 +29,6 @@
 <body data-spy="scroll" data-target=".subnav" data-offset="50" class="">
 <div id="hints-bundle-modal">
 </div>
-
-<!-- Navbar
-  ================================================== -->
 <div id="main-navbar" class="navbar navbar-fixed-top ">
     <div class="navbar-inner" style="filter: none">
         <div class="container">
@@ -47,19 +38,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-
             <div class="nav-collapse">
-
                 <ul class="nav" style="z-index: 1040">
-
-
                     <li class="dropdown main-nav home ">
                         <a class="main-menu" href="#">首页</a>
                     </li>
-
-                    <li class="dropdown main-nav
-    active
-">
+                    <li class="dropdown main-nav active">
                         <a href="#" class="main-menu">
                             单词
                         </a>
@@ -91,7 +75,6 @@
                         </ul>
                     </li>
                 </ul>
-
                 <form class="navbar-search pull-right" action="">
                     <div class="controls">
                         <div class="input-prepend">
@@ -114,80 +97,7 @@
             <li class=""><a href="/setting.jsp">单词设置</a></li>
         </ul>
     </div>
-
-    <div class="sub-menu ">
-        <ul class="container">
-            <li class=""><a href="#">炼句学习</a></li>
-            <li class=""><a href="#">课程</a></li>
-            <li class=""><a href="#">炼句设置</a></li>
-        </ul>
-    </div>
-
-    <div id="menu-news" class="sub-menu ">
-        <ul class="container">
-            <li class="">
-                <a href="#">短文首页</a>
-            </li>
-            <li class="">
-                <a href="#">收藏的短文</a>
-            </li>
-            <li class="">
-                <a href="#">短文计划</a>
-            </li>
-
-            <li class="">
-                <a href="#">短文进度</a>
-            </li>
-
-        </ul>
-    </div>
-
-    <div id="menu-books" class="sub-menu ">
-        <ul class="container">
-            <li class="">
-                <a href="#">读书首页</a>
-            </li>
-            <li class="">
-                <a href="#">短文计划</a>
-            </li>
-
-            <li class="">
-                <a href="#">短文进度</a>
-            </li>
-
-        </ul>
-    </div>
-
-
-    <div class="sub-menu ">
-        <ul class="container">
-            <li class=""><a href="#">听力学习</a></li>
-            <li class=""><a href="#">听力课程</a></li>
-            <li class=""><a href="#">听力计划</a></li>
-            <li class=""><a class="#" href="/listen/#buy-hints">购买提示</a></li>
-            <li class=""><a href="#">听力设置</a></li>
-        </ul>
-    </div>
-
-    <div class="sub-menu ">
-        <ul class="container">
-            <li class=""><a href="#">论坛</a></li>
-            <li class=""><a href="#">小组</a></li>
-            <li class=""><a href="#">精选</a></li>
-        </ul>
-    </div>
-
-
 </div>
-
-
-<!--
-<div class="gradient-bar">
-    &nbsp;
-</div>
--->
-
-
 <div class="container main-body  new-main-body" style="min-height: 754px;">
 
     <div id="review-setting"></div>
@@ -241,75 +151,23 @@
 </div>
 <script src="js/jquery-1.12.4.min.js"></script>
 <script>
-
     var words;
     var cur;
     let m = document.getElementById('music');
     var flg = true;
-
-    $(function () {
-
-        $.ajax({
-            url: '/userword/get_MWord.do',
-            type: 'get',
-            data: {},
-            success: function (data) {
-                words = data.data;
-                $('.today').text(words.length);
-                if (words.length > 0) {
-                    cur = 0;
-                    $('#word_name').html(words[cur].word_name);
-                    $('#word_symbol').html(words[cur].word_symbol);
-                    $('#music').attr('src', words[cur].word_sound);
-                    $('.hint-content').text(words[cur].word);
-                }
-            },
-        });
 
         $('.speaker-icon').click(function () {
             m.load();//加载
             m.play();//播放
         })
         $('.start-review-button').click(function () {
+
             if (words.length > 0) {
                 $('#review1').hide();
                 $('#review2').show();
             }
+
         })
-    })
-
-    function onKnow() {
-        if (flg) {
-            $.ajax({
-                url: '/userword/Know_Word.do',
-                type: 'get',
-                data: {word_id: words[cur].id},
-                success: function (data) {
-                },
-            });
-        }
-        flg = true;
-        cur++;
-        $('#word_name').html(words[cur].word_name);
-        $('#word_symbol').html(words[cur].word_symbol);
-        $('#music').attr('src', words[cur].word_sound);
-        $('.hint-content').text(words[cur].word);
-        $('#example-hint').hide();
-    }
-
-    function unKnow() {
-        if (flg) {
-            flg = false;
-            $('#example-hint').show();
-            $.ajax({
-                url: '/userword/unKnow_Word.do',
-                type: 'get',
-                data: {word_id: words[cur].id},
-                success: function (data) {
-                },
-            });
-        }
-    }
 
     $('.search-submited').click(function () {
         window.location.href = '/userword/searchwordDetail.do?word=' + $('.search-input').val()

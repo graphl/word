@@ -3,51 +3,60 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.word.test;
+package com.word.service.impl;
+
+import com.word.dao.MemoMapper;
+import com.word.pojo.Memo;
+import com.word.service.ISM2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class sm2 {
+@Service("sm2")
+public class Sm2 implements ISM2 {
 
-    private ArrayList<Card> cards = new ArrayList<>();
+    @Autowired
+    private MemoMapper memoMapper;
+
+
+    private static List<Card> cards = new ArrayList<>();
+
     private int scheduled = 0;      // numbers of cards in deck
     private int notMemorised = 0;   // start value will be the same as scheduled
 
-    private int currentIndex = 0;   // current index in cards Arraylist
-    private Card currentCard = null;
+    public int currentIndex = 0;   // current index in cards Arraylist
+    public static  Card currentCard = null;
 
-    public sm2() {
-    }
-
-    // methods -->
-    public void addCard(String q, String a) {
+    public void addCard(String q, String a,String w,Integer userId,Integer wordId) {
         // Fill deck up with cards
-        cards.add(new Card(q, a));
+        Memo memo = new Memo(0,0,2.5,0,0,wordId,userId);
+       int id =  memoMapper.insertSelective(memo);
+        cards.add(new Card(id,q,a,w));
+        System.out.println("cards 11================"+cards);
+        scheduled++;
+        notMemorised++;
+    }
+    public void changCard(Card card){
+
+//        System.out.println(card);
+        cards.add(card);
+        System.out.println("cards2 ============="+cards);
         scheduled++;
         notMemorised++;
     }
 
-    // currentCard should be named card, and
-    // nextDate should be called overDueDate and should be changed from int to time
-    // in final product
+
     public void calcIntervalEF(int grade /*,Card card*/) {
 
-        // SM-2:
-        // EF (easiness factor) is a rating for how difficult the card is.
-        // Grade: (0-2) Set reps and interval to 0, keep current EF (repeat card today)
-        //        (3)   Set interval to 0, lower the EF, reps + 1 (repeat card today)
-        //        (4-5) Reps + 1, interval is calculated using EF, increasing in time.
         double oldEF = currentCard.efactor;
         double newEF = 0;
-
-        //int nextDate = new Date(today);
-        int nextDate = 0;
 
         if (grade < 3) {
             currentCard.Repetition = 0;
             currentCard.interval = 0;
-
         } else {
 
             newEF = oldEF + (0.1 - (5 - grade) * (0.08 + (5 - grade) * 0.02));
@@ -61,7 +70,6 @@ public class sm2 {
             }
 
             currentCard.Repetition = currentCard.Repetition + 1;
-
             switch (currentCard.Repetition) {
                 case 1:
                     currentCard.interval = 1;
@@ -75,25 +83,34 @@ public class sm2 {
             }
         } // End of if-else()
 
-        if (grade == 3) {
+        if (grade == 5) {
             currentCard.interval = 0;
         }
 
-        //  nextDate.setDate(today.getDate() + card.interval);
-        //  card.nextDate = nextDate;
-        currentCard.overDueDate += currentCard.interval;
 
+        currentCard.overDueDate += currentCard.interval;
+        Memo memo = new Memo();
+        memo.setEfactor(currentCard.efactor);
+        memo.setGrad(currentCard.grad);
+        memo.setId(currentCard.id);
+        memo.setOverduedate(currentCard.overDueDate);
+        memo.setRepetition(currentCard.Repetition);
+        memo.setInterval(currentCard.interval);
+        System.out.println(memo);
+        memoMapper.updateByPrimaryKeySelective(memo);
+        System.out.println(currentCard+"      currentCard");
     } // end of method :: calcIntervalEF
 
-    public sm2 getQuestions() {
+    public Sm2 getQuestions() {
 
+        System.out.println(scheduled+"======================scheduled");
+        System.out.println(cards);
         // Roted the deck
         if ((scheduled - 1) - currentIndex <= 0) {
             currentIndex = 0;
         } else {
             currentIndex++;
         }
-
         // pick a card
         for (int i = currentIndex; i < scheduled; i++) {
 
@@ -103,9 +120,8 @@ public class sm2 {
                 System.out.println(currentCard.Q);
                 return this;
             }
-            // Get cards with a wrong ansaw 
+            // Get cards with a wrong ansaw
             if (cards.get(i).overDueDate <= 0 && cards.get(i).grad < 4) { // 3 or 4
-
                 currentCard = cards.get(i);
                 System.out.println(currentCard.Q);
                 return this;
@@ -116,76 +132,76 @@ public class sm2 {
         return this;
     }
 
-    public void getUsersAnswer() {
+
+    public Sm2 gradYouAnswer(int grad_test) {
 
         if (currentCard == null) {
-            return;
-        }
-
-        String ansaw = "";
-        ansaw = getInput("Please enter you answers: ");
-
-        if (ansaw.equalsIgnoreCase(currentCard.A)) {
-            System.out.println("your ansaw is correct");
-        } else {
-            System.out.println("your ansaw was worng!");
-        }
-    }
-
-    public sm2 gradYouAnswer() {
-
-        if (currentCard == null) {
+            System.out.println("出bug了");
             return this;
         }
 
-        int grad = Integer.parseInt(getInput("grad you answer type: (0)(1)(2)(3)(4)(5)"));
-
+//        int grad = Integer.parseInt(getInput("grad you answer type: (0)(1)(2)(3)(4)(5)"));
+        int grad = grad_test;
+        System.out.println(grad+"=================================");
         if (0 <= grad && grad <= 5) {
             //calculate new Over Due Date
             currentCard.grad = grad;
             calcIntervalEF(grad);
-            
-            if (3 < grad) { // se line 136 have to match this line 
+            if (5 < grad) { // se line 136 have to match this line
                 //currentCard.overDueDate = 1;
 //                currentCard.grad = grad;
 //                calcIntervalEF(grad);
                 notMemorised--;
             }
         } else {
-            gradYouAnswer();
+            gradYouAnswer(grad_test);
         }
+/*
+
+
+        Memo memo = new Memo();
+        memo.setEfactor(currentCard.efactor);
+*/
+
+
+
         return this;
     }
 
-    private String getInput(String msg) {
-
-        Scanner in = new Scanner(System.in);
-        System.out.print(msg);
-        return in.nextLine();
-    }
 
     public boolean isFinishedForToDay() {
         return notMemorised != 0;
     }
 
-    public boolean doTomorrowsExercises(int day) {
-
-        String ansaw = getInput("Do you whant to do a nother day press y for yes");
-
-        if (ansaw.equalsIgnoreCase("y")) {
+    public boolean doTomorrowsExercises(Integer userId) {
             for (Card c : cards) {
                 c.overDueDate--;
-                if(c.overDueDate <= 0) notMemorised++;
+                if(c.overDueDate <= 0)
+                    c.overDueDate = 0;
+                Memo memo = new Memo();
+                memo.setId(c.getId());
+                memo.setUserid(userId);
+                memo.setOverduedate(c.getOverDueDate());
+
             }
             return true;
-        }
-        return false;
     }
+
 
     // util methods -->
     public void cardsToString() {
         for (Card c : cards) {
             c.toString();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Sm2{" +
+                ", scheduled=" + scheduled +
+                ", notMemorised=" + notMemorised +
+                ", currentIndex=" + currentIndex +
+                ", currentCard=" + currentCard +
+                '}';
     }
 } // End of class

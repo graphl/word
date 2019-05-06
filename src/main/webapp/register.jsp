@@ -77,8 +77,7 @@
         <div class="container clearfix">
             <div class="nav-top-left">
                 <ul>
-                    <!--<li class="nav-brand"><a href="https://www.shanbay.com"><img-->
-                    <!--src="https://assets0.baydn.com/static/img/logo_v4.png"></a></li>-->
+
                     <li><a class="secondary" href="#">首页</a></li>
                     <li><a class="secondary" href="#">单词</a></li>
                 </ul>
@@ -109,13 +108,7 @@
                                         name="password"><i class="ib ib-lock-o"></i></div>
                 <div class="row"><input class="password" id="input-password-" type="password" placeholder="确认密码"
                                         name="password"><i class="ib ib-lock-o"></i></div>
-                <!--<div class="row two-step-token-input hide"><input class="two-step-token-input hide" type="text"-->
-                <!--placeholder="两步验证密码" name="code_2fa"-->
-                <!--data-not-required="true"><i-->
-                <!--class="ib ib-lock-check-o"></i></div>-->
-                <!--<a class="register-text" href="/web/account/register">还没有账号？<span>去注册</span></a><a class="forget"-->
-                <!--href="/web/account/reset">忘记密码？</a>-->
-                <!--<div class="clearfix"></div>-->
+
                 <div class="submit-btn-box">
                     <button class="button login-button" id="button-login" type="submit">注册</button>
                     <p class="error-msg"></p></div>
@@ -132,6 +125,14 @@
         var username = $('#input-account').val();
         var password = $('#input-password').val();
         var password2 = $('#input-password-').val();
+
+        var re = /^1\d{10}$/;
+
+        if(!re.test(username)){
+            alert("错误")
+            return;
+        }
+
         if (password != password2){
             $('#stantard-dialogBox').dialogBox({
                 title: 'English',

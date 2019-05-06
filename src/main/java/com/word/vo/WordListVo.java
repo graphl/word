@@ -10,7 +10,6 @@ public class WordListVo {
 
     private String wordSymbol;
 
-    private String wordImage;
 
     public Integer getId() {
         return id;
@@ -21,9 +20,11 @@ public class WordListVo {
         return this;
     }
 
+
     public String getWordName() {
         return wordName;
     }
+
 
     public WordListVo setWordName(String wordName) {
         this.wordName = wordName;
@@ -34,6 +35,7 @@ public class WordListVo {
         return wordSound;
     }
 
+
     public WordListVo setWordSound(String wordSound) {
         this.wordSound = wordSound;
         return this;
@@ -43,17 +45,10 @@ public class WordListVo {
         return wordSymbol;
     }
 
+
     public WordListVo setWordSymbol(String wordSymbol) {
         this.wordSymbol = wordSymbol;
         return this;
     }
 
-    public String getWordImage() {
-        return wordImage;
-    }
-
-    public WordListVo setWordImage(String wordImage) {
-        this.wordImage = wordImage;
-        return this;
-    }
 }

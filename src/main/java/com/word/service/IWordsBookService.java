@@ -13,4 +13,8 @@ public interface IWordsBookService {
 
     ServerResponse delTobookWord(Integer wordId,Integer book_id);
 
+    ServerResponse showBookWord(Integer bookId,Integer pageNum,Integer pageSize);
+
+    ServerResponse deleteByWbId(Integer wbId);
+
 }

@@ -8,6 +8,9 @@ public class MWordVo {
     private String word_sound;
     private String word;
 
+    public MWordVo() {
+    }
+
     public Integer getId() {
         return id;
     }
@@ -54,5 +57,17 @@ public class MWordVo {
         this.word_symbol = word_symbol;
         this.word_sound = word_sound;
         this.word = word;
+    }
+
+
+    @Override
+    public String toString() {
+        return "MWordVo{" +
+                "id=" + id +
+                ", word_name='" + word_name + '\'' +
+                ", word_symbol='" + word_symbol + '\'' +
+                ", word_sound='" + word_sound + '\'' +
+                ", word='" + word + '\'' +
+                '}';
     }
 }

@@ -79,7 +79,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectAllBook" resultMap="BaseResultMap">
+  <select id="selectAllBook" resultType="WordBook">
     select
     <include refid="Base_Column_List"/>
     from  words_word_book

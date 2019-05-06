@@ -36,13 +36,22 @@ public class SettingController {
 
     }
 
-    @RequestMapping(value = "/updata_setting_message.do")
+    @RequestMapping("/updata_setting_message.do")
     @ResponseBody
     public ServerResponse updata_setting_message(User_SettingWord user_settingWord,HttpSession session){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
+        System.out.println(user_settingWord.getCheckBookId());
         return iSettingService.updata_setting_message(user_settingWord,user.getId());
     }
 
+    @RequestMapping("/get_Setting_Detail.do")
+    @ResponseBody
+    public ServerResponse SettingDetail(HttpSession session){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+
+
+        return   iSettingService.get_setting_message(user.getId());
+    }
     @RequestMapping("/UserSetting")
     public void UserSetting(HttpSession session, HttpServletRequest request, HttpServletResponse response){
         User user = (User)session.getAttribute(Const.CURRENT_USER);

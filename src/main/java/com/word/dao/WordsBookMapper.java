@@ -1,8 +1,9 @@
 package com.word.dao;
 
 import com.word.pojo.WordsBook;
+import com.word.vo.BookWord;
+import com.word.vo.MWordVo;
 import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 public interface WordsBookMapper {
@@ -23,6 +24,13 @@ public interface WordsBookMapper {
     /**
      * 前端
      */
+    List<MWordVo> selectByBookId(Integer bookId);
 
 
+    List<BookWord> selectBookWord( @Param("bookId")Integer bookId,
+                                   @Param("pageNumKey")Integer pageNum,
+                                  @Param("pageSizeKey") Integer pageSize
+
+    );
+    int deleteByWbId(@Param("id") Integer wbId);
 }
