@@ -22,6 +22,23 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
+  <filter>
+    <filter-name>urlFilter</filter-name>
+    <filter-class>com.word.filter.UrlFilter</filter-class>
+    <init-param>
+      <param-name>charset</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>contentType</param-name>
+      <param-value>text/html;charset=UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>urlFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <!--<filter>-->
     <!--<filter-name>login</filter-name>-->
     <!--<filter-class>com.word.filter</filter-class>-->
