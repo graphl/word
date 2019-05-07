@@ -9,7 +9,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, book_name, book_js
+    id, book_name as bookName, book_js
   </sql>
 
   <sql id="Base_Column_List_word" >
@@ -75,11 +75,11 @@
   <update id="updateByPrimaryKey" parameterType="com.word.pojo.WordBook" >
     update words_word_book
     set book_name = #{bookName,jdbcType=VARCHAR},
-      book_js = #{bookJs,jdbcType=VARCHAR}
+      book_js = #{book_js,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectAllBook" resultMap="BaseResultMap">
+  <select id="selectAllBook" resultType="WordBook">
     select
     <include refid="Base_Column_List"/>
     from  words_word_book

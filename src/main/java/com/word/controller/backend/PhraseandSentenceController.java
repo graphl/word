@@ -57,4 +57,14 @@ public class PhraseandSentenceController {
         return iPhraseAndSentenceService.updateSentence(sentence);
     }
 
+    @RequestMapping("/addSentence")
+    @ResponseBody
+    public ServerResponse addSentence(Sentence sentence){
+
+
+        System.out.println(sentence.getSentence()+"   "+sentence.getSentenceChinese());
+
+     return iPhraseAndSentenceService.addSentence(sentence);
+    }
+
 }

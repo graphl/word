@@ -18,10 +18,13 @@ public interface User_SettingWordMapper {
 
     User_SettingWord selectByUserId(Integer user_id);
 
-    int updateByUserId(@Param("user_setting") User_SettingWord user_settingWord,
-                       @Param("user_id") Integer user_id);
+    int updateByUserId(User_SettingWord user_settingWord);
 
 
     User_SettingWord selectSetting(Integer userId);
+
+    int checkUser(Integer userId);
+
+
 
 }

@@ -69,19 +69,11 @@ public class PhraseAndSentenceServiceImpl implements IPhraseAndSentenceService {
         return ServerResponse.createBySuccess(result);
 
      }
-  /*  public ServerResponse addPhrase(Phrase phrase){
-        int result = phraseMapper.addPhrase(phrase);
-         if(result == 0 ){
-             return ServerResponse.createByErrorMessage("添加失败");
-        }
-        return ServerResponse.createBySuccess(result);
-    }
-    public ServerResponse updateSentence(Sentence sentence){
-        int result  = sentenceMapper.addSentence(sentence);
-        if(result == 0 ){
-             return ServerResponse.createByErrorMessage("添加失败");
-        }
-        return ServerResponse.createBySuccess(result);
-    }*/
 
+     public ServerResponse addSentence(Sentence sentence){
+//         System.out.println("service"+wordId+sentence.getSentenceChinese());
+        int result = sentenceMapper.insertIntoSentence(sentence);
+         System.out.println(result);
+        return  ServerResponse.createBySuccess(result);
+     }
 }

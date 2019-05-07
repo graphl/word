@@ -70,10 +70,10 @@
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 ,{field:'id', title: 'ID', sort: true}
-                ,{field:'wordName', title: '单词'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                ,{field:'wordName', title: '单词'}
                 ,{field:'wordSound', title: '单词发音地址'}
                 ,{field:'wordSymbol', title: '单词音标'}
-                ,{field:'wordImage', title: '单词图片地址'}
+                // ,{field:'wordImage', title: '单词图片地址'}
                 ,{field:'word', title: '单词中文意思', align: 'center'} //单元格内容水平居中
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
             ]]
@@ -152,7 +152,6 @@
     });
 
     });
-
 </script>
 
 <script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script>

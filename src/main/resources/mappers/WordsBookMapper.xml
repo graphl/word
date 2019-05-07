@@ -76,9 +76,24 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 <delete id="delTobookWord" parameterType="map">
-
   delete from words_book
   where book_id = #{bookId} and word_id = #{wordId}
 </delete>
+  <select id="selectByBookId" parameterType="integer" resultType="com.word.vo.MWordVo">
+    select w.id,w.word_name,w.word_symbol,w.word_sound,w.word
+    from  words_book wb, words_word w
+    where wb.word_id = w.id
+    and book_id = #{bookId}
+  </select>
 
+<select id="selectBookWord" parameterType="integer" resultType="com.word.vo.BookWord">
+  select w.id,w.word_name as wordName,w.word,wb.id as wbId
+  from words_word w,words_book wb
+  where w.id = wb.word_id and wb.book_id = #{bookId}
+</select>
+  <delete id="deleteByWbId" parameterType="integer" >
+
+    delete from words_book
+    where id = #{id}
+  </delete>
 </mapper>

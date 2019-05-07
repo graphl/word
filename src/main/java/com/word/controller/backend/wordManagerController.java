@@ -7,6 +7,7 @@ import com.word.pojo.User;
 import com.word.pojo.Word;
 import com.word.service.IUserService;
 import com.word.service.IWordService;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/manage/word/")
@@ -43,6 +47,34 @@ public class wordManagerController {
         return iWordService.addword(word);
     }
 
+
+    @RequestMapping("/addWord")
+    @ResponseBody
+    public Map<String,Integer> addWord(MultipartFile file, Word word, HttpServletRequest request) {
+
+        Map<String,Integer> map = new HashedMap();
+        String path = "F:\\studystarting\\simple-start\\word\\src\\main\\resources\\upload\\"+word.getWordName()+".mp3";
+        File localFile = new File(path);
+        System.out.println(path);
+        if(!localFile.exists()){
+            localFile.mkdirs();
+        }
+        try {
+            file.transferTo(localFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("创建失败");
+            map.put("code",404);
+
+            return map;
+        }
+
+        if (file != null){
+            word.setWordSound(path);
+        }
+        map.put("code",0);
+        return map;
+    }
 
     @RequestMapping("update.do")
     @ResponseBody
@@ -87,6 +119,8 @@ public class wordManagerController {
    public ServerResponse getword(){
         return iWordService.WordList();
    }
+
+
     @RequestMapping("wordList.do")
     @ResponseBody
     public ServerResponse getAllWord(@RequestParam(value = "page",defaultValue = "1")Integer pageNum,
@@ -106,7 +140,5 @@ public class wordManagerController {
     public ServerResponse deleteByWordIdList(List<String> listwordId){
         return null;
     }
-
-
 
 }

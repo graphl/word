@@ -5,6 +5,8 @@ import com.word.common.ServerResponse;
 import com.word.pojo.Word;
 import com.word.vo.WordDetailVo;
 
+import java.util.List;
+
 public interface IWordService {
 
     ServerResponse saveOrUpdateProduct(Word word);
@@ -20,4 +22,5 @@ public interface IWordService {
     ServerResponse deleteByWordId(Integer wordId);
 
     ServerResponse addword(Word word);
+
 }

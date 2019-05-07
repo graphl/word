@@ -125,7 +125,7 @@ public class UserController {
     // 后端
     @RequestMapping(value = "getAllUser.do")
     @ResponseBody
-    public ServerResponse<List<User>> getAllUsser(@RequestParam(value = "page",defaultValue = "1")Integer pageNum,
+    public ServerResponse<List<User>> getAllUser(@RequestParam(value = "page",defaultValue = "1")Integer pageNum,
                                                   @RequestParam(value = "limit",defaultValue = "10") Integer pageSize){
 
        return iUserService.getAllUser(pageNum,pageSize);

@@ -3,10 +3,12 @@ package com.word.service.impl;
 import com.google.common.collect.Lists;
 import com.word.common.ServerResponse;
 import com.word.dao.WordBookMapper;
+import com.word.dao.WordsBookMapper;
 import com.word.pojo.WordBook;
 import com.word.pojo.WordsBook;
 import com.word.service.IWordBookService;
 import com.word.service.IWordsBookService;
+import com.word.vo.BookWord;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +29,8 @@ public class WordBookServiceImpl  implements IWordBookService {
     @Autowired
    private WordBookMapper wordBookMapper;
 
+    @Autowired
+    private WordsBookMapper wordsBookMapper;
 
     public ServerResponse addBook(WordBook wordBook) {
 
@@ -103,5 +107,8 @@ public class WordBookServiceImpl  implements IWordBookService {
         int result  = wordBookMapper.insertWordToBook(WordIdList,word_id);
         return  ServerResponse.createBySuccess(result);
     }
+
+
+
 
 }

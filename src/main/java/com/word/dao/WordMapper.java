@@ -22,6 +22,7 @@ public interface WordMapper {
                           @Param("pageSizeKey") int pageSize);
 
     List<Word> wordList();
+
     int getCountWord();
     List<Word> selectByNameAndWordId(@Param("wordName") String wordName, @Param("wordId") Integer wordId);
 

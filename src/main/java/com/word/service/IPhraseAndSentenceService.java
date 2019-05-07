@@ -17,4 +17,6 @@ public interface IPhraseAndSentenceService {
     ServerResponse updateSentence(Sentence sentence);
 
     ServerResponse updatePhrase(Phrase phrase);
+
+    ServerResponse addSentence(Sentence sentence);
 }

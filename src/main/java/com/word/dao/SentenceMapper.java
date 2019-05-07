@@ -26,4 +26,6 @@ public interface SentenceMapper {
     int deleteBySentenceId(Integer sentence_id);
 
     List<Sentence> selectByWordId(Integer word_id);
+
+    int insertIntoSentence(Sentence record);
 }

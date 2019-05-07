@@ -13,7 +13,7 @@ public class WordDetailOneVo {
     private String word_symbol;
     private Integer check;
     private String word_sound;
-    private List<Phrase> phrase;
+/*    private List<Phrase> phrase;*/
     private List<Sentence> sentence;
 
     public int getId() {
@@ -52,9 +52,9 @@ public class WordDetailOneVo {
         this.word_sound = word_sound;
     }
 
-    public void setPhrase(List<Phrase> phrase) {
+/*    public void setPhrase(List<Phrase> phrase) {
         this.phrase = phrase;
-    }
+    }*/
 
     public void setSentence(List<Sentence> sentence) {
         this.sentence = sentence;
@@ -72,23 +72,23 @@ public class WordDetailOneVo {
         return word_sound;
     }
 
-    public List<Phrase> getPhrase() {
+/*    public List<Phrase> getPhrase() {
         return phrase;
-    }
+    }*/
 
     public List<Sentence> getSentence() {
         return sentence;
     }
 
 
-    public WordDetailOneVo(int id, String word, String word_name, String word_symbol, Integer check, String word_sound, List<Phrase> phrase, List<Sentence> sentence) {
+    public WordDetailOneVo(int id, String word, String word_name, String word_symbol, Integer check, String word_sound,  List<Sentence> sentence) {
         this.id = id;
         this.word = word;
         this.word_name = word_name;
         this.word_symbol = word_symbol;
         this.check = check;
         this.word_sound = word_sound;
-        this.phrase = phrase;
+       /* this.phrase = phrase;*/
         this.sentence = sentence;
     }
 
@@ -96,11 +96,10 @@ public class WordDetailOneVo {
 
     }
 
-    public WordDetailOneVo(int id, String word, String word_name, List<Phrase> phrase, List<Sentence> sentence) {
+    public WordDetailOneVo(int id, String word, String word_name, List<Sentence> sentence) {
         this.id = id;
         this.word = word;
         this.word_name = word_name;
-        this.phrase = phrase;
         this.sentence = sentence;
     }
 
@@ -114,7 +113,6 @@ public class WordDetailOneVo {
                 ", word_symbol='" + word_symbol + '\'' +
                 ", check=" + check +
                 ", word_sound='" + word_sound + '\'' +
-                ", phrase=" + phrase +
                 ", sentence=" + sentence +
                 '}';
     }

@@ -103,68 +103,6 @@
         </ul>
     </div>
 
-    <div class="sub-menu ">
-        <ul class="container">
-            <li class=""><a href="#">炼句学习</a></li>
-            <li class=""><a href="#">课程</a></li>
-            <li class=""><a href="#">炼句设置</a></li>
-        </ul>
-    </div>
-
-    <div id="menu-news" class="sub-menu ">
-        <ul class="container">
-            <li class="">
-                <a href="#">短文首页</a>
-            </li>
-            <li class="">
-                <a href="#">收藏的短文</a>
-            </li>
-            <li class="">
-                <a href="#">短文计划</a>
-            </li>
-
-            <li class="">
-                <a href="#">短文进度</a>
-            </li>
-
-        </ul>
-    </div>
-
-    <div id="menu-books" class="sub-menu ">
-        <ul class="container">
-            <li class="">
-                <a href="#">读书首页</a>
-            </li>
-            <li class="">
-                <a href="#">短文计划</a>
-            </li>
-
-            <li class="">
-                <a href="#">短文进度</a>
-            </li>
-
-        </ul>
-    </div>
-
-
-    <div class="sub-menu ">
-        <ul class="container">
-            <li class=""><a href="#">听力学习</a></li>
-            <li class=""><a href="#">听力课程</a></li>
-            <li class=""><a href="#">听力计划</a></li>
-            <li class=""><a class="#" href="/listen/#buy-hints">购买提示</a></li>
-            <li class=""><a href="#">听力设置</a></li>
-        </ul>
-    </div>
-
-    <div class="sub-menu ">
-        <ul class="container">
-            <li class=""><a href="#">论坛</a></li>
-            <li class=""><a href="#">小组</a></li>
-            <li class=""><a href="#">精选</a></li>
-        </ul>
-    </div>
-
 
 </div>
 
@@ -192,7 +130,7 @@
                 </div>
 
 
-                <form action="/bdc/setting/" method="post">
+                <form action="">
                     <input type="hidden" name="csrfmiddlewaretoken" value="Mcqgva6946fzwOgCovf5ByiyYWgQ0c7G">
                     <table class="table">
                         <tbody>
@@ -203,9 +141,8 @@
                                 </label>
                             </th>
                             <td>
-                                <select  name="learn">
-                                    <option value="1" selected="selected">考研单词书</option>
-                                    <option value="2">四级单词</option>
+                                <select  name="learn" id="learn">
+
                                 </select>
                             </td>
                         </tr>
@@ -216,25 +153,15 @@
                                 <option value="2">拼写</option>
                             </select></td>
                         </tr>
-                        <tr>
-                            <th><label for="id_target_retention">学习次数：</label></th>
-                            <td>
-                                <select  name="learn" id="id_target_retention">
-                                    <option value="1" selected="selected">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </td>
-                        </tr>
+
                         <tr>
                             <th><label for="id_quota">每日学习量：</label></th>
+
                             <td><select id="id_quota" name="quota">
                                 <option value="20">20</option>
                                 <option value="50">50</option>
                                 <option value="100">100</option>
-                                <option value="150" selected="selected">150</option>
+                                <option value="150" >150</option>
                                 <option value="200">200</option>
                                 <option value="250">250</option>
                                 <option value="300">300</option>
@@ -247,19 +174,11 @@
                         </tbody>
                     </table>
 
-                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-success" type="submit" onclick="tijiao()">确定</button>
                     &nbsp;&nbsp;<a href="/" class="cancel">取消</a>
 
                 </form>
             </div>
-
-            <script id="cost_tip_tmpl" type="text/x-jquery-tmpl">
-    <p>只要坚持登录，您每天都会收到 <span class="green">5</span> 个彩贝的奖励</p>
-    <p>如果坚持完成学习后打卡，您每天还会再被额外奖励 <span class="green">${checkin_prize}</span> 个彩贝</p>
-    <p>总之，只要你坚持学习，就能够积攒到足够的贝壳支付将来的学费，还有机会向更高的单词量迈进。</p>
-    <p> <a href="/help/support_function/how_to_earn_coins/#invite-user" target="_blank">了解什么是贝壳，彩贝</a> </p>
-
-            </script>
 
         </div>
 
@@ -272,77 +191,73 @@
 <script src="js/jquery-1.12.4.min.js"></script>
 <script>
 
-    var words;
-    var cur;
-    let m = document.getElementById('music');
-    var flg = true;
 
     $(function () {
-
         $.ajax({
-            url: '/userword/get_MWord.do',
-            type: 'get',
-            data: {},
-            success: function (data) {
-                words = data.data;
-                $('.today').text(words.length);
-                if (words.length > 0) {
-                    cur = 0;
-                    $('#word_name').html(words[cur].word_name);
-                    $('#word_symbol').html(words[cur].word_symbol);
-                    $('#music').attr('src', words[cur].word_sound);
-                    $('.hint-content').text(words[cur].word);
+            type:'post'
+            ,url:'/manage/book/get_all_bookName.do'
+            ,success:function (data) {
+                console.log('成功');
+                /*       console.log(data.data)*/
+                var selects = "";
+                for(var i=0;i<data.data.length;i++){
+                    selects+='<option value="'+ data.data[i].id+ '">'+ data.data[i].bookName+'</option>'
                 }
-            },
-        });
-
-        $('.speaker-icon').click(function () {
-            m.load();//加载
-            m.play();//播放
-        })
-        $('.start-review-button').click(function () {
-            if (words.length > 0) {
-                $('#review1').hide();
-                $('#review2').show();
+                console.log(selects)
+                $('#learn').html(selects);
+            }
+            ,error:function () {
+                console.log('失败');
             }
         })
-        $('.search-submited').click(function () {
-            window.location.href = '/userword/searchwordDetail.do?word=' + $('.search-input').val()
+
+        $.ajax({
+            type:'post'
+            ,url:'/get_Setting_Detail.do'
+            ,success:function (data) {
+                var res = data.data;
+                console.log("res =========="+res)
+
+                if(res.checkBookId != null){
+                    $("#learn").val(res.checkBookId)
+                }
+                if(res.wordSize != null){
+                    $("#id_quota").val(res.wordSize)
+                }
+            }
+            ,error:function () {
+                console.log()
+            }
+
         })
-    })
 
-    function onKnow() {
-        if (flg) {
-            $.ajax({
-                url: '/userword/Know_Word.do',
-                type: 'get',
-                data: {word_id: words[cur].id},
-                success: function (data) {
-                },
-            });
-        }
-        flg = true;
-        cur++;
-        $('#word_name').html(words[cur].word_name);
-        $('#word_symbol').html(words[cur].word_symbol);
-        $('#music').attr('src', words[cur].word_sound);
-        $('.hint-content').text(words[cur].word);
-        $('#example-hint').hide();
+    });
+
+    function tijiao(){
+
+        var check_book_id = $("#learn option:selected").val();
+        var word_size = $("#id_quota option:selected").text();
+
+        alert(check_book_id)
+        $.ajax({
+            type:'post'
+            ,url:'/updata_setting_message.do'
+            ,data:{checkBookId:check_book_id
+                ,wordSize:word_size
+            }
+            ,success:function (data) {
+                console.log('成功............');
+                alert(data.msg)
+                console.log(data)
+
+            }
+            ,error:function () {
+                console.log('失败');
+            }
+        })
     }
 
-    function unKnow() {
-        if (flg) {
-            flg = false;
-            $('#example-hint').show();
-            $.ajax({
-                url: '/userword/unKnow_Word.do',
-                type: 'get',
-                data: {word_id: words[cur].id},
-                success: function (data) {
-                },
-            });
-        }
-    }
+
 </script>
 </body>
 </html>

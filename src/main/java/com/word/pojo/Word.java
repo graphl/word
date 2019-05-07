@@ -11,8 +11,6 @@ public class Word {
 
     private String wordSymbol;
 
-    private String wordImage;
-
     private Date createTime;
 
     private Date updateTime;
@@ -22,12 +20,11 @@ public class Word {
     public Word() {
     }
 
-    public Word(Integer id, String wordName, String wordSound, String wordSymbol, String wordImage, Date createTime, Date updateTime, String word) {
+    public Word(Integer id, String wordName, String wordSound, String wordSymbol, Date createTime, Date updateTime, String word) {
         this.id = id;
         this.wordName = wordName;
         this.wordSound = wordSound;
         this.wordSymbol = wordSymbol;
-        this.wordImage = wordImage;
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.word = word;
@@ -65,13 +62,6 @@ public class Word {
         this.wordSymbol = wordSymbol;
     }
 
-    public String getWordImage() {
-        return wordImage;
-    }
-
-    public void setWordImage(String wordImage) {
-        this.wordImage = wordImage;
-    }
 
     public Date getCreateTime() {
         return createTime;
@@ -104,7 +94,6 @@ public class Word {
                 ", wordName='" + wordName + '\'' +
                 ", wordSound='" + wordSound + '\'' +
                 ", wordSymbol='" + wordSymbol + '\'' +
-                ", wordImage='" + wordImage + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", word='" + word + '\'' +

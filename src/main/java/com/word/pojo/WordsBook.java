@@ -36,4 +36,7 @@ public class WordsBook {
     public void setWordId(Integer wordId) {
         this.wordId = wordId;
     }
+
+    public WordsBook() {
+    }
 }
