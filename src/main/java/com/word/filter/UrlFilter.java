@@ -40,7 +40,7 @@ public class UrlFilter implements Filter {
 		servletResponse.setCharacterEncoding("utf-8");
 		String servletPath = request.getServletPath();
 
-		if (request.getSession().getAttribute(Const.CURRENT_USER) != null || servletPath.contains("login") || servletPath.contains("register.jsp")){
+		if (request.getSession().getAttribute(Const.CURRENT_USER) != null || servletPath.contains("login") || servletPath.contains("register")){
 			filterChain.doFilter(servletRequest, servletResponse);
 			return;
 		}

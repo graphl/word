@@ -130,7 +130,7 @@
             data: {
                 username: username,
                 password: password,
-                role:'1'
+                role:'0'
             },
             success: function (data) {
                 console.log(data);

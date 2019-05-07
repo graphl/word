@@ -199,13 +199,10 @@
 </div>
 <script src="/js/jquery-1.12.4.min.js"></script>
 <script>
-
     var words;
     var cur;
     let m = document.getElementById('music');
     var flg = true;
-
-
     $(function () {
         $.ajax({
             url: '/userword/get_MWord.do',
@@ -245,6 +242,12 @@
         $('.search-submited').click(function () {
             window.location.href = '/userword/searchwordDetail.do?word=' + $('.search-input').val()
         })
+
+        $('ul.nav.nav-right.pull-right > li.dropdown.main-nav.nav-avatar').mouseenter(function(){
+            $(this).addClass('open');
+        }).mouseleave(function(){
+            $(this).removeClass('open');
+        });
     })
 
     function onKnow() {
