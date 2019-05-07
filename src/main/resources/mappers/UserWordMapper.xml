@@ -68,4 +68,5 @@
    where  wu.word_id = w.id
    and user_id = #{userId}
   </select>
+
 </mapper>

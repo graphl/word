@@ -2,6 +2,7 @@ package com.word.service.impl;
 
 import com.google.common.collect.Lists;
 import com.word.common.ServerResponse;
+import com.word.dao.UserWordMapper;
 import com.word.dao.WordBookMapper;
 import com.word.dao.WordsBookMapper;
 import com.word.pojo.WordBook;
@@ -29,6 +30,8 @@ public class WordBookServiceImpl  implements IWordBookService {
     @Autowired
    private WordBookMapper wordBookMapper;
 
+    @Autowired
+    private UserWordMapper userWordMapper;
     @Autowired
     private WordsBookMapper wordsBookMapper;
 
@@ -104,7 +107,16 @@ public class WordBookServiceImpl  implements IWordBookService {
     }
 
     public ServerResponse addwordTobook(List<Integer> WordIdList,Integer word_id){
+        for (int i=0;i<WordIdList.size();i++){
+            int check = userWordMapper.checkWordIsInUserWord(WordIdList.get(i),word_id);
+            if(check >0){
+                WordIdList.remove(i);
+            }
+        }
         int result  = wordBookMapper.insertWordToBook(WordIdList,word_id);
+        if(result<=0){
+            return ServerResponse.createByErrorMessage("添加失败");
+        }
         return  ServerResponse.createBySuccess(result);
     }
 

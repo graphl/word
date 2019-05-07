@@ -20,7 +20,9 @@ public interface UserWordMapper {
 
     int updateUserWord(Word word);
 
-    int checkWordIsInUserWord(Integer wordId);
+    int checkWordIsInUserWord(@Param("wordId") Integer wordId,
+                              @Param("userId") Integer userId);
 
     List<MWordVo> selectUserWord(Integer userId);
+
 }

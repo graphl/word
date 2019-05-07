@@ -1,7 +1,6 @@
 package com.word.controller.portal;
 
 import com.word.common.Const;
-import com.word.common.ResponseCode;
 import com.word.common.ServerResponse;
 import com.word.pojo.*;
 import com.word.service.IMemoService;
@@ -49,6 +48,7 @@ public class UserWordManagerController {
         }
 
 
+
         @RequestMapping("/delete_UserWord.do")
         @ResponseBody
         public ServerResponse deleteUserWord(HttpSession session,Integer wordId){
@@ -82,7 +82,9 @@ public class UserWordManagerController {
     @RequestMapping("/unKnow_Word.do")
     @ResponseBody
     public ServerResponse<MWordVo> unKnowWord(HttpSession session, Integer word_id) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
         iMemoService.unKonw(3);
+        iUserWordService.addUserWord(word_id,user.getId());
         return ServerResponse.createBySuccess();
 
     }
@@ -92,10 +94,12 @@ public class UserWordManagerController {
     public ServerResponse nexrMW(){
             return ServerResponse.createBySuccess(iMemoService.NextMW());
     }
+
     @RequestMapping("/searchwordDetail.do")
     public void searchWord(HttpSession session, String word, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       WordDetailOneVo wordDetailOneVo = new WordDetailOneVo();
-       wordDetailOneVo = iUserWordService.searchWordDetail(word);
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+      WordDetailOneVo wordDetailOneVo = new WordDetailOneVo();
+       wordDetailOneVo = iUserWordService.searchWordDetail(word,user.getId());
      request.setAttribute("wordDetail",wordDetailOneVo);
        request.getServletContext().getRequestDispatcher("/search.jsp").forward(request,response);
     }
@@ -111,7 +115,6 @@ public class UserWordManagerController {
         return iWordsBookService.showBookWord(bookId,pageNum,pageSize);
     }
 
-
     @RequestMapping("/deleteByWbId.do")
     @ResponseBody
     public ServerResponse deleteByWbId(Integer wbId)
@@ -119,6 +122,12 @@ public class UserWordManagerController {
         return iWordsBookService.deleteByWbId(wbId);
     }
 
+    @RequestMapping("/deleteByWordIdList.do")
+    public ServerResponse deleteByWordIdList(HttpSession session,List<Integer> wordIdlist){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        return iUserWordService.deleteByWordIdlist(wordIdlist,user.getId());
+
+    }
 
 
 }

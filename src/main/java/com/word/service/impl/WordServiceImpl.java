@@ -152,4 +152,13 @@ public class WordServiceImpl implements IWordService {
     public ServerResponse addword(Word word) {
         return null;
     }
+
+   public ServerResponse deleteByWordId(List<Integer> wordIdList){
+
+
+       int result = wordMapper.deleteByWordList(wordIdList);
+       return ServerResponse.createBySuccess(result);
+   }
+
+
 }

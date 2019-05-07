@@ -4,11 +4,11 @@ import com.word.common.ServerResponse;
 import com.word.pojo.User;
 
 public interface IUserService {
-    ServerResponse login(String username, String password);
+    ServerResponse login(String username, String password,Integer role);
 
     ServerResponse<String> register(User user);
 
-    ServerResponse<String> checkVaild(String str,String type);
+    ServerResponse<String> checkVaild(String str,Integer type);
 
     ServerResponse selectQuestion(String username);
 

@@ -26,9 +26,8 @@ public class UserController {
 
     @RequestMapping(value = "login.do",method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<User> login(String username, String password, HttpSession session){
-      //  System.out.println(username);
-        ServerResponse<User> response = iUserService.login(username,password);
+    public ServerResponse<User> login(String username, String password,Integer role, HttpSession session){
+        ServerResponse<User> response = iUserService.login(username,password,role);
         if(response.isSuccess()){
             session.setAttribute(Const.CURRENT_USER,response.getData());
         }
@@ -52,7 +51,7 @@ public class UserController {
 
     @RequestMapping(value = "check_valid.do" ,method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<String> checkVaild(String str,String type){
+    public ServerResponse<String> checkVaild(String str,Integer type){
         return iUserService.checkVaild(str,type);
     }
 

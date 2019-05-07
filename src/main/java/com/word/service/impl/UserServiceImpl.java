@@ -27,17 +27,16 @@ public class UserServiceImpl  implements IUserService {
      * @param password
      * @return
      */
-    public ServerResponse login(String username,String password){
-        int resultCount = userMapper.checkUsername(username);
+    public ServerResponse login(String username,String password,Integer role){
+        int resultCount = userMapper.checkUsername(username,role);
         if(resultCount == 0){
-            int t = ServerResponse.createByErrorMessage("用户名不存在").getStatus();
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),"用户名不存在");
         }
 
         // todo MD5加密
         //前端已经加过密了
         String MD5Password = MD5Util.MD5EncodeUtf8(password);
-        User user = userMapper.selectLogin(username,MD5Password);
+        User user = userMapper.selectLogin(username,MD5Password,role);
         if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),"密码错误");
         }
@@ -52,23 +51,20 @@ public class UserServiceImpl  implements IUserService {
      */
 
     public ServerResponse<String> register(User user){
-        ServerResponse vaildResponse = this.checkVaild(user.getUsername(),Const.USERNAME);
+        if(user == null || user.equals("")){
+            return ServerResponse.createByErrorMessage("参数错误");
+        }
+        if(user.getRole()!=1&&user.getRole()!=0){
+            return ServerResponse.createByErrorMessage("参数错误");
+        }
+        ServerResponse vaildResponse = this.checkVaild(user.getUsername(),user.getRole());
         if(!vaildResponse.isSuccess()){
             return vaildResponse;
         }
-        int resultCount = userMapper.checkUsername(user.getUsername());
+        int resultCount = userMapper.checkUsername(user.getUsername(),user.getRole());
         if(resultCount > 0){
             return ServerResponse.createByErrorMessage("用户名已存在");
         }
-        vaildResponse = this.checkVaild(user.getEmail(),Const.EMAIL);
-        if(!vaildResponse.isSuccess()){
-            return vaildResponse;
-        }
-        resultCount = userMapper.checkEmail(user.getEmail());
-        if(resultCount > 0){
-            return ServerResponse.createByErrorMessage("email已存在");
-        }
-        user.setRole(Const.Role.ROLE_CUSTOMER);
         //MD5加密
         user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
         resultCount = userMapper.insert(user);
@@ -84,26 +80,16 @@ public class UserServiceImpl  implements IUserService {
      * @param type
      * @return
      */
-    public ServerResponse<String> checkVaild(String str,String type){
-        if (StringUtils.isNotBlank(type)){
-            //开始校验
-            if(Const.USERNAME.equals(type)){
-                int resultCount = userMapper.checkUsername(str);
-                if(resultCount > 0){
-                    return ServerResponse.createByErrorMessage("用户名已存在");
-                }
-                if(Const.EMAIL.equals(type)){
-                    resultCount = userMapper.checkEmail(str);
-                    if(resultCount > 0){
-                        return ServerResponse.createByErrorMessage("email已存在");
-                    }
-                }
-            }
-        }
-        else{
+    public ServerResponse<String> checkVaild(String str,Integer type){
+
+        if(str == null || (type!=1&& type!=0)){
             return ServerResponse.createByErrorMessage("参数错误");
         }
-        return ServerResponse.createBySuccessMessage("校验成功");
+        int resultCount = userMapper.checkUsername(str,type);
+        if(resultCount>0){
+            return ServerResponse.createByErrorMessage("用户名已存在");
+        }
+        return ServerResponse.createBySuccess();
     }
 
     /**
@@ -112,7 +98,7 @@ public class UserServiceImpl  implements IUserService {
      * @return
      */
     public ServerResponse selectQuestion(String username){
-        ServerResponse validResponse = this.checkVaild(username,Const.USERNAME);
+        ServerResponse validResponse = this.checkVaild(username,0);
         if(validResponse.isSuccess()){
             //用户不存在
             return ServerResponse.createByErrorMessage("用户不存在");
@@ -153,7 +139,7 @@ public class UserServiceImpl  implements IUserService {
         if(StringUtils.isBlank(forgetToken)){
             return ServerResponse.createByErrorMessage("参数错误，toke需要传递");
         }
-        ServerResponse validResponse = this.checkVaild(username,Const.USERNAME);
+        ServerResponse validResponse = this.checkVaild(username,0);
         if(validResponse.isSuccess()){
             //用户不存在
             return ServerResponse.createByErrorMessage("用户不存在");

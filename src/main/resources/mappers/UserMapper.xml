@@ -151,10 +151,11 @@
       now()
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="checkUsername" parameterType="string" resultType="int">
+  <select id="checkUsername" parameterType="map" resultType="int">
     select  count(1)
     from words_user
     where  username = #{username}
+    and role = #{type}
   </select>
 
   <select id="selectLogin" resultMap="BaseResultMap" parameterType="map">
@@ -163,6 +164,7 @@
   from words_user
   where  username = #{username}
   and password = #{password}
+  and role = #{role}
   </select>
 
   <select id="checkEmail" resultType="int" parameterType="string">

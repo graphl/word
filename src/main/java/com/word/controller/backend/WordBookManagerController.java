@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/manage/book/")
-
 public class WordBookManagerController {
     @Autowired
     private IUserService iUserService;
@@ -85,9 +84,9 @@ public class WordBookManagerController {
 
     @RequestMapping("/addwordTobook")
     @ResponseBody
-    public ServerResponse addwordTobook(String WordIdList,Integer wordId){
+    public ServerResponse addwordTobook(String WordIdList,Integer wordbookId){
         List<Integer> ids = Arrays.asList(WordIdList.split(",")).stream().map(s->Integer.parseInt(s)).collect(Collectors.toList());
-        return iWordBookService.addwordTobook(ids,wordId);
+        return iWordBookService.addwordTobook(ids,wordbookId);
     }
 
     @RequestMapping("/showAllbook")

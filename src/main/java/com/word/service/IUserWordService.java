@@ -14,7 +14,8 @@ public interface IUserWordService {
 
     List<UserWordVo> showUserWord(Integer user_id);
 
-    WordDetailOneVo searchWordDetail(String wordName);
+    WordDetailOneVo searchWordDetail(String wordName,Integer userId);
 
+    ServerResponse deleteByWordIdlist(List<Integer> wordIdList,Integer userId);
 
 }

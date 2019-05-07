@@ -23,4 +23,6 @@ public interface IWordService {
 
     ServerResponse addword(Word word);
 
+    ServerResponse deleteByWordId(List<Integer> wordIdList);
+
 }

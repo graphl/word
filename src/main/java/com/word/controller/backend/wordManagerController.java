@@ -21,8 +21,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/manage/word/")
@@ -38,7 +40,6 @@ public class wordManagerController {
     @ResponseBody
     public ServerResponse uploadfile(HttpServletRequest request, MultipartFile file,Word word){
         String rootPath = request.getSession().getServletContext().getRealPath("resource/uploads/");
-
         return  null;
     }
     @RequestMapping("add.do")
@@ -137,8 +138,11 @@ public class wordManagerController {
 
     @RequestMapping("deleteByWordIdList.do")
     @ResponseBody
-    public ServerResponse deleteByWordIdList(List<String> listwordId){
-        return null;
+    public ServerResponse deleteByWordIdList(String wordIdlist){
+        System.out.println("==========================");
+        List<Integer> ids = Arrays.asList(wordIdlist.split(",")).stream().map(s->Integer.parseInt(s)).collect(Collectors.toList());
+        System.out.println(ids);
+        return iWordService.deleteByWordId(ids);
     }
 
 }

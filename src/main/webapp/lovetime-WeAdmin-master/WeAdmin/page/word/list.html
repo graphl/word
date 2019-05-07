@@ -107,13 +107,6 @@
                // layer.alert(JSON.stringify(data));
                 //layer.alert(data.id)
                 break;
-            case 'getCheckLength':
-                var data = checkStatus.data;
-                layer.msg('选中了：'+ data.length + ' 个');
-                break;
-            case 'isAll':
-                layer.msg(checkStatus.isAll ? '全选': '未全选');
-                break;
         };
     });
 
@@ -150,6 +143,40 @@
             )
         }
     });
+
+        delAll = function (argument) {
+            alert("来了")
+            var checkStatus = table.checkStatus('word');
+            var data = checkStatus.data;
+            var ids = new Array();
+            for(i=0;i<data.length;i++){
+                ids.push(data[i].id);
+            }
+            console.log(ids)
+            layer.confirm('确认要删除吗？',{}, function() {
+
+                $.ajax({
+                    type:'post'
+                    ,url:'/manage/word/deleteByWordIdList.do'
+                    ,data:{'wordIdlist':ids.join(',')}
+                    ,success:function (res) {
+                        layer.msg('删除成功', {
+                            icon: 1
+                        });
+                        $(".layui-form-checked").not('.header').parents('tr').remove();
+                    }
+                    ,error:function (res) {
+                        console.log(res)
+                        alert(res)
+                        layer.msg('删除失败', {
+                            icon: 1
+                        });
+                    }
+
+                })
+
+            });
+        }
 
     });
 </script>

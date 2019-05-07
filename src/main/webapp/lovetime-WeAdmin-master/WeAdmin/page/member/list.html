@@ -79,20 +79,20 @@
                         {type: 'checkbox', fixed: 'left'}
                         ,{field:'id', title: 'ID', sort: true}
                         ,{field:'username', title: '用户名'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
-                        ,{field:'email', title: '邮箱' ,edit:'text',
+                       /* ,{field:'email', title: '邮箱' ,edit:'text',
                             templet:function (res) {
 								return '<em>'+ res.email + '</em>'
-                            }}
+                            }}*/
                         ,{field:'phone', title: '电话',edit:'text',templet:function (res) {
                                 return '<em>'+ res.phone + '</em>'
                             }}
-                        ,{field:'question', title: '问题', edit:'text',templet:function (res) {
+                       /* ,{field:'question', title: '问题', edit:'text',templet:function (res) {
                                 return '<em>'+ res.question + '</em>'
                             }}
                         ,{field:'answer', title: '结果', align: 'center',edit:'text',
 								templet:function (res) {
                                 return '<em>'+ res.answer + '</em>'
-                            }} //单元格内容水平居中
+                            }} //单元格内容水平居中*/
                         ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
                     ]],
                     page:{

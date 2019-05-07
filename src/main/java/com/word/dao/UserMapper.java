@@ -18,7 +18,9 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    User selectLogin(@Param("username") String username, @Param("password") String password);
+    User selectLogin(@Param("username") String username,
+                     @Param("password") String password,
+                     @Param("role") Integer role);
 
     String selectQuestionByUsername(String username);
 
@@ -30,7 +32,8 @@ public interface UserMapper {
 
     int checkEmailByUserId(@Param("email") String email, @Param("userId") Integer userId);
 
-    int checkUsername(String username);
+    int checkUsername(@Param("username") String username,
+                      @Param("type") Integer type);
 
     int checkEmail(String email);
 

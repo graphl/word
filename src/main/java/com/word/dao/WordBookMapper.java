@@ -37,4 +37,6 @@ public interface WordBookMapper {
 
     int insertWordToBook(@Param("wordlist") List<Integer> wordlist,
                          @Param("wordId") Integer word_id);
+
+
 }

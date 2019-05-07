@@ -160,5 +160,13 @@
     where  id = #{wordId}
   </delete>
 
+<delete id="deleteByWordList" parameterType="list">
+  delete from
+  where id in
+  <foreach collection="wordIdList" item="item" index="index"  open="(" separator="," close=")">
+    #{item}
+  </foreach>
 
+
+</delete>
 </mapper>
