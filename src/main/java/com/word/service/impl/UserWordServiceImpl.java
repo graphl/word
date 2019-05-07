@@ -74,7 +74,7 @@ public class UserWordServiceImpl implements IUserWordService {
         WordDetailOneVo wordDetailOneVo = new WordDetailOneVo();
         Word word = wordMapper.selectByWord_name(wordName);
         System.out.println(word);
-        List<Phrase> phraseList = phrase_wordMapper.selectBywordId(word.getId());
+      /*  List<Phrase> phraseList = phrase_wordMapper.selectBywordId(word.getId());*/
         List<Sentence> sentenceList = sentenceMapper.selectByWordId(word.getId());
         int check = userWordMapper.checkWordIsInUserWord(word.getId());
         if(check > 0 ){
@@ -85,7 +85,7 @@ public class UserWordServiceImpl implements IUserWordService {
         wordDetailOneVo.setWord_name(word.getWordName());
         wordDetailOneVo.setWord_sound(word.getWordSound());
         wordDetailOneVo.setWord_symbol(word.getWordSymbol());
-        wordDetailOneVo.setPhrase(phraseList);
+       /* wordDetailOneVo.setPhrase(phraseList);*/
         wordDetailOneVo.setSentence(sentenceList);
         wordDetailOneVo.setCheck(check);
         System.out.println(wordDetailOneVo);

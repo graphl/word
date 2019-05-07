@@ -108,67 +108,7 @@
         </ul>
     </div>
 
-    <div class="sub-menu ">
-        <ul class="container">
-            <li class=""><a href="#">炼句学习</a></li>
-            <li class=""><a href="#">课程</a></li>
-            <li class=""><a href="#">炼句设置</a></li>
-        </ul>
-    </div>
 
-    <div id="menu-news" class="sub-menu ">
-        <ul class="container">
-            <li class="">
-                <a href="#">短文首页</a>
-            </li>
-            <li class="">
-                <a href="#">收藏的短文</a>
-            </li>
-            <li class="">
-                <a href="#">短文计划</a>
-            </li>
-
-            <li class="">
-                <a href="#">短文进度</a>
-            </li>
-
-        </ul>
-    </div>
-
-    <div id="menu-books" class="sub-menu ">
-        <ul class="container">
-            <li class="">
-                <a href="#">读书首页</a>
-            </li>
-            <li class="">
-                <a href="#">短文计划</a>
-            </li>
-
-            <li class="">
-                <a href="#">短文进度</a>
-            </li>
-
-        </ul>
-    </div>
-
-
-    <div class="sub-menu ">
-        <ul class="container">
-            <li class=""><a href="#">听力学习</a></li>
-            <li class=""><a href="#">听力课程</a></li>
-            <li class=""><a href="#">听力计划</a></li>
-            <li class=""><a class="#" href="/listen/#buy-hints">购买提示</a></li>
-            <li class=""><a href="#">听力设置</a></li>
-        </ul>
-    </div>
-
-    <div class="sub-menu ">
-        <ul class="container">
-            <li class=""><a href="#">论坛</a></li>
-            <li class=""><a href="#">小组</a></li>
-            <li class=""><a href="#">精选</a></li>
-        </ul>
-    </div>
 
 
 </div>
@@ -201,9 +141,10 @@
                                     </h1>
 
                                     <div class="pull-left learning-speaker">
-                                        <span class="audio us"
-                                              data="https://media-audio1.baydn.com/us%2Fe%2Fen%2Fenglish_v3.mp3">US<span
+                                        <span class="audio us">US<span
                                                 class="speaker-icon"></span></span>
+                                        <audio id="music"
+                                               src="<%=((WordDetailOneVo)request.getAttribute("wordDetail")).getWord_sound()%>" />
                                     </div>
 
                                 </div>
@@ -228,56 +169,16 @@
                             </div>
                         </div>
                     </div>
-                    <div id="learning-examples-box" class="row">
+                    <div  class="row" style="margin-top: 40px;">
                         <div class="span1">
                             <h6 class="pull-right">
                                 例句
                             </h6>
                         </div>
                         <div class="span9">
-                            <ul id="example-tab" class="nav nav-tabs">
-                                <li class="active"><a class="ex-sys-box-tab" data-toggle="tab"
-                                                      href="#ex-sys-box">词典例句</a></li>
-                            </ul>
-                            <div>
-                                <div class="tab-pane row active" id="ex-sys-box">
-                                    <ol class="span9">
-                                        <%
-                                            List<Phrase> phraseList = ((WordDetailOneVo)request.getAttribute("wordDetail")).getPhrase();
-                                            for (int i=0; i<phraseList.size(); i++) {
-                                        %>
-                                        <li class="row">
-                                            <div class="span9">
-                                                <%--<div class="index pull-left"><%=i+1%></div>--%>
-                                                <div class="pull-left body">
-                                                    <div class="annotation enex">
-                                                        <%=phraseList.get(i).getPhrase()%>
-                                                    </div>
-                                                    <div class="cnex"> <%=phraseList.get(i).getPhraseChinese()%></div>
-                                                    <div class="edit-example-box">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    <%
-                                        }
-                                    %>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div  class="row" style="margin-top: 40px;">
-                        <div class="span1">
-                            <h6 class="pull-right">
-                                短语
-                            </h6>
-                        </div>
-                        <div class="span9">
                             <ul  class="nav nav-tabs">
                                 <li class="active"><a class="ex-sys-box-tab" data-toggle="tab"
-                                                      href="#ex-sys-box">词典短语</a></li>
+                                                      href="#ex-sys-box">金典例句</a></li>
                             </ul>
                             <div>
                                 <div class="tab-pane row active">
@@ -348,12 +249,19 @@
 
 
 </div>
-<script src="js/jquery-1.12.4.min.js"></script>
+<script src="/js/jquery-1.12.4.min.js"></script>
 <script>
     $(function () {
         $('.search-submited').click(function () {
             window.location.href = '/userword/searchwordDetail.do?word=' + $('.search-input').val()
         })
+    })
+
+    let m = document.getElementById('music');
+
+    $('.speaker-icon').click(function () {
+        m.load();//加载
+        m.play();//播放
     })
 </script>
 </body>
