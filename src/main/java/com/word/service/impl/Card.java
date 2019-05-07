@@ -10,7 +10,7 @@ public class Card {
         int Repetition;
         double efactor = 2.5;
 
-        int overDueDate = 0; // should be a date (here 0 = today);
+        int overDueDate = 0;
         int grad = 0;
 
         String Q = "";

@@ -42,7 +42,7 @@
   </select>
 <select id="showUserWord" parameterType="integer" resultType="com.word.vo.UserWordVo">
   select
-  ww.word_name,ww.word,ww.word_symbol
+ ww.id,ww.word_name,ww.word,ww.word_symbol
   from  words_word ww,words_user_word wu
   where ww.id = wu.word_id and wu.user_id = #{userid}
 </select>

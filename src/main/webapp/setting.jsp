@@ -53,11 +53,11 @@
                         </a>
                     </li>
 
-                    <li class="dropdown main-nav  ">
+                 <%--   <li class="dropdown main-nav  ">
                         <a class="main-menu" href="#">
                             社区
                         </a>
-                    </li>
+                    </li>--%>
 
                 </ul>
 

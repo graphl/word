@@ -36,6 +36,8 @@ public class MemoServiceImpl implements IMemoService {
 
     public MWordVo MM(Integer userId){
 
+        superMemo2.wordList.clear();
+
         List<Memo> memosvalue = memoMapper.selectMemo(userId);
 
         List<MWordVo> memoList = getMemo(userId);
@@ -57,22 +59,19 @@ public class MemoServiceImpl implements IMemoService {
         }
         List<Integer> checkM = memoMapper.selectWordId(userId);
         List<MWordVo> newMemo = new ArrayList<>();
-
         if (memoList.size() == 0){
             for (int i=0;i<Mwords.size();i++){
-                if (newMemo.size()>=settingWord.getWordSize()) break;
-                if(checkM.indexOf(Mwords.get(i).getId()) == -1)
-                      newMemo.add(Mwords.get(i));
+                if (newMemo.size()>=settingWord.getWordSize()) {break;}
+                if(checkM.indexOf(Mwords.get(i).getId()) == -1){
+                    newMemo.add(Mwords.get(i));
+                }
             }
         }
        else if(memoList.size() < settingWord.getWordSize()){
             for(int i=0;i<Mwords.size();i++){
-                if(memoList.size() >= settingWord.getWordSize())break;
-
-                for (int j=0;j<memoList.size();j++){
-                    if(Mwords.get(i).getId()!=memoList.get(j).getId()){
-                            memoList.add(Mwords.get(i));
-                    }
+                if(memoList.size()+newMemo.size() >= settingWord.getWordSize()){break;}
+                    if(checkM.indexOf(Mwords.get(i).getId()) == -1){
+                           newMemo.add(Mwords.get(i));
                 }
             }
         }
@@ -95,8 +94,8 @@ public class MemoServiceImpl implements IMemoService {
         }
 
 
-
         MWordVo mWordVo =  superMemo2.getQuestion();
+        mWordVo.setMsize(superMemo2.wordList.size());
         System.out.println(mWordVo);
         if (!superMemo2.isFinishedForToDay()){
             superMemo2.doTomorrowsExercises();

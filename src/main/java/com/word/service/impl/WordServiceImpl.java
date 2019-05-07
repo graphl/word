@@ -38,30 +38,22 @@ public class WordServiceImpl implements IWordService {
     private SentenceMapper sentenceMapper;
 
     public ServerResponse saveOrUpdateProduct(Word word) {
-      /*  if (word != null) {
-            if ((StringUtils.isNotBlank(word.getSubImages()))) {
-                String[] subImageArray = product.getSubImages().split(",");
-                if (subImageArray.length > 0) {
-                    product.setMainImage(subImageArray[0]);
-                }
-            }*/
             if(word !=null){
                 if (word.getId() != null) {
                     int rowCount = wordMapper.updateByPrimaryKey(word);
                     if (rowCount > 0) {
-                        return ServerResponse.createBySuccess("跟新单词成功");
+                        return ServerResponse.createBySuccess("更新新单词成功");
                     }
-                    return ServerResponse.createBySuccess("跟新单词失败");
+                    return ServerResponse.createBySuccess("更新单词失败");
                 } else {
                     int rowCount = wordMapper.insert(word);
                     if (rowCount > 0) {
-                        return ServerResponse.createBySuccess("跟新单词成功");
+                        return ServerResponse.createBySuccess("插入单词成功");
                     }
-                    return ServerResponse.createBySuccess("跟新产品失败");
+                    return ServerResponse.createBySuccess("插入单词失败");
                 }
             }
         return ServerResponse.createByErrorMessage("单词信息为空");
-
     }
     public ServerResponse<WordDetailVo> getWordDetail(Integer wordId){
         if (wordId == null){
@@ -120,7 +112,6 @@ public class WordServiceImpl implements IWordService {
         if (StringUtils.isNotBlank(wordName)) {
             wordName = new StringBuffer().append("%").append(wordName).append("%").toString();
         }
-        //List<Word> productList = wordMapper.selectByNameAndWordId(wordName,wordId);
         List<Word> productList = new ArrayList<>();
         List<WordListVo> productListVoList = Lists.newArrayList();
         for(Word productItem:productList){
@@ -150,6 +141,10 @@ public class WordServiceImpl implements IWordService {
 
     public ServerResponse deleteByWordId(Integer wordId){
         Integer result = wordMapper.deleteByWordId(wordId);
+        if(result <= 0)
+        {
+            return ServerResponse.createByErrorMessage("删除失败");
+        }
         return ServerResponse.createBySuccess(result);
     }
 

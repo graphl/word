@@ -48,25 +48,25 @@
                             单词
                         </a>
                     </li>
-
+<%--
                     <li class="dropdown main-nav  ">
                         <a class="main-menu" href="#">
                             社区
                         </a>
-                    </li>
+                    </li>--%>
 
                 </ul>
 
                 <ul class="nav nav-right pull-right" style="z-index: 1000">
 
-                    <li><a href="#" class="shortcuts-button">快捷键</a></li>
+                 <%--   <li><a href="#" class="shortcuts-button">快捷键</a></li>--%>
 
                     <li class="dropdown main-nav nav-avatar  ">
                         <a href="#" class="main-menu user-avatar" data-toggle="dropdown"> <i> <img
                                 src="https://media-image1.baydn.com/avatar_img%2Fcizbtc%2Fb5c11e19486a6c1def47c9345fb425a8.c7a2d9f8de1d9979a1ff579a396b3ea9.jpg@20w_20h"
                                 width="20" height="20" class=""> </i>
                             <%=((User) session.getAttribute("currentUser")).getUsername()%>
-                            <img class="dropdown-arraw" src="https://static.baydn.com/static//img/icon-arraw.png">
+                            <%--<img class="dropdown-arraw" src="https://static.baydn.com/static//img/icon-arraw.png">--%>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="sb-nav-menu-a" href="#">设置</a></li>
@@ -122,14 +122,17 @@
                                     class="icon-volume-off" style="font-size:20px; color:#d3d3d3"></i>                 </span>                 </span>
                             <span class="definition" style="width: 30%; display: block; float: left;"><%=item.getWord()%></span> <span class="operations" style="width:10%; display: block; float:left;">             <p
                                     class="msg success hide">操作成功</p>             <p class="delete-confirm well hide">                 <span
-                                    class="confirm">确认删除</span>             </p>             <span class="view"
-                                                                                                   title="查看"><a
-                                    href="/review/learning/63335072296/">                 <span class="icon icon-small"
-                                                                                                style="margin-right: -15px;"><img
-                                    src="https://static.baydn.com/static/img/package/eye.png"></span>             </a></span>                                                                                                     <span
-                                    class="setmaster master" title="太简单">                           <span
-                                    class="icon icon-small"><img
-                                    src="https://static.baydn.com/static/img/package/rubish.png"></span>                         </span>                                                                                         </span>
+                                    class="confirm">确认删除</span>             </p>             <span class="view" title="查看">
+                                <a href="/userword/searchwordDetail.do?word=<%=item.getWord_name()%>">
+                                    <span class="icon icon-small" style="margin-right: -15px;">
+                                    <img src="https://static.baydn.com/static/img/package/eye.png">
+                                    </span>
+                                </a>
+                            </span>
+                                <span class="setmaster master" title="删除" id="deleteWord">
+                                    <span class="icon icon-small"><img src="https://static.baydn.com/static/img/package/rubish.png" onclick="deleteUserWord(<%=item.getId()%>)" ></span>
+                            </span>
+                            </span>
                             <br style="clear:both;height:0;"></div>
                     </div>
                     <%
@@ -149,7 +152,7 @@
 
 
 </div>
-<script src="js/jquery-1.12.4.min.js"></script>
+<script src="/js/jquery-1.12.4.min.js"></script>
 <script>
     var words;
     var cur;
@@ -168,6 +171,27 @@
             }
 
         })
+
+
+
+    function deleteUserWord(wordId)
+    {
+        alert("delete"+wordId)
+
+
+        $.ajax({
+            url:'/userword/delete_UserWord.do'
+            ,type:'post'
+            ,data:{wordId:wordId}
+            ,success:function (res) {
+                alert('成功')
+
+            }
+            ,error:function (res) {
+                alert("失败")
+            }
+        })
+    }
 
     $('.search-submited').click(function () {
         window.location.href = '/userword/searchwordDetail.do?word=' + $('.search-input').val()

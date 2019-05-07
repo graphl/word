@@ -24,7 +24,7 @@ public class SuperMemo2 {
     private Sm2 quiz;
 
 
-    List<MWordVo> wordList = new ArrayList<>();
+    public  List<MWordVo> wordList = new ArrayList<>();
 
 //    public  static Sm2 quiz;
 

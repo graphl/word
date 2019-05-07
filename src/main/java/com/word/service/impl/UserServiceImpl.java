@@ -39,8 +39,6 @@ public class UserServiceImpl  implements IUserService {
         String MD5Password = MD5Util.MD5EncodeUtf8(password);
         User user = userMapper.selectLogin(username,MD5Password);
         if(user == null){
-            //int t = ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),"密码错误").getStatus();
-           // System.out.println("密码错误"+t);
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),"密码错误");
         }
         user.setPassword(StringUtils.EMPTY);
@@ -266,11 +264,18 @@ public class UserServiceImpl  implements IUserService {
 
     public ServerResponse deleteUserById(Integer user_id,Integer role){
         int result = userMapper.deleteUserById(user_id,role);
+        if(result <= 0){
+            return ServerResponse.createByErrorMessage("删除失败");
+        }
         return ServerResponse.createBySuccess(result);
     }
 
     public ServerResponse updateUser(User user){
         int result  = userMapper.updateByPrimaryKeySelective(user);
+        if(result <= 0 )
+        {
+            return ServerResponse.createByErrorMessage("更新失败");
+        }
         return ServerResponse.createBySuccess(result);
     }
 

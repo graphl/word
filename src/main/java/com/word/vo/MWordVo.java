@@ -7,6 +7,15 @@ public class MWordVo {
     private String word_symbol;
     private String word_sound;
     private String word;
+    private Integer Msize;
+
+    public Integer getMsize() {
+        return Msize;
+    }
+
+    public void setMsize(Integer msize) {
+        Msize = msize;
+    }
 
     public MWordVo() {
     }
@@ -59,7 +68,6 @@ public class MWordVo {
         this.word = word;
     }
 
-
     @Override
     public String toString() {
         return "MWordVo{" +
@@ -68,6 +76,7 @@ public class MWordVo {
                 ", word_symbol='" + word_symbol + '\'' +
                 ", word_sound='" + word_sound + '\'' +
                 ", word='" + word + '\'' +
+                ", Msize=" + Msize +
                 '}';
     }
 }

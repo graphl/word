@@ -130,8 +130,8 @@
             <div class="hero-unit start-review new-start-review">
                 <div class="row new-review-summary">
                     <div class="pull-left span7">
-                        <h1 class="span2 today">150
-                            <small>我的单词</small>
+                        <h1 class="span2 today" id="word_size">
+                            <small id="jiyi">单词记忆</small>
                         </h1>
                     </div>
                     <div class="span3">
@@ -212,13 +212,14 @@
             type: 'get',
             data: {},
             success: function (data) {
-
                 words = data.data;
                 console.log(data)
                 alert(words.word_name)
                 $('#word_name').html(words.word_name);
                 $('#word_symbol').html(words.word_symbol);
                 $('#music').attr('src', words.word_sound);
+                $('#word_size').html(words.msize)
+                $('#jiyi').html("单词记忆")
                 $('.hint-content').text(words.word);
                // $('.today').text(words.length);
                /* if (words.length > 0) {

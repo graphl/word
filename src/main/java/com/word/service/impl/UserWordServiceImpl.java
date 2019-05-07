@@ -30,6 +30,7 @@ public class UserWordServiceImpl implements IUserWordService {
     private SentenceMapper sentenceMapper;
 
 
+    @Override
    // 前端
     public ServerResponse addUserWord(Integer wordId,Integer userId){
         if(wordId == null||userId == null){
@@ -45,7 +46,7 @@ public class UserWordServiceImpl implements IUserWordService {
        return ServerResponse.createByErrorMessage("用户添加单词失败");
     }
 
-
+    @Override
     public ServerResponse deleteUserWord(Integer wordId,Integer userId){
         if(wordId == null||userId == null){
             return ServerResponse.createByErrorMessage("单词参数错误");
@@ -62,6 +63,7 @@ public class UserWordServiceImpl implements IUserWordService {
         return ServerResponse.createByErrorMessage("没有该单词");
     }
 
+    @Override
     public List<UserWordVo> showUserWord(Integer user_id){
 
         List<UserWordVo> userWordVoList = userWordMapper.showUserWord(user_id);
@@ -69,11 +71,11 @@ public class UserWordServiceImpl implements IUserWordService {
        return userWordVoList;
     }
 
-
+    @Override
     public WordDetailOneVo searchWordDetail(String wordName){
         WordDetailOneVo wordDetailOneVo = new WordDetailOneVo();
         Word word = wordMapper.selectByWord_name(wordName);
-        System.out.println(word);
+     /*   System.out.println(word);*/
       /*  List<Phrase> phraseList = phrase_wordMapper.selectBywordId(word.getId());*/
         List<Sentence> sentenceList = sentenceMapper.selectByWordId(word.getId());
         int check = userWordMapper.checkWordIsInUserWord(word.getId());

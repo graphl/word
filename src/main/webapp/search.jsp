@@ -58,11 +58,11 @@
                         </a>
                     </li>
 
-                    <li class="dropdown main-nav  ">
+                <%--    <li class="dropdown main-nav  ">
                         <a class="main-menu" href="#">
                             社区
                         </a>
-                    </li>
+                    </li>--%>
 
                 </ul>
 
@@ -107,10 +107,6 @@
             <li class=""><a href="/setting.jsp">单词设置</a></li>
         </ul>
     </div>
-
-
-
-
 </div>
 <div class="container main-body  new-main-body" style="min-height: 754px;">
 
@@ -130,7 +126,8 @@
                         <p class="word-added-hint hide">该单词已被成功添加进你的词库，页面将在2秒钟之后刷新</p>
                         <p class="add-word-failed-hint hide">添加单词失败，请稍后再试</p>
                     </div>
-
+                    <input type="hidden" id="hidenWorId" value="<%=((WordDetailOneVo)request.getAttribute("wordDetail")).getId()%>" />
+                    <input  type="hidden" id="user_check" value="<%=((WordDetailOneVo)request.getAttribute("wordDetail")).getCheck()%> "  />
                     <div id="learning_word" class="row">
                         <div class="word span10">
                             <div class="row">
@@ -139,14 +136,12 @@
                                     <h1 class="content pull-left" style=""><%=((WordDetailOneVo)request.getAttribute("wordDetail")).getWord_name()%>
                                         <small><%=((WordDetailOneVo)request.getAttribute("wordDetail")).getWord_symbol()%></small>
                                     </h1>
-
                                     <div class="pull-left learning-speaker">
                                         <span class="audio us">US<span
                                                 class="speaker-icon"></span></span>
                                         <audio id="music"
                                                src="<%=((WordDetailOneVo)request.getAttribute("wordDetail")).getWord_sound()%>" />
                                     </div>
-
                                 </div>
                             </div>
                             <div class="row">
@@ -168,7 +163,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div  class="row" style="margin-top: 40px;">
                         <div class="span1">
@@ -196,6 +190,8 @@
                                                         <%=sentenceList.get(i).getSentence()%>
                                                     </div>
                                                     <div class="cnex"> <%=sentenceList.get(i).getSentenceChinese()%></div>
+                                                    <p></p>
+                                                    <p></p>
                                                     <div class="edit-example-box">
                                                     </div>
                                                 </div>
@@ -209,37 +205,7 @@
                             </div>
                         </div>
                     </div>
-
                     <div id="spell-modal-box">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="row hide bottom-progress progress-box">
-        <div class="span12 progress-box-wrap">
-            <div class="row">
-                <div class="span1">
-                    <h6 class="pull-right">进度</h6>
-                </div>
-                <div class="span10">
-                    <div class="well review-progress">
-                        <div class="progress pull-right progress-danger" style="width:0%;">
-                            <div class="bar" style="width: 100%"><span class="num"></span>
-                            </div>
-                        </div>
-                        <div class="progress pull-left progress-success" style="width:0%;">
-                            <div class="bar" style="width: 100%"><span class="num"></span></div>
-                        </div>
-                        <div class="progress pull-left progress-reviewed " style="width: 0%;">
-                            <div class="bar reviewed pull-left" style="width: 100%;"><span class="num"></span>
-                            </div>
-                        </div>
-                        <div class="progress pull-left progress-unreviewed" style="width: 99.9%;">
-                            <div class="bar" style="width: 100%"><span class="num">150</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -247,17 +213,44 @@
     </div>
     <div id="affix-prompt">
     </div>
-
-
 </div>
 <script src="/js/jquery-1.12.4.min.js"></script>
 <script>
+
+
+
+    var check = $("#user_check").val();
+    alert(check+"1")
+    var check1 =  $("#user_check").text();
+    console.log(check)
+    if(check == 1)
+    {
+        $(".add-word-hint").hide();
+        $(".alert alert-container").hide()
+    }
+
+    $("#add_to_userWord").click(function () {
+        var wordId = $("#hidenWorId").val();
+        $.ajax({
+            url:'/userword//delete_UserWord.do'
+            ,type:'post'
+            ,data:{wordId:wordId}
+            ,success:function (res) {
+                alert('成功')
+                $(".add-word-hint").hide();
+                $(".alert alert-container").hide()
+            }
+            ,error:function (res) {
+                alert("失败")
+            }
+        })
+    })
+    
     $(function () {
         $('.search-submited').click(function () {
             window.location.href = '/userword/searchwordDetail.do?word=' + $('.search-input').val()
         })
     })
-
     let m = document.getElementById('music');
 
     $('.speaker-icon').click(function () {
