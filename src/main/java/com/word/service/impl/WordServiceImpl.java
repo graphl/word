@@ -156,7 +156,7 @@ public class WordServiceImpl implements IWordService {
    public ServerResponse deleteByWordId(List<Integer> wordIdList){
 
 
-       int result = wordMapper.deleteByWordList(wordIdList);
+       int result = wordMapper.deleteByWordIdList(wordIdList);
        return ServerResponse.createBySuccess(result);
    }
 

@@ -32,5 +32,5 @@ public interface WordMapper {
 
     int deleteByWordId(Integer wordId);
 
-    int deleteByWordList(List<Integer> wordIdList);
+    int deleteByWordIdList(@Param("wordIdList")List<Integer> wordIdList);
 }

@@ -160,8 +160,8 @@
     where  id = #{wordId}
   </delete>
 
-<delete id="deleteByWordList" parameterType="list">
-  delete from
+<delete id="deleteByWordIdList" parameterType="list">
+  delete from words_word
   where id in
   <foreach collection="wordIdList" item="item" index="index"  open="(" separator="," close=")">
     #{item}
