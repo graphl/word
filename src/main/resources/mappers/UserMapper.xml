@@ -166,7 +166,14 @@
   and password = #{password}
   and role = #{role}
   </select>
-
+  <select id="selectLoginByPhone" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from words_user
+    where  phone = #{username}
+    and password = #{password}
+    and role = #{role}
+  </select>
   <select id="checkEmail" resultType="int" parameterType="string">
   select count(1) from words_user
   where email = #{email}
@@ -232,4 +239,8 @@
 <select id="getCountAdmin" resultType="integer">
   select count(*) from words_user where role=1
 </select>
+  
+  <select id="checkUserPhone" parameterType="map" resultType="integer">
+    select count(*) from words_user where role = #{role} and phone = #{phone}
+  </select>
 </mapper>

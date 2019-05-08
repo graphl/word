@@ -82,7 +82,10 @@
                 </ul>
                 <div class="nav-user"><a class="login-btn"
                                          href="#">登录</a><span>·</span><a
-                        class="register-btn" href="register.jsp">注册</a></div>
+                        class="register-btn" href="register.jsp">注册</a>
+                    <span class="login-btn"><a href="/lovetime-WeAdmin-master/WeAdmin/admin_login.html">admin</a></span>
+                </div>
+
             </div>
         </div>
     </div>
@@ -96,7 +99,7 @@
     /* text-align: center; */
 "><h3>English</h3>
             <div class="login-form" name="login-form">
-                <div class="row"><input class="name" id="input-account" type="text" placeholder="用户名 / 邮箱 / 手机号"
+                <div class="row"><input class="name" id="input-account" type="text" placeholder="用户名 / 手机号"
                                         name="account" autofocus=""><i class="ib ib-user-o"></i></div>
                 <div class="row"><input class="password" id="input-password" type="password" placeholder="密码"
                                         name="password"><i class="ib ib-lock-o"></i></div>

@@ -22,6 +22,10 @@ public interface UserMapper {
                      @Param("password") String password,
                      @Param("role") Integer role);
 
+    User selectLoginByPhone(@Param("username") String username,
+                     @Param("password") String password,
+                     @Param("role") Integer role);
+
     String selectQuestionByUsername(String username);
 
     int checkAnswer(@Param("username") String username, @Param("question") String question, @Param("answer") String answer);
@@ -48,4 +52,8 @@ public interface UserMapper {
     int getCountAdmin();
 
     int deleteUserById(@Param("id") Integer id,@Param("role") Integer role);
+
+
+    int checkUserPhone(@Param("phone") String phtone,
+                       @Param("role") Integer role);
 }

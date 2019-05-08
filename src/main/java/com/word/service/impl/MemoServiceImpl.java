@@ -1,5 +1,6 @@
 package com.word.service.impl;
 
+import com.word.common.ServerResponse;
 import com.word.dao.*;
 import com.word.pojo.Memo;
 import com.word.pojo.User_SettingWord;
@@ -46,13 +47,12 @@ public class MemoServiceImpl implements IMemoService {
 
         List<MWordVo> Mwords;
 
-        if(settingWord.getCheckBookId() == null){
+        if(settingWord.getCheckBookId() == 3){
             Mwords = userWordMapper.selectUserWord(userId);
         }
         else{
              Mwords = wordsBookMapper.selectByBookId(settingWord.getCheckBookId());
         }
-
 
         if (settingWord.getWordSize() == null){
             settingWord.setWordSize(20);
@@ -93,7 +93,9 @@ public class MemoServiceImpl implements IMemoService {
             superMemo2.existenceMemo(memoList,memosvalue);
         }
 
-
+        if(newMemo.size()+memoList.size()<=0){
+            return null;
+        }
         MWordVo mWordVo =  superMemo2.getQuestion();
         mWordVo.setMsize(superMemo2.wordList.size());
         System.out.println(mWordVo);

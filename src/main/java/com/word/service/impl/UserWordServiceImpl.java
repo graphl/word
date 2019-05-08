@@ -79,8 +79,15 @@ public class UserWordServiceImpl implements IUserWordService {
 
     @Override
     public WordDetailOneVo searchWordDetail(String wordName,Integer userId){
+        if(wordName == null|| userId == null){
+            return null;
+        }
         WordDetailOneVo wordDetailOneVo = new WordDetailOneVo();
         Word word = wordMapper.selectByWord_name(wordName);
+        if(word ==null || word.equals(""))
+        {
+            return null;
+        }
      /*   System.out.println(word);*/
       /*  List<Phrase> phraseList = phrase_wordMapper.selectBywordId(word.getId());*/
         List<Sentence> sentenceList = sentenceMapper.selectByWordId(word.getId());
@@ -88,12 +95,17 @@ public class UserWordServiceImpl implements IUserWordService {
         if(check > 0 ){
             check = 1;
         }
+        if((word==null||word.equals("")) && sentenceList.size()<=0){
+
+            return  null;
+        }
         wordDetailOneVo.setId(word.getId());
         wordDetailOneVo.setWord(word.getWord());
         wordDetailOneVo.setWord_name(word.getWordName());
         wordDetailOneVo.setWord_sound(word.getWordSound());
         wordDetailOneVo.setWord_symbol(word.getWordSymbol());
        /* wordDetailOneVo.setPhrase(phraseList);*/
+        if(sentenceList.size()>0)
         wordDetailOneVo.setSentence(sentenceList);
         wordDetailOneVo.setCheck(check);
         System.out.println(wordDetailOneVo);

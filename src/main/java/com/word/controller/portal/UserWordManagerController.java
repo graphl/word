@@ -100,7 +100,10 @@ public class UserWordManagerController {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
       WordDetailOneVo wordDetailOneVo = new WordDetailOneVo();
        wordDetailOneVo = iUserWordService.searchWordDetail(word,user.getId());
-     request.setAttribute("wordDetail",wordDetailOneVo);
+       if (wordDetailOneVo == null || wordDetailOneVo.equals("")){
+           request.getServletContext().getRequestDispatcher("/404.jsp").forward(request,response);
+       }
+        request.setAttribute("wordDetail",wordDetailOneVo);
        request.getServletContext().getRequestDispatcher("/search.jsp").forward(request,response);
     }
 

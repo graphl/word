@@ -102,7 +102,9 @@
     /* text-align: center; */
 "><h3>English</h3>
             <div class="login-form" name="login-form">
-                <div class="row"><input class="name" id="input-account" type="text" placeholder="用户名 / 邮箱 / 手机号"
+                <div class="row"><input class="name" id="input-account" type="text" placeholder="用户名"
+                                        name="account" autofocus=""><i class="ib ib-user-o"></i></div>
+                <div class="row"><input class="name" id="input-phone" type="text" placeholder=" 手机号"
                                         name="account" autofocus=""><i class="ib ib-user-o"></i></div>
                 <div class="row"><input class="password" id="input-password" type="password" placeholder="密码"
                                         name="password"><i class="ib ib-lock-o"></i></div>
@@ -123,16 +125,26 @@
 <script>
     $("#button-login").click(function (e) {
         var username = $('#input-account').val();
+        var phone = $('#input-phone').val();
         var password = $('#input-password').val();
         var password2 = $('#input-password-').val();
 
-        var re = /^1\d{10}$/;
+        var rephone = /^1\d{10}$/;
+        var reusername = /[\u4e00-\u9fa5]{2,}$/;
 
-        if(!re.test(username)){
-            alert("错误")
+
+        if(!reusername.test(username)){
+           alert("用户名必须大于2位")
+        }
+
+        if(!rephone.test(phone)){
+            alert("请输入正确的手机号")
             return;
         }
 
+        if(password == null|| password=="" ){
+            alert("密码不能为空");
+        }
         if (password != password2){
             $('#stantard-dialogBox').dialogBox({
                 title: 'English',
@@ -146,7 +158,8 @@
             type: 'post',
             data: {
                 username: username,
-                password: password
+                password: password,
+                role:'0'
             },
             success: function (data) {
                 console.log(data);

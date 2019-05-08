@@ -28,9 +28,9 @@ public class SettingServiceImpl implements ISettingService {
         Integer result;
         user_settingWord.setUserId(user_id);
         System.out.println(check+".................................."+user_settingWord.getCheckBookId());
-        if(check <= 0 && user_settingWord.getCheckBookId() == null){
-
-          result =   user_settingWordMapper.insertSelective(user_settingWord);
+        if(check <= 0){
+            user_settingWord.setCheckBookId(3);
+             result =   user_settingWordMapper.insertSelective(user_settingWord);
         }
         else {
             result = user_settingWordMapper.updateByUserId(user_settingWord);

@@ -62,10 +62,9 @@
   </select>
   
   <select id="selectUserWord" resultType="com.word.vo.MWordVo" parameterType="integer">
-
-  select w.id,w.word_name,w.word_symbol,w.word_soud,w.word
-   from  words_user_word wu, words_word
-   where  wu.word_id = w.id
+  select w.id,w.word_name,w.word_symbol,w.word_sound,w.word
+  from words_user_word wu, words_word  w
+  where wu.word_id = w.id
    and user_id = #{userId}
   </select>
 

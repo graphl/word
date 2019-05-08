@@ -215,6 +215,10 @@
                 $('#word_name').html(words.word_name);
                 $('#word_symbol').html(words.word_symbol);
                 $('#music').attr('src', words.word_sound);
+                if(words.msize ==null || words.msize == 0){
+                    words.msize = 0;
+                }
+
                 $('#word_size').html(words.msize)
                 $('#jiyi').html("单词记忆")
                 $('.hint-content').text(words.word);

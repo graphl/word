@@ -1,9 +1,5 @@
 <%@ page import="com.word.pojo.User" %><%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2019/4/9 0009
-  Time: 22:04
-  To change this template use File | Settings | File Templates.
+
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="zh-CN">
@@ -63,7 +59,6 @@
 
                 <ul class="nav nav-right pull-right" style="z-index: 1000">
 
-                    <li><a href="#" class="shortcuts-button">快捷键</a></li>
 
                     <li class="dropdown main-nav nav-avatar  ">
                         <a href="#" class="main-menu user-avatar" data-toggle="dropdown"> <i> <img
@@ -73,8 +68,6 @@
                             <img class="dropdown-arraw" src="https://static.baydn.com/static//img/icon-arraw.png">
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="sb-nav-menu-a" href="#">设置</a></li>
-
                             <li><a class="sb-nav-menu-a" href="#">退出</a></li>
                         </ul>
                     </li>
@@ -192,6 +185,11 @@
 <script>
 
 
+
+    $('.search-submited').click(function () {
+        window.location.href = '/userword/searchwordDetail.do?word=' + $('.search-input').val()
+    })
+
     $(function () {
         $.ajax({
             type:'post'
@@ -199,7 +197,7 @@
             ,success:function (data) {
                 console.log('成功');
                 /*       console.log(data.data)*/
-                var selects = "";
+                var selects = "<option value="+'3'+">自己单词书</option>";
                 for(var i=0;i<data.data.length;i++){
                     selects+='<option value="'+ data.data[i].id+ '">'+ data.data[i].bookName+'</option>'
                 }
@@ -256,7 +254,6 @@
             }
         })
     }
-
 
 </script>
 </body>

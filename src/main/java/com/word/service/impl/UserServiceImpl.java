@@ -29,14 +29,22 @@ public class UserServiceImpl  implements IUserService {
      */
     public ServerResponse login(String username,String password,Integer role){
         int resultCount = userMapper.checkUsername(username,role);
-        if(resultCount == 0){
+        int resultPhone = userMapper.checkUserPhone(username,role);
+        if(resultCount == 0 && resultPhone == 0){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),"用户名不存在");
         }
+        String MD5Password = MD5Util.MD5EncodeUtf8(password);
 
+        User user;
+        if(resultCount>0){
+              user = userMapper.selectLogin(username,MD5Password,role);
+        }
+        else
+        {
+            user = userMapper.selectLoginByPhone(username,MD5Password,role);
+        }
         // todo MD5加密
         //前端已经加过密了
-        String MD5Password = MD5Util.MD5EncodeUtf8(password);
-        User user = userMapper.selectLogin(username,MD5Password,role);
         if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),"密码错误");
         }
@@ -49,21 +57,32 @@ public class UserServiceImpl  implements IUserService {
      * @param user
      * @return
      */
-
     public ServerResponse<String> register(User user){
+
+
         if(user == null || user.equals("")){
             return ServerResponse.createByErrorMessage("参数错误");
         }
+
         if(user.getRole()!=1&&user.getRole()!=0){
             return ServerResponse.createByErrorMessage("参数错误");
         }
+
         ServerResponse vaildResponse = this.checkVaild(user.getUsername(),user.getRole());
         if(!vaildResponse.isSuccess()){
             return vaildResponse;
         }
+
+
         int resultCount = userMapper.checkUsername(user.getUsername(),user.getRole());
         if(resultCount > 0){
             return ServerResponse.createByErrorMessage("用户名已存在");
+        }
+
+        int resultPhone = userMapper.checkUserPhone(user.getPhone(),user.getRole());
+
+        if(resultPhone>0){
+            return ServerResponse.createByErrorMessage("该手机号已经注册过了");
         }
         //MD5加密
         user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
