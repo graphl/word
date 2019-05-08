@@ -1,0 +1,235 @@
+#learnings-library #information {
+  text-align: right;
+  margin-bottom: 20px;
+  color: #46a546;
+  font: sans-serif, bold, 18px;
+}
+#learnings-library .learning {
+  padding: 5px 10px 20px;
+  position: relative;
+  font-size: 1.15em;
+  background-color: #eaeaea;
+  margin-top: 5px;
+}
+#learnings-library .learning .wordinfo span {
+  padding-right: 5px;
+}
+#learnings-library .learning .wordinfo .definition {
+  color: #555555;
+  padding-left: 20px;
+}
+#learnings-library .learning .wordinfo .word {
+  color: #209e85;
+  font-size: 17px;
+}
+#learnings-library .learning .example {
+  padding-top: 10px;
+}
+#learnings-library .learning .example .mid {
+  color: #46a546;
+}
+#learnings-library .learning .operations {
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+  font-size: 0.9em;
+}
+#learnings-library .learning .operations a,
+#learnings-library .learning .operations span {
+  color: #555555;
+  padding: 0 5px;
+  cursor: pointer;
+}
+#learnings-library .learning .operations a:hover,
+#learnings-library .learning .operations span:hover {
+  color: #46a546;
+  font-weight: bold;
+}
+#learnings-library .learning .operations .delete-confirm,
+#learnings-library .learning .operations .success {
+  border: 1px solid #DDD;
+  padding: 10px;
+  background: #EEE;
+  opacity: 0.9;
+}
+#learnings-library .learning .operations .view {
+  display: none;
+}
+#learnings-library .learning .operations .view a {
+  text-decoration: none;
+}
+#learnings-library .learning .operations .master {
+  display: none;
+}
+#learnings-library .learning .operations .unresolve-learning {
+  display: none;
+}
+#learnings-library .learning:hover {
+  background: #e5e4e7;
+}
+#learnings-library .learning:hover .view {
+  display: inline;
+}
+#learnings-library .learning:hover .master {
+  display: inline;
+}
+#learnings-library .learning:hover .unresolve-learning {
+  display: inline;
+}
+#add-learnings .instruction {
+  font: sans-serif, bold, 14px;
+}
+#add-learnings .error {
+  color: red;
+  padding: 10px 0;
+}
+#add-learnings #add-learnings-form textarea {
+  height: 300px;
+  width: 500px;
+}
+#add-learnings .learnings ul {
+  list-style: none;
+  margin-left: 0;
+}
+#add-learnings .learnings ul li {
+  margin-bottom: 10px;
+}
+#add-learnings .learnings ul li .info {
+  font-size: 18px;
+}
+.horizon {
+  display: inline-block;
+  margin-left: 25px;
+}
+.nav.nav-tabs.nav-horizon {
+  background-color: #f4f4f4;
+  height: 38px;
+}
+.nav.nav-tabs.nav-horizon li {
+  line-height: 24px;
+  border-bottom: 4px solid transparent;
+  font: SimHei light 14pt;
+}
+.nav.nav-tabs.nav-horizon li a {
+  border-radius: 0;
+  border: none;
+  font-size: 16px;
+  color: #555555;
+}
+.nav.nav-tabs.nav-horizon li.active a {
+  background-color: #f4f4f4;
+  color: #209e85;
+  font: SimHei midium 14pt;
+}
+.nav.nav-tabs.nav-horizon li:hover {
+  border-bottom: 4px solid #209e85;
+}
+.btn-side {
+  padding: 5px;
+  display: inline-block;
+  width: 150px;
+  height: 32px;
+  margin-top: 20px;
+  text-decoration: none;
+  color: white;
+  line-height: 32px;
+}
+.btn-side:hover,
+.btn-side.active,
+.btn-side:focus {
+  text-decoration: none;
+  color: #ffffff;
+}
+.center {
+  text-align: center;
+}
+.blue {
+  background: #63a3ce;
+}
+.yellow {
+  background: #e2bb81;
+}
+.green {
+  background: #6dccc2;
+}
+.icon {
+  height: 28px;
+  width: 28px;
+  margin: 2px;
+}
+.icon-small {
+  vertical-align: sub;
+  height: 16px;
+  width: 16px;
+}
+.icon-mini {
+  verticle-align: sub;
+  height: 16px;
+  width: 12px;
+}
+.icon-text {
+  font-size: 18px;
+  margin-right: 20px;
+  float: right;
+}
+.no-border {
+  border: none;
+}
+#chargeModal {
+  width: 30%;
+  margin-left: -15%;
+  border-radius: 0;
+}
+#myModalLabel {
+  text-align: center;
+  font-size: 25px;
+  margin-top: 10px;
+}
+.mymodel-foot {
+  text-align: center;
+}
+.mymodel-foot button,
+.mymodel-foot a {
+  width: 180px;
+  border-radius: 0;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  line-height: 30px;
+  box-sizing: content-box;
+}
+.modal-body p {
+  text-align: center;
+}
+.modal-body p .pay {
+  color: #209e85;
+  font-size: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.modal-body p .pay-margin {
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+.modal-body div {
+  color: grey;
+}
+.modal-body div .mark {
+  color: #209e85;
+}
+#recharge {
+  display: none;
+}
+#pay-and-clean {
+  display: none;
+}
+#processing {
+  display: none;
+}
+#finish {
+  display: none;
+}
+#not-finished {
+  display: none;
+}
